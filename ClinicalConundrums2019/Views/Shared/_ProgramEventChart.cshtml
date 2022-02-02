@@ -1,0 +1,173 @@
+﻿
+<style>
+
+
+    #ChartContainer, #chartjs-legend {
+        margin:0 auto;
+    }
+    # #chartjs-legend {
+        width: 150px;
+    }
+    #ChartContainer {
+        /*can only control the size of the chart by the parent container of the canvas*/
+        width: 200px;
+        height: 50px;
+    }
+    .noselect {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+ul.legend {
+    
+  list-style: none;
+
+ 
+  text-align:center;
+  display:inline !important;
+}
+ul.legend li{
+    float: left;
+  margin-right: 10px;
+  min-height: 35px;
+
+}
+
+ul.legend li span  {
+    width:160px;
+    display:block;
+    border: 1px solid #fff;
+    cursor:pointer;
+  
+ /* padding: 6px 20px;*/
+  border-radius:13px;
+  color:white;
+  z-index:2;
+}
+
+</style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js" type="text/javascript"></script>
+<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        var canvas = document.getElementById("myChart");
+        var defaultLegendClickHandler = Chart.defaults.global.legend.onClick;
+        //var ctx = canvas.getContext("2d");
+        //ctx.canvas.width = 200;
+        //ctx.canvas.height = 200;
+        var graphChart = new Chart(canvas, {
+
+            type: 'doughnut',
+            data: {
+                labels: ["ACTIVE", "ATTENTION", "CANCELLED", "COMPLETED"],
+                datasets: [{
+                    label: "Population (millions)",
+                    backgroundColor: ["#BADA55", "#871216", "#E21C21", "#0C4D9C"],
+                    data: [@ViewBag.ProgramRequestStatusCounts.Percent_Active, @ViewBag.ProgramRequestStatusCounts.Percent_Attention, @ViewBag.ProgramRequestStatusCounts.Percent_Cancelled, @ViewBag.ProgramRequestStatusCounts.Percent_Completed]
+                }]
+            },
+            options: {
+                legend: false,
+                
+                //legendCallback: function (chart) {//write out the customized legend html
+                //    var text = [];
+                //    text.push('<ul class="legend">');
+                //    for (var i = 0; i < chart.data.datasets[0].data.length; i++) {
+                     
+                //        text.push('<li>');
+                //        text.push('<span style="background-color:' + chart.data.datasets[0].backgroundColor[i] + '">' + chart.data.labels[i] + '</span>');
+                //        text.push('</li>');
+                //    }
+                //    text.push('</ul>');
+                //    return text.join("");
+                //},
+                  
+                legendCallback: function(chart) { 
+                        var text = [];
+                        text.push('<ul class="legend">');
+                        for (var i = 0; i < chart.data.datasets[0].data.length; i++) {
+
+                            text.push('<li>');
+                            text.push('<span style="background-color:' + chart.data.datasets[0].backgroundColor[i] + '">' + chart.data.labels[i] + '</span>');
+                            text.push('</li>');
+                        }
+                        text.push('</ul>');
+                        return text.join("");
+                 },
+            
+                title: {
+                    display: false,
+                    text: 'Program Request Summary',
+                    responsive: true,
+
+
+                },
+                animation: {
+                    animateScale: true
+                }
+            }
+        });
+        // Show/hide chart by click legend
+        // Show/hide chart by click legend
+        //function legendClickCallback(event) {
+
+        //    event = event || window.event;
+
+        //    var target = event.target || event.srcElement;
+        //    while (target.nodeName !== 'LI') {
+        //        target = target.parentElement;
+        //    }
+        //    var parent = target.parentElement;
+        //    var chartId = 0;
+        //    var chart = Chart.instances[chartId];
+        //    var index = Array.prototype.slice.call(parent.children).indexOf(target);
+           
+        //    var ci = graphChart;
+        //    var alreadyHidden = (ci.getDatasetMeta(index).hidden === null) ? false : ci.getDatasetMeta(index).hidden;
+
+        //    ci.data.datasets.forEach(function (e, i) {
+        //        var meta = ci.getDatasetMeta(i);
+
+        //        if (i !== index) {
+        //            if (!alreadyHidden) {
+        //                meta.hidden = meta.hidden === null ? !meta.hidden : null;
+        //            } else if (meta.hidden === null) {
+        //                meta.hidden = true;
+        //            }
+        //        } else if (i === index) {
+        //            meta.hidden = null;
+        //        }
+        //    });
+
+        //    ci.update();
+
+        //    //chart.legend.options.onClick.call(chart, event, chart.legend.legendItems[index]);
+        //    //if (chart.isDatasetVisible(index)) {
+        //    //    target.classList.remove('hidden');
+        //    //} else {
+        //    //    target.classList.add('hidden');
+        //    //}
+        //}
+        $("#chartjs-legend").html(graphChart.generateLegend());//make sure the customized legend html is tied to the pie chart
+
+
+        // bind onClick event to all LI-tags of the legend
+        //var myLegendContainer = document.getElementById("chartjs-legend");
+        //var legendItems = myLegendContainer.getElementsByTagName('li');
+        //for (var i = 0; i < legendItems.length; i += 1) {
+        //    legendItems[i].addEventListener("click", legendClickCallback, false);
+        //}
+
+    });
+</script>
+<div id="chartjs-legend" ></div>
+<div id="ChartContainer">
+    <canvas id="myChart" width="200" height="200"></canvas>
+
+
+</div>

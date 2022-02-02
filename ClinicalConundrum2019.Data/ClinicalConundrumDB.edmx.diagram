@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="2f511f1e0f3249c8a86c3a830d3334f7" Name="Diagram1" ZoomLevel="82">
+        <EntityTypeShape EntityType="ClinicalConundrums2019Model.PayeeInfo" Width="1.5" PointX="7.75" PointY="5.75" />
+        <EntityTypeShape EntityType="ClinicalConundrums2019Model.Program" Width="3.125" PointX="2.25" PointY="4.125" />
+        <EntityTypeShape EntityType="ClinicalConundrums2019Model.Region" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="ClinicalConundrums2019Model.RequestStatusLookup" Width="1.5" PointX="4.75" PointY="0.75" />
+        <EntityTypeShape EntityType="ClinicalConundrums2019Model.Role" Width="1.5" PointX="7.75" PointY="1.625" />
+        <EntityTypeShape EntityType="ClinicalConundrums2019Model.SpeakerPayment" Width="1.5" PointX="9.75" PointY="5.75" />
+        <EntityTypeShape EntityType="ClinicalConundrums2019Model.User" Width="1.5" PointX="10" PointY="1" />
+        <EntityTypeShape EntityType="ClinicalConundrums2019Model.UserStatu" Width="1.5" PointX="0.75" PointY="12.25" />
+        <EntityTypeShape EntityType="ClinicalConundrums2019Model.SessionCreditLookUp" Width="1.5" PointX="9.75" PointY="8.75" />
+        <AssociationConnector Association="ClinicalConundrums2019Model.UserRole" />
+        <EntityTypeShape EntityType="ClinicalConundrums2019Model.UserTypeLookUp" Width="1.5" PointX="0.75" PointY="18" />
+        <EntityTypeShape EntityType="ClinicalConundrums2019Model.UserRegistration" Width="1.5" PointX="0.75" PointY="8.75" />
+        <EntityTypeShape EntityType="ClinicalConundrums2019Model.ProgramRequestFileUpload" Width="1.5" PointX="7.375" PointY="11.75" />
+        <EntityTypeShape EntityType="ClinicalConundrums2019Model.ProgramRequestFileUploadOther" Width="1.5" PointX="9.375" PointY="11.75" />
+        <EntityTypeShape EntityType="ClinicalConundrums2019Model.UserInfo" Width="1.5" PointX="15.25" PointY="6.125" />
+        <AssociationConnector Association="ClinicalConundrums2019Model.FK_UserInfo_User" />
+        <AssociationConnector Association="ClinicalConundrums2019Model.FK_UserInfo_UserStatus" />
+        <AssociationConnector Association="ClinicalConundrums2019Model.FK_UserInfo_UserTypeLookUp" />
+        <EntityTypeShape EntityType="ClinicalConundrums2019Model.AssignedRole" Width="1.5" PointX="3.375" PointY="8.75" />
+        <EntityTypeShape EntityType="ClinicalConundrums2019Model.ProgramRequest" Width="1.5" PointX="17.5" PointY="0.75" />
+        <AssociationConnector Association="ClinicalConundrums2019Model.FK_ProgramRequest_Program" />
+        <AssociationConnector Association="ClinicalConundrums2019Model.FK_ProgramRequest_RequestStatusLookup" />
+        <AssociationConnector Association="ClinicalConundrums2019Model.FK_ProgramRequest_UserInfo" />
+        <AssociationConnector Association="ClinicalConundrums2019Model.FK_ProgramRequest_UserInfo1" />
+        <AssociationConnector Association="ClinicalConundrums2019Model.FK_ProgramRequest_UserInfo2" />
+        <EntityTypeShape EntityType="ClinicalConundrums2019Model.HandoutRequest" Width="1.5" PointX="12.25" PointY="12" />
+        <EntityTypeShape EntityType="ClinicalConundrums2019Model.ProgramRequestSessionCredit" Width="1.5" PointX="3.375" PointY="11.75" />
+        <AssociationConnector Association="ClinicalConundrums2019Model.FK_HandoutRequest_User" />
+        <AssociationConnector Association="ClinicalConundrums2019Model.FK_ProgramRequestSessionCredits_SessionCreditLookUp" />
+        <EntityTypeShape EntityType="ClinicalConundrums2019Model.COISlidesUpload" Width="1.5" PointX="12.375" PointY="0.75" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,99 @@
+﻿
+
+@{
+
+    Layout = "~/Views/Shared/_LoginMaster.cshtml";
+}
+<style>
+    input[type=text], input[type=email] {
+        width: 400px;
+        border: 0px;
+        border-bottom: 1px solid #fff;
+        -webkit-box-shadow: unset;
+        box-shadow: unset;
+        -webkit-transition: unset;
+        /*color: #fff;*/
+        padding-left: 0px !important;
+        margin-left: 0px !important;
+    }
+
+    #box {
+        width: 400px;
+        margin: 0 auto;
+    }
+
+    h4 {
+        text-align: center;
+    }
+
+    #button_activate {
+        width: 100px;
+        float: right;
+        margin-top: 20px;
+        background: gray;
+        color: white;
+        margin-bottom: 10px;
+    }
+
+    .lblUsername {
+        font-size: 14px;
+        font-weight: 100;
+    }
+
+    .activateBorder {
+        border: 1px solid black;
+    }
+
+    #lblEmail {
+        font-size: 12px;
+        margin-top: 2px;
+    }
+
+    .error {
+        color: red;
+    }
+
+    .footer1 {
+        display: none;
+    }
+</style>
+
+<div class="pnl-regsiter">
+    <div class="row">
+        <div class="col-md-12">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 col-md-offset-2 activateBorder">
+            <div class="form-group ">
+                <h4>Program Date Update</h4>
+                <div id="box">
+
+                    @if (@ViewBag.ProgramDate == "AlreadyExists")
+                    {
+                        <p style="text-align:center"> Please Contact CHRC to change or Update your ProgramDate .</p>
+
+                    }
+                    else
+                    {
+
+                        if (@ViewBag.ProgramDate == "NotAvailable")
+                        {
+                            <p style="text-align:center"> You are Not Available for this Program </p>
+
+                        }
+                        else
+                        {
+                            <p style="text-align:center"> Your Program Date is @ViewBag.ProgramDate </p>
+                        }
+
+                    }
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

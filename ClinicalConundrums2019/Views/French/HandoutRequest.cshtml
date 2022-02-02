@@ -1,0 +1,248 @@
+﻿@using ClinicalConundrums2019.Util
+@model ClinicalConundrums2019.Models.HandoutRequestModel
+@{
+    ViewBag.Title = "Handout Request";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+@using (@Html.BeginForm("HandoutRequest", "French", FormMethod.Post, new { @id = "formHandoutRequest" }))
+{
+    @Html.HiddenFor(model => model.UserID)
+    @Html.HiddenFor(model => model.UserEmail)
+
+    <div class="pnl-portal frmProgramRequest">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Enjeux cliniques IV – 2019<br/>Demande de guide de poche</h1> N. B. : À moins d'indication contraire, tous les champs sont obligatoires.
+                <div class="btn-back"><span class="glyphicon glyphicon-chevron-left"></span><span>Précédent</span></div>
+            </div>
+        </div>
+
+
+        <div class="row" style="margin-bottom:20px"></div>
+
+
+        <div class="row">
+            <div class="form-group form-group-sm col-sm-4">
+                <label class="" title="Number of Pocket Guide / Nombre de Guides de Poches" style="font-size:16px">Number of Pocket Guide / Nombre de Guides de Poches</label>
+                
+                @Html.DropDownListFor(m => m.Number, Enumerable.Range(1, 30).Select(n => n * 5).ToList().Select(i => new SelectListItem { Text = i.ToString(), Value = i.ToString() }), "Veuillez sélectionner un montant", new {@class="form-control"})
+                @Html.ValidationMessageFor(m => m.Number, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group form-group-sm col-sm-2">
+                <label class="" title="Pocket Guide Language" style="font-size:16px">Pocket Guide Language</label>
+                <div>
+                    @Html.RadioButtonFor(model => model.Language, "English") English&nbsp;&nbsp;&nbsp;
+                    @Html.RadioButtonFor(model => model.Language, "French") French <br />
+                    @Html.ValidationMessageFor(m => m.Language, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group form-group-sm col-sm-2">
+                <label class="" title="Date Required By/ Date Requis par" style="font-size:16px">Date Required By/ Date Requis par</label>
+                @Html.TextBoxFor(m => m.DateRequiredBy, new { @class = "form-control"})
+                @Html.ValidationMessageFor(m => m.DateRequiredBy, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group form-group-sm col-sm-4">
+                <label class="" title="Contact Name (Ship to) / Nom du contact (Expédier à)" style="font-size:16px">Contact Name (Ship to) / Nom du contact (Expédier à)</label>
+                @Html.TextBoxFor(m => m.ContactName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.ContactName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group form-group-sm col-sm-2">
+                <label class="" title="Email Address / Courriel" style="font-size:16px">Email Address / Courriel</label>
+                @Html.TextBoxFor(m => m.EmailAddress, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.EmailAddress, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group form-group-sm col-sm-2">
+                <label class="" title="Mailing Address / Adresse mail" style="font-size:16px">Mailing Address / Adresse mail</label>
+                @Html.TextBoxFor(m => m.MailingAddress, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.MailingAddress, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group form-group-sm col-sm-2">
+                <label class="" title="City / Ville:" style="font-size:16px">City / Ville:</label>
+                @Html.TextBoxFor(m => m.City, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.City, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group form-group-sm col-sm-2">
+                <label class="" title="Province" style="font-size:16px">Province</label>
+                @Html.DropDownListFor(model => model.Province, new SelectList(AppData.GetProvinceList(), "Value", "Text"), "Please select a province", new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Province, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group form-group-sm col-sm-2">
+                <label class="" title="Postal Code / Code Postal:" style="font-size:16px">Postal Code / Code Postal:</label>
+                @Html.TextBoxFor(m => m.PostalCode, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.PostalCode, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group form-group-sm col-sm-2">
+                <label class="" title="Phone Number / Numéro de Téléphone:" style="font-size:16px">Phone Number / Numéro de Téléphone:</label>
+                @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.PhoneNumber, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group form-group-sm col-sm-6">
+                <label class="" title="Would you like a copy mailed to the presenter?/ Voulez-vous que le présenteur recoive une copie par courrier?" style="font-size:16px">Would you like a copy mailed to the presenter?/ Voulez-vous que le présenteur recoive une copie par courrier?</label>
+                <div>
+                    @Html.RadioButtonFor(model => model.MailToPresenter, "Y", new { id="mailToPresenterY"})Yes / Oui   &nbsp;&nbsp;&nbsp;
+                    @Html.RadioButtonFor(model => model.MailToPresenter, "N", new { id = "mailToPresenterN" }) No, I will hand deliver / Non, je le livrerai en main propre <br />
+                    @Html.ValidationMessageFor(m => m.MailToPresenter, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="mailPresenter">
+            <div class="form-group form-group-sm col-sm-3">
+                <label class="" title="Presenter Name / Nom du Conférencier" style="font-size:16px">Presenter Name / Nom du Conférencier</label>
+                @Html.TextBoxFor(m => m.PresenterName, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.PresenterName, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group form-group-sm col-sm-3">
+                <label class="" title="Mailing Address / Addresse" style="font-size:16px">Mailing Address / Addresse</label>
+                @Html.TextBoxFor(m => m.PresenterMailingAddress, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.PresenterMailingAddress, "", new { @class = "text-danger" })
+            </div>
+            </div>
+       </div>
+
+        <div class="row">
+            <div class="mailPresenter">
+            <div class="form-group form-group-sm col-sm-2">
+                <label class="" title="City / Ville:" style="font-size:16px">City / Ville:</label>
+                @Html.TextBoxFor(m => m.PresenterCity, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.PresenterCity, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group form-group-sm col-sm-2">
+                <label class="" title="Province" style="font-size:16px">Province</label>
+                @Html.DropDownListFor(model => model.PresenterProvince, new SelectList(AppData.GetProvinceList(), "Value", "Text"), "Please select a province", new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.PresenterProvince, "", new { @class = "text-danger" })
+            </div>
+
+
+            <div class="form-group form-group-sm col-sm-2">
+                <label class="" title="Postal Code / Code Postal:" style="font-size:16px">Postal Code / Code Postal:</label>
+                @Html.TextBoxFor(m => m.PresenterPostalCode, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.PresenterPostalCode, "", new { @class = "text-danger" })
+            </div>
+            </div>
+
+
+            <div class="form-group form-group-sm col-sm-6">
+                <label class="" title="Additional Information / Information Supplémentaire:" style="font-size:16px">Additional Information / Information Supplémentaire:</label>
+                @Html.TextAreaFor(m => m.AdditionalInfo, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.AdditionalInfo, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+
+        <div class="row">
+            <div class="form-group form-group-sm col-sm-2 pull-right">
+                <label class="" title="">&nbsp;</label>
+                <input type="submit" class="form-control btn btn-default btn-sm" id="btnSubmit" value="SUBMIT" style="bottom:0px">
+            </div>
+        </div>
+
+
+
+        <div class="row">
+            <div class="col-md-12">&nbsp;</div>
+        </div>
+    </div>
+
+}
+
+<div id="cb-modal-container">
+    <div id="myModal" tabindex="-1" class="modal fade in">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div id="TY-ct">
+                    <div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button><h4 class="modal-title"></h4></div><div class="modal-body">
+                        <div id="successful_modal">
+                            Merci. Nous avons reçu votre demande et la traiterons sous peu.
+                            <br /><br />
+                            <p><b>S’il vous plaît noter:</b> Les guides de poche sont réservés uniquement aux participants et aux présentateurs du programme et ne devraient être distribués sur place qu’au moment du programme.</p>
+                            <p>                                Merci, l’équipe CHRC</p>
+
+                            <br />
+                           
+                        </div>
+                        <div id="failed_modal" style="color:red">
+                        
+                            échec de la soumission
+                        </div>
+                    </div><div class="modal-footer"><button class="btn btn-default btn-sm" data-dismiss="modal">Close</button></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<link href="~/Content/bootstrap-datetimepicker.min.css" rel="stylesheet" />
+<script src="/Scripts/moment-with-locales.min.js"></script>
+<script src="/Scripts/bootstrap-datetimepicker.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('#DateRequiredBy').datetimepicker({
+            format: 'YYYY/MM/DD',
+            //minDate: moment() //later than today
+            //minDate: moment().add(4, 'days') //if afer 4 days from now
+        });
+        
+
+        mailPresenterHideAndShow();
+        $('input[type=radio][name=MailToPresenter]').change(function () {
+            mailPresenterHideAndShow();
+        });
+
+        var isHttpPost = "@ViewBag.IsHttpPost".toLowerCase();
+        var isSuccessful = "@ViewBag.IsSuccessful".toLowerCase();
+        if (isHttpPost == "true") {
+            if (isSuccessful == "true") {
+                $("#successful_modal").show();
+                $("#failed_modal").hide();
+            } else {
+                $("#successful_modal").hide();
+                $("#failed_modal").show();
+            }
+            $("#myModal").modal('show');
+        }
+
+
+
+        $('#myModal').on('hidden.bs.modal', function () {
+            window.location = "/program/index";
+        })
+    
+        //var hideBn = "@ViewBag.HideSubmit".toLowerCase();
+        /*if (hideBn == "true") {
+            $("#btnSubmit").hide();
+        }*/
+       
+    });
+
+    function mailPresenterHideAndShow() {
+        if ($("#mailToPresenterY").is(":checked")) {
+            $(".mailPresenter").show();
+        } else {
+            $(".mailPresenter").hide();
+            $(".mailPresenter").find("input").val("");
+            $(".mailPresenter").find("select").val("");
+        }
+    }
+</script>

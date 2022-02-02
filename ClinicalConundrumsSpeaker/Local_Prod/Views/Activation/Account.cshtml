@@ -1,0 +1,168 @@
+﻿@model ClinicalConundrumsSpeaker.Models.SpeakerActivationModel
+@using ClinicalConundrumsSpeaker.Util
+
+@{
+    Layout = "~/Views/Shared/_LoginMaster.cshtml";
+}
+
+
+@using (@Html.BeginForm("Account", "Activation", FormMethod.Post, new { @id = "frmActivate" }))
+{
+    
+<div class="pnl-portal frmProgramRequest">
+    <div class="row">
+        <div class="col-md-12">
+            <!-- <h1 id="lblTitle"></h1>-->
+            <h1>SPEAKER RESOURCE PORTAL ACCOUNT ACTIVATION</h1>
+            <div class="lead1">Please complete and/or update any relevant fields below and create your permanent password.</div>
+            <div class="btn-back"><span class="glyphicon glyphicon-chevron-left"></span><span>Back</span></div>
+            <!--<div class="lead1" style="color: #534d4d"></div>-->
+        </div>
+    </div>
+
+
+
+    <div class="row">
+        <div class="form-group form-group-sm col-sm-2">
+            <label class="" style="font-size: 16px" title="First Name">First Name: </label>
+            @Html.TextBoxFor(model => model.FirstName, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group form-group-sm col-sm-2">
+            <label class="" style="font-size: 16px" title="Last Name">Last Name:</label>
+            @Html.TextBoxFor(model => model.LastName, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.LastName, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group form-group-sm col-sm-2">
+            <label class="" style="font-size: 16px" title="speciality">Speciality:</label>
+            @Html.TextBoxFor(model => model.Speciality, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Speciality, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group form-group-sm col-sm-2">
+            <label class="" style="font-size: 16px" title="Clinic Name">Clinic Name:</label>
+            @Html.TextBoxFor(model => model.Clinic, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Clinic, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group form-group-sm col-sm-2">
+            <label class="" style="font-size: 16px" title="Phone Number">Phone Number:</label>
+            @Html.TextBoxFor(model => model.Phone, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Phone, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="form-group form-group-sm col-sm-4">
+            <label class="" style="font-size: 16px" title="address">Address:</label>
+            @Html.TextBoxFor(model => model.Address, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Address, "", new { @class = "text-danger" })
+        </div>
+
+
+        <div class="form-group form-group-sm col-sm-2">
+            <label class="" style="font-size: 16px" title="City">City:  </label>
+            @Html.TextBoxFor(model => model.City, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.City, "", new { @class = "text-danger" })
+        </div>
+
+
+        <div class="form-group form-group-sm col-sm-4">
+            <label class="" style="font-size: 16px" title="province">Province: please select one from the drop down menu</label>
+            @Html.DropDownListFor(model => model.Province, new SelectList(AppData.GetProvinceList(), "Value", "Text"), "Please select a province", new { @class = "form-control"} )
+            @Html.ValidationMessageFor(model => model.Province, "", new { @class = "text-danger" })
+        </div>
+        
+
+        
+    </div>
+
+
+    <div class="row">
+        <div class="form-group form-group-sm col-sm-3">
+            <label class="" style="font-size: 16px" title="Additional Phone Number (optional)">Additional Phone Number (optional): </label>
+            @Html.TextBoxFor(model => model.AdditionalPhone, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.AdditionalPhone, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group form-group-sm col-sm-3">
+            <label class="" style="font-size: 16px" title="Username">Username (your email address):</label>
+            @Html.TextBoxFor(model => model.Username, new { @class = "form-control", @readonly = "readonly" })
+            @Html.ValidationMessageFor(m => m.Username, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group form-group-sm col-sm-2">
+            <label class="" style="font-size: 16px" title="password">Password:</label>
+            @Html.PasswordFor(model => model.Password, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group form-group-sm col-sm-2">
+            <label class="" style="font-size: 16px" title="re-enter password">Re-enter Password:</label>
+            @Html.PasswordFor(model => model.ConfirmPassword, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.ConfirmPassword, "", new { @class = "text-danger" })
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="form-group form-group-sm col-sm-2 pull-right">
+            <input type="submit" class="form-control btn btn-default btn-sm" value="SUBMIT" />
+
+
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="successLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                        </div>
+
+                        <div class="modal-body">
+                            <div id="successful_modal">
+                                You have successfully activated your account.  An email confirmation has been sent with the log-in instructions.
+                            </div>
+                            <div id="failed_modal" style="color:red">
+                                @ViewBag.Msg
+                            </div>
+
+                        </div>
+                        <div class="modal-footer" style="border:none">
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+}
+
+
+<script>
+    $(document).ready(function () {
+        var isHttpPost = "@ViewBag.IsHttpPost".toLowerCase();
+        var isSuccessful = "@ViewBag.IsSuccessful".toLowerCase();
+        if (isHttpPost == "true") {
+            if (isSuccessful == "true") {
+                $("#successful_modal").show();
+                $("#failed_modal").hide();
+            } else {
+                $("#successful_modal").hide();
+                $("#failed_modal").show();
+            }
+            $("#myModal").modal('show');
+        }
+
+        $('#myModal').on('hidden.bs.modal', function () {
+            if (isHttpPost == "true") {
+                if (isSuccessful == "true") {
+                    window.location = "/Account/Login";
+                } 
+            }
+        });
+    });
+</script>
+

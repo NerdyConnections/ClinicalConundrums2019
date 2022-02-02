@@ -1,0 +1,172 @@
+﻿@model ClinicalConundrumsSpeaker.Models.PayeeModel
+@using ClinicalConundrumsSpeaker.Util
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+@{
+
+    Html.RenderPartial("_LeftNav", UserHelper.GetLoggedInUser());
+}
+
+
+@using (@Html.BeginForm("Index", "Payee", FormMethod.Post, new { @id = "frmActivate" }))
+{
+    @Html.HiddenFor(m => m.UserId)
+    <div style="float:right">
+        <div class="pnl-portal frmProgramRequest">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>Payee Form</h1>
+
+                    Instructions:
+                    <ul>
+                        <li>
+                            Completion of the Payee Form is a mandatory requirement
+                        </li>
+                        <li>
+                            Click the "Submit" button once you have completed the Payee Form
+                        </li>
+                        <li>
+                            Once the Payee Form is completed, the status in your dashboard will change to a checkmark (<span class="glyphicon glyphicon-ok"></span>)<br>
+                            <br>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="row">
+
+            <div class="form-group form-group-sm col-sm-6">
+                <label class="" title="I request the cheque(s) to be issued as following">I request the cheque(s) to be issued as following: (Please select one of the following two options)</label>
+                <div>
+                    @Html.RadioButtonFor(model => model.PaymentMethod, "Institution", new { @id = "Institution" })
+                    <label class="form-check-label" for="Institution" style="padding-right:10px; font-size:16px">To a Company Name</label>
+
+                    @Html.RadioButtonFor(model => model.PaymentMethod, "Personal", new { @id = "Personal" })
+                    <label class="form-check-label" for="Personal" style="padding-right:10px; font-size:16px">To me Personally</label>
+                </div>
+                <div>@Html.ValidationMessageFor(m => m.PaymentMethod, "", new { @class = "text-danger" })</div>
+            </div>
+
+            <div class="form-group form-group-sm col-sm-3">
+                <label class="" title="Session Date">Cheque Payable to: </label>
+                @Html.TextBoxFor(model => model.PayableTo, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.PayableTo, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group form-group-sm col-sm-3">
+                <label class="" title="Internal Reference Number">Internal Reference Number:</label>
+                @Html.TextBoxFor(model => model.IRN, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.IRN, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group form-group-sm col-sm-6">
+                Mailing Address 1:
+                @Html.TextBoxFor(model => model.MailingAddress1, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.MailingAddress1, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group form-group-sm col-sm-6">
+                Mailing Address 2:
+                @Html.TextBoxFor(model => model.MailingAddress2, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.MailingAddress2, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group form-group-sm col-sm-2">
+                <label class="" title="Attention To">Attention To: </label>
+                @Html.TextBoxFor(model => model.AttentionTo, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.AttentionTo, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group form-group-sm col-sm-2">
+                <label class="" title="City">City:	 </label>
+                @Html.TextBoxFor(model => model.City, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.City, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group form-group-sm col-sm-3">
+                <label class="" title="Province">Province:</label>
+                @Html.DropDownListFor(model => model.Province, new SelectList(AppData.GetProvinceList(), "Value", "Text"), "Please select a province", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Province, "", new { @class = "text-danger" })
+            </div>
+
+
+            <div class="form-group form-group-sm col-sm-2">
+                <label class="" title="Postal Code">Postal Code:</label>
+                @Html.TextBoxFor(model => model.PostalCode, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.PostalCode, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group form-group-sm col-sm-3">
+                <label class="" title="Tax Number (HST / Other)">Tax Number (HST / Other):</label>
+                @Html.TextBoxFor(model => model.TaxNumber, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.TaxNumber, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="form-group form-group-sm col-sm-8">
+                <label class="" title="Additional Information / Comments">Additional Information / Comments</label>
+                <em>(if Applicable)</em>
+                @Html.TextAreaFor(model => model.Instructions, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Instructions, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group form-group-sm col-sm-2 pull-right">
+                <input type="submit" class="form-control btn btn-default btn-sm" value="SUBMIT" />
+
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="successLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">                         
+                            <div class="modal-header">
+                                Thank you!
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+
+                            <div class="modal-body">
+                                <div id="successful_modal">
+                                    You have submitted the Payee Form successfully
+                                </div>
+                                <div id="failed_modal" style="color:red">
+                                    @ViewBag.Msg
+                                </div>
+
+                            </div>
+                            <div class="modal-footer" style="border:none">
+                                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+<script>
+    $(document).ready(function () {
+        var isHttpPost = "@ViewBag.IsHttpPost".toLowerCase();
+        
+        if (isHttpPost == "true") {
+            $("#successful_modal").show();
+            $("#failed_modal").hide();
+            $("#myModal").modal('show');
+        }
+    });
+</script>

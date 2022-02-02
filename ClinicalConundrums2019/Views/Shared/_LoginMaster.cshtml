@@ -1,0 +1,113 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+
+    <link href="https://fonts.googleapis.com/css?family=BenchNine" rel="stylesheet">
+
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <!--<link href="/Content/bootstrap.min.css" rel="stylesheet" />-->
+    <link href="/Content/Site.css" rel="stylesheet" />
+    <link href="/Content/Login.css" rel="stylesheet" />
+    
+</head>
+<body style="background-image: url(/Images/notebook1st.jpg);">
+    <div class="overlay"></div>
+
+    <!-- nav bar-->
+    <header>
+        <div class="navbar navbar-inverse overlay-z2">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+
+                            <div id="logo">
+                                <div class="logo-img">
+                                    <object id="logo-svg" type="image/svg+xml" data="/Images/BMSPfizer.svg"></object>
+
+                                </div>
+                                <div class="logo-txt-sub">CPD Portal</div>
+                                <div class="logo-txt-welcome">&nbsp;</div>
+                            </div>
+                        </div>
+
+                        <div class="navbar-collapse collapse">
+                            <ul class="nav navbar-nav float-right">
+                                <li><a href="#" title="Français FMOQ">Français FMOQ</a></li>
+
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!--end of nav bar-->
+
+    <section>
+
+        <div role="main" class="container overlay-z2">
+
+            @RenderBody()
+        </div>
+    </section>
+    <!--footer-->
+    <footer>
+
+        <div class="container overlay-z2 footer">
+
+            <div class="row">
+                <div class="col-sm-12 col-sm-12 col-md-6">
+                    <div class="logo-img-ftr">
+                        <object class="logo-img-ftr-svg" type="image/svg+xml" data="/Images/CHRClogos_mer.svg"></object>
+                    </div>
+                </div>
+
+                <div class="col-xs-12  col-sm-12 col-md-2">
+                    Dija Changkit<br>
+                    Project Leader<br>
+                    <a href="mailto:changkitdija@chrc.net" title="changkitdija@chrc.net">changkitdija@chrc.net</a><br>
+                    416-977-8010 ext. 296
+                </div>
+
+
+                <div class="col-xs-12  col-sm-12 col-md-2">
+                    Annie Pham <br>
+                    Administrative Assistant<br>
+                    <a href="mailto:phama@chrc.net" title="phama@chrc.net ">phama@chrc.net </a><br>
+                    416-977-8010 ext. 244
+                </div>
+
+
+                <div class="col-xs-12  col-sm-12 col-md-2">
+                    <span style="margin-right: 20px">http://clinicalconundrums.ca</span>
+                    <br class="r-break">
+                    <a href="mailto:info@clinicalconundrums.ca" title="info@clinicalconundrums.ca" style="margin-right: 20px">info@clinicalconundrums.ca</a><br class="">
+                    110 Sheppard Avenue East, Suite 309, <br class="r-break">
+                    North York, Ontario, <br class="r-break">
+                    Canada, M2N 6Y8
+                    <br class="r-break">
+                    <br>
+                </div>
+            </div>
+
+        </div>
+    </footer>
+    <!-- end of footer-->
+    @RenderSection("Scripts", required: false)
+
+</body>
+</html>

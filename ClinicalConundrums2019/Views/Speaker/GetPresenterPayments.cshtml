@@ -1,0 +1,87 @@
+﻿@using ClinicalConundrums2019.Models;
+@model List<PresenterPayment>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>GetPresenterPayments</title>
+</head>
+<body>
+
+    @if (Model.Count > 0)
+    {
+        <h1>Payment(s)</h1>
+        foreach (var PresenterPayment in Model)
+        {
+            <div class="margin-top-24">
+                <table class="table table-bordered table-sm" style="font-size:12px" align="center">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th class="h6" style="text-align: left" scope="col" width="12%">Program Date:</th>
+                            <th class="h6" style="text-align: left" scope="col" width="88%">@PresenterPayment.ProgramDate</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th style="text-align: left" scope="row" align="center"><span class="h6" style="text-align: left">Payment Amount:</span></th>
+                            <td style="text-align: left" align="center">@PresenterPayment.PaymentAmount</td>
+                        </tr>
+                        <tr>
+                            <th style="text-align: left" scope="row" align="center">
+                                <span class="h6" style="text-align: left">Payment Method:</span>
+                            </th>
+                            <td style="text-align: left" align="center">Cheque</td>
+                        </tr>
+                        <tr>
+                            <th style="text-align: left" scope="row" align="center">
+                                <span class="h6" style="text-align: left">Date Sent:</span>
+                            </th>
+                            <td style="text-align: left" align="center">@PresenterPayment.PaymentSentDate</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        }
+    }
+    else
+    {
+
+        <div class="row">
+            <div class="col-md-12">
+                <h1 id="lblTitle" style="color: rgb(255, 75, 75);">No Payment Information is currently available</h1>
+            </div>
+        </div>
+    }
+    <table class="table table-bordered table-sm" style="font-size:12px" align="center">
+        <thead class="thead-dark">
+            <tr>
+                <th class="h6" style="text-align: left" scope="col" width="90%" colspan="2"><b>Honoraria Information</b></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th style="text-align: left" scope="row" align="center"><span class="h6" style="text-align: left"><b>Speaker Honoraria:</b></span></th>
+                <td style="text-align: left" align="center">
+                    @if (!string.IsNullOrEmpty(@ViewBag.SpeakerHonoraria))
+                {
+                    @ViewBag.SpeakerHonoraria }
+            </td>
+        </tr>
+        <tr>
+            <th style="text-align: left" scope="row" align="center"><span class="h6" style="text-align: left"><b>Moderator Honoraria:</b></span></th>
+            <td style="text-align: left" align="center">
+                @if (!string.IsNullOrEmpty(@ViewBag.ModeratorHonoraria))
+            {
+                @ViewBag.ModeratorHonoraria
+            }
+        </td>
+    </tr>
+</tbody>
+</table>
+</body>
+</html>

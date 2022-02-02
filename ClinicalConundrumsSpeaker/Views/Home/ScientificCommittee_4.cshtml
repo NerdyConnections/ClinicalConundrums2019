@@ -1,0 +1,204 @@
+﻿@using ClinicalConundrumsSpeaker.Models
+@using ClinicalConundrumsSpeaker.Util
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="pnl-portal">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 id="lblTitle"></h1>
+            <!--div class="btn-back"><span class="glyphicon glyphicon-chevron-left"></span><span>Back</span></!--div-->
+            <!-- <div class="lead1" style="color: #534d4d">CFPC &nbsp;&nbsp; FMOQ</div>-->
+        </div>
+    </div>
+
+    <div class="row">
+
+        @{
+
+            Html.RenderPartial("_LeftNav", UserHelper.GetLoggedInUser());
+        }
+        <div class="col-md-9" style="margin-bottom: 2px; color: #2b2b2b">
+            <div class="1">
+                <h1>SCIENTIFIC PLANNING COMMITTEE </h1>
+                <!-- <div class="link-blue"><a class="link-blue" href="javascript:void(0)">Download Process Document</a></div>-->
+                <div class="row" style="margin-left:0px; padding-top:15px; padding-bottom:20px">
+                    <div class="col-sm-4">
+                        <img class="img-responsive" src="/Images/honos.png" width="190" height="190"><br>
+                        <h5>
+                            <strong>
+                                George Honos, MD
+                                <br>
+                                Clinical Conundrums Program Chair
+                            </strong>
+                        </h5>
+                        <h6>
+                            Cardiologist
+                            <br>
+                            Chief of cardiology
+                            <br>
+                            Medical Director of CV Program, CHUM<br>
+                            Associate Professor of Medicine,
+                            <br>
+                            Université de Montréal
+                            <br>
+                            Montreal, Quebec <br>
+                        </h6>
+                    </div>
+                    <div class="col-sm-4">
+                        <img class="img-responsive" src="/Images/bouchard.png" width="190" height="190"><br>
+                        <h5>
+                            <strong>Jacques Bouchard MD </strong>
+                        </h5>
+                        <h6>
+                            Associate professor of clinical medicine
+                            <br>
+                            Université Laval , Québec
+                            <br>
+                            Head medicine department
+                            <br>
+                            Hôpital de la Malbaie . Québec<br>
+                        </h6>
+                    </div>
+                    <div class="col-sm-4">
+                        <img class="img-responsive" src="/Images/dorian.png" width="190" height="190"><br>
+                        <h5><strong>Paul Dorian, MD</strong></h5>
+                        <h6>
+                            Cardiologist
+                            <br>
+                            Director, Division of Cardiology
+                            <br>
+                            Professor of Medicine<br>
+                            St. Michael's Hospital
+                            <br>
+                            University of Toronto
+                            <br>
+                            Toronto, Ontario <br>
+                        </h6>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="margin-left:0px; padding-top:15px; padding-bottom:20px">
+                <div class="col-sm-4">
+                    <img class="img-responsive" src="/Images/ghosh.png" width="190" height="190"><br>
+                    <h5>
+                        <strong>
+                            Indy (Indraneel) Ghosh, MD
+                        </strong>
+                    </h5>
+                    <h6>
+                        Assistant Clinical Professor, McMaster University
+                        <br>
+                        Emergency Physician at Trillium Health Partners <br>
+                    </h6>
+                </div>
+                <div class="col-sm-4">
+                    <img class="img-responsive" src="/Images/goodman.png" width="190" height="190"><br>
+                    <h5><strong>Shaun Goodman, MD</strong></h5>
+                    <h6>
+                        Associate Head, Division of Cardiology, St. Michael's Hospital
+                        <br>
+                        Professor and Heart &amp; Stroke Foundation of Ontario (Polo) Chair, <br>
+                        Department of Medicine, University of Toronto
+                        <br>
+                        Adjunct Professor, Department of Medicine, University of Alberta <br>
+                    </h6>
+                </div>
+                <div class="col-sm-4">
+                    <strong><img class="img-responsive" src="/Images/habert.png" width="190" height="190"><br></strong>
+                    <h5><strong>Jeffrey Habert, MD</strong></h5>
+                    <h6>
+                        Family Physician
+                        <br>
+                        Assistant Professor
+                        <br>
+                        University of Toronto
+                        <br>
+                        Dept. of Family and Community Medicine<br>
+                        Toronto, Ontario <br>
+                    </h6>
+                </div>
+            </div>
+            <div class="row" style="margin-left:0px; padding-top:15px; padding-bottom:20px">
+                <div class="col-sm-4">
+                    <img class="img-responsive" src="/Images/lanthier.png" width="190" height="190"><br>
+                    <h5><strong>Sylvain Lanthier, MD</strong></h5>
+                    <h6>
+                        Neurologist
+                        <br>
+                        Neurovascular Program, CHUM<br>
+                        Associate Professor, University of Montreal
+                        <br>
+                        Montreal, Quebec <br>
+                    </h6>
+                </div>
+                <div class="col-sm-4">
+                    <img class="img-responsive" src="/Images/marshall.png" width="190" height="190"><br>
+                    <h5><strong>John K. Marshall, MD </strong></h5>
+                    <h6>
+                        Professor of Medicine, and<br>
+                        Director, Division of Gastroenterology<br>
+                        McMaster University
+                        <br>
+                        Hamilton, Ontario <br>
+                    </h6>
+                </div>
+                <div class="col-sm-4">
+                    <img class="img-responsive" src="/Images/mitchell.png" width="190" height="190"><br>
+                    <h5><strong>L. Brent Mitchell, MD</strong></h5>
+                    <h6>
+                        Cardiac Electrophysiologist<br>
+                        Professor, Department of Cardiac Sciences
+                        <br>
+                        Libin Cardiovascular Institute of Alberta<br>
+                        University of Calgary
+                        <br>
+                        Calgary, Alberta <br>
+                    </h6>
+                </div>
+            </div>
+            <div class="row" style="margin-left:0px; padding-top:15px; padding-bottom:20px">
+                <div class="col-sm-4">
+                    <img class="img-responsive" src="/Images/ngui.png" width="190" height="190"><br>
+                    <h5><strong>Daniel Ngui, MD</strong></h5>
+                    <h6>
+                        Family Physician
+                        <br>
+                        Clinical Lead, Fraser Street Medical
+                        <br>
+                        Clinical Associate Professor
+                        <br>
+                        UBC Department of Family Medicine<br>
+                        Vancouver, British Columbia <br>
+                    </h6>
+                </div>
+                <div class="col-sm-4">
+                    <img class="img-responsive" src="/Images/Noiseux.png" width="190" height="190"><br>
+                    <h5><strong>Isabelle Noiseux, MD</strong></h5>
+                    <h6>
+                        Directrice adjointe à la direction de la formation professionnelle
+                        FMOQ
+                        <br>
+                    </h6>
+                </div>
+                <div class="col-sm-4">
+                    <img class="img-responsive" src="/Images/rehman.png" width="190" height="190"><br>
+                    <h5><strong>Faisal Rehman, MD</strong></h5>
+                    <h6>
+                        Professor of Medicine<br>
+                        Schulich School of Medicine
+                        <br>
+                        Western University <br>
+                    </h6>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">&nbsp;</div>
+    </div>
+</div>
+

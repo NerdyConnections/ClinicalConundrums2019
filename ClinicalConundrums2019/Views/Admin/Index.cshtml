@@ -1,0 +1,576 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<link href="~/Content/jquery-ui.css" rel="stylesheet" />
+<link href="~/Content/jquery-ui-1.10.3.custom.css" rel="stylesheet" />
+
+<h2>Clinical Conundrums 2020 Program Request Admin</h2>
+
+
+
+
+
+
+
+
+<style>
+    tr td {
+        color: #333;
+    }
+
+    .clear {
+        clear: both;
+    }
+
+    tfoot input {
+        width: 100%;
+        padding: 3px;
+        box-sizing: border-box;
+    }
+
+    .dt-body-center {
+    }
+
+    #DataTable_filter { /*hiding the search box*/
+        visibility: hidden;
+    }
+
+    .container { /*make sure the table is not center but go to left so more field can be displayed*/
+        margin-left: 10px;
+    }
+</style>
+
+
+<div id="SelectProgram" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+
+                <h4 class="modal-title">Please Select a program from the dropdown</h4>
+            </div>
+            <div class="modal-body">
+                @Html.DropDownList("ProgramList", (IEnumerable<SelectListItem>)ViewBag.ProgramList, "Please select a Program", new { id = "ddlPrograms", @class = "form-control" })
+
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@Html.ActionLink("Manage Speakers & Moderator", "Speakers", "Admin", null, new { @class = "btn btn-primary btn-large" }) &nbsp;@Html.ActionLink("Manage Users", "Users", "Admin", null, new { @class = "btn btn-primary btn-large" }) &nbsp;@Html.ActionLink("Reports", "Reports", "Admin", null, new { @class = "btn btn-primary btn-large" })
+<br /><br />
+
+<table id="DataTable" class="table table-striped table-bordered" style="width:100%">
+    <thead>
+        <tr>
+
+            <th>Manage PostSession</th>
+            <th>Manage Session Request</th>
+            <th>Request Status</th>
+            <th>RecordID</th>
+            <th>Submitted Date</th>
+            <th>ContactFirstName</th>
+            <th>ContactLastName</th>
+            <th>ContactPhoneNumber</th>
+            <th>ContactEmailAddress</th>
+            <th>ContactInformation</th>
+            <th>SpeakerStatus</th>
+            <th>Speaker2Status</th>
+            <th>ModeratorStatus</th>
+            <th>ProgramDate 1</th>
+            <th>ProgramDate 2</th>
+            <th>ProgramDate 3</th>
+            <th>Meal Start Time</th>
+            <th>Program Start Time</th>
+            <th>Program End Time</th>
+
+
+
+            <th>Approved</th>
+
+        </tr>
+    </thead>
+    <tfoot>
+        <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th>RecordID</th>
+            <th></th>
+            <th>ContactFirstName</th>
+            <th>ContactLastName</th>
+            <th>ContactPhoneNumber</th>
+            <th>ContactEmailAddress</th>
+            <th>ContactInformation</th>
+            <th>SpeakerStatus</th>
+            <th>Speaker2Status</th>
+            <th>ModeratorStatus</th>
+            <th>ProgramDate1</th>
+            <th>ProgramDate2</th>
+            <th>ProgramDate3</th>
+            <th>MealStartTime</th>
+            <th>ProgramStartTime</th>
+            <th>ProgramEndTime</th>
+
+
+            <th></th>
+
+        </tr>
+    </tfoot>
+
+
+
+
+</table>
+
+<div class="modal fade bootstrapmodal" id="#PostSessionPopUp">
+
+
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+
+                <div class="modal-title">Post Session Management</div>
+
+            </div>
+
+            <div id="PostSessionData" class="modal-body">
+
+                @*@{Html.RenderPartial("Edit"); }*@
+
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+@section scripts{
+    <link href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <script src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script>
+    <!--pdf/excell/copy buttons cdn scripts-->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.10.16/b-1.5.1/b-colvis-1.5.1/b-flash-1.5.1/b-html5-1.5.1/b-print-1.5.1/r-2.2.1/datatables.min.css" />
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/pdfmake.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.10.16/b-1.5.1/b-colvis-1.5.1/b-flash-1.5.1/b-html5-1.5.1/b-print-1.5.1/r-2.2.1/datatables.min.js"></script>
+    <!--end of buttons cdn scripts-->
+    <!--cnd for search-->
+   
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.16/b-1.5.1/b-colvis-1.5.1/b-flash-1.5.1/b-html5-1.5.1/b-print-1.5.1/sl-1.2.5/datatables.min.css" />
+
+    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.16/b-1.5.1/b-colvis-1.5.1/b-flash-1.5.1/b-html5-1.5.1/b-print-1.5.1/sl-1.2.5/datatables.min.js"></script>
+
+
+    <!--end of search-->
+    <!--cdn for checkboxes-->
+    <link type="text/css" href="//gyrocode.github.io/jquery-datatables-checkboxes/1.2.9/css/dataTables.checkboxes.css" rel="stylesheet" />
+    <script type="text/javascript" src="//gyrocode.github.io/jquery-datatables-checkboxes/1.2.9/js/dataTables.checkboxes.min.js"></script>
+    <!--end of checkboxes-->
+    <script src="~/Scripts/jquery-ui-1.12.1.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script>
+        var Popup, dataTable, programID;
+        $(document).ready(function () {
+
+            programID = getURLParameter('programID')
+            if (programID == null)
+                programID = 0;//if there is no programID in the url set to zero the api will retrieve all program requests
+
+            if (getURLParameter('programID') == null) {//if there is no programID in the url then user hasn't select a program
+
+                $("#SelectProgram").modal('show');//user has to select a program if it hasn't been selected
+            }
+            $('select#ddlPrograms').change(function () {
+
+                window.location = '/Admin/Index?programID='   + $("#ddlPrograms").val();//user selected a program and redirect to the same page with the chosen program id
+                $("#SelectProgram").modal('hide');
+            });
+            //Search by individual column
+            // Setup - add a text input to each footer cell
+            $('#DataTable tfoot th').not(":eq(0),:eq(1),:eq(14),:eq(4),:eq(16)").each(function () {//do not display a text box to search for columns 0,3
+                var title = $(this).text();
+                $(this).html('<input type="text" placeholder="Search ' + title + '" />');
+            });
+            //checkbox display if the data is true or false
+            var simple_checkbox = function (data, type, full, meta) {
+
+                var is_checked = data == true ? "checked" : "";
+                var id = full.ProgramRequestID;
+                id = id.toString();
+
+                return '<input type="checkbox" onclick="ProcessCheckbox(this.parentElement)" class="checkbox1"  id= ' + id + " "  +
+                    is_checked +   ' />';
+            }
+            //end of checkbox display
+            //admin program request dropdown
+
+            //Program Request Status dropdown select the right dropdown option based on RequestStatusID
+            var ddlProgramRequestAdmin = function (data, type, full, meta) {
+                var statuslist = [{ 'Value': '1', 'Text': 'Under Review' }, { 'Value': '2', 'Text': 'Active – Regional Ethics Review Pending' }, { 'Value': '3', 'Text': 'Active – Regional Ethics Approved' }, { 'Value': '4', 'Text': 'Completed – Session Closed ' }, { 'Value': '5', 'Text': 'Completed – Items Pending' }, { 'Value': '6', 'Text': 'Session Cancelled' }];
+
+                var $select = $('<select/>', { 'class': 'ddlProgramRequestStatus', 'data-id': full.ProgramRequestID });
+
+                $.each(statuslist, function (Value, Text) {
+
+
+                  //  console.log('RequestStatusID: ' + full.RequestStatusID)
+                    var $opt = $('<option/>', { 'value': Text.Value, 'text': Text.Text });
+
+                    if (Text.Value == full.RequestStatusID) {
+                        console.log('Text.Value' + Text.Value)
+                        console.log('full.RequestStatusID' + full.RequestStatusID)
+                        $opt.attr("selected", "selected");
+                    }
+                    $select.append($opt);
+                });
+                return $select.prop("outerHTML");
+             //   var is_checked = data == true ? "checked" : "";
+               // var id = full.ProgramRequestID;
+               // id = id.toString();
+
+               //return "<select><option>Under Review</option><option>Active – Regional Ethics Review Pending</option><option>Active – Regional Ethics Approved</option><option>Completed – Items Pending</option><option>Completed – Session Closed </option>>option>Session Cancelled</option></select> ";
+            }
+            //datatable definitions
+            dataTable = $("#DataTable").DataTable({
+                dom: '<"buttons"B><"clear"><lf<t>ip>',//put a div tag with class=buttons around the buttons //put a div tag with class=clear immediately after the buttons
+                buttons: [
+                   {
+                        extend: 'copy',
+                        text: 'Copy to clipboard'
+
+                    }, {
+                        extend: 'excel',
+                        text: 'Download to Excel'
+
+                    }, 'pdf'
+                ],
+                bFilter: true,  //search box  for individual column search it must be true, otherwise does not work, you can hide search box using css and column search still works
+                bJQueryUI: true,
+                bInfo: true,  //showing 1 of x entries in x entries
+                sPaginationType: "full_numbers",//how pages button appears
+                bLengthChange: true,//show 10/20/30 entries dropdown
+                "bSort": true,//whether the columns are sortable or not
+                "bAutoWidth": false,
+                "asStripClasses": null,
+                "ajax": {
+                    "url": "/Program/GetAllProgramRequests?programID=" + programID ,
+                    "type": "GET",
+                    "datatype": "json"
+                },
+
+                "columns": [
+                    {
+
+                        "data": "ProgramRequestID", "render": function (data) {
+                            return "<a class='btn btn-default' data-toggle='modal' data-target='.bootstrapmodal' onclick=PopupForm('@Url.Action("PostSession","Admin")?ProgramRequestID=" + data + "')><i class='fa fa-pencil'></i> </a>";
+
+                        },
+                        "orderable": false,
+                        "searchable": false,
+                        "width": "25px"
+                    },
+                     {
+
+                         "data": "ProgramRequestID", "render": function (data) {
+                             return "<a class='btn btn-default'  href='@Url.Action("GetProgramRequest", "Program")?IsAdmin=1&ProgramRequestID=" + data + "'><i class='fa fa-pencil'></i> </a>";
+
+                         },
+                         "orderable": false,
+                         "searchable": false,
+                         "width": "25px"
+                     },
+                      { "data": "RequestStatusID", "title": "Program Request Status", "render": ddlProgramRequestAdmin },
+                    { "data": "ProgramRequestID", "title": "Record ID", "width": "5px" },
+                     { "data": "SubmittedDate", "title": "Submitted Date" },
+                    { "data": "ContactFirstName", "title": "Contact First Name", "visible": false },
+                    { "data": "ContactLastName", "title": "Contact Last Name", "visible": false },
+
+                    { "data": "ContactPhone", "title": "Contact Phone Number", "visible": false },
+                    { "data": "ContactEmail", "title": "Contact Email Address", "visible": false },
+                      { "data": "ContactInformation", "title": "Contact Information" },
+                        { "data": "SpeakerStatus", "title": "Speaker Status" },
+                          { "data": "Speaker2Status", "title": "Speaker2 Status" },
+                          { "data": "ModeratorStatus", "title": "Moderator Status" },
+                    { "data": "ConfirmedSessionDate", "title": "Confirmed Session Date" },
+                    { "data": "ProgramDate2", "title": "Program Date 2","visible":false },
+                    { "data": "ProgramDate3", "title": "Program Date 3" ,"visible":false},
+                   { "data": "MealStartTime", "title": "Meal Start Time" ,"visible":false},
+                 { "data": "ProgramStartTime", "title": "Program Start Time" },
+                    { "data": "ProgramEndTime", "title": "Program End Time" },
+
+
+                       { "data": "RequestStatus", "title": "Action Item(s)", "visible": false },
+
+
+
+                ],
+
+                "language": {
+
+                    "UserTable": "No data found, Please click on <b>Add New</b> Button"
+                }
+            });//end of datatable definitions
+
+            //move search input textboxes to the top
+            $('#DataTable tfoot tr').appendTo('#DataTable thead');
+
+            if (getURLParameter('programID') != null) {
+                var table = $('#DataTable').DataTable();//populate table only if there is programID chosen
+            }
+            //search code
+            table.columns().every(function () {
+                var that = this;
+
+                $('input', this.footer()).on('keyup change', function () {
+                    if (that.search() !== this.value) {
+                        that
+                            .search(this.value)
+                            .draw();
+                    }
+                });
+            });
+            //end of search
+
+
+
+
+        });//end document.ready()
+
+    var Popup1;
+    function PopupForm(url) {
+
+        var formDiv = $('#PostSessionData');
+        $.get(url)
+        .done(function (response) {
+
+            formDiv.html(response);
+
+
+        });
+    }
+        function SubmitForm(form) {
+
+            $.validator.unobtrusive.parse(form);
+
+            if ($(form).valid()) {
+                $.ajax({
+                    type: "POST",
+                    url: form.action,
+                    data: $(form).serialize(),
+
+                    success: function (result) {
+                        debugger;
+                        if (result) {
+
+                            $('#myModal').modal('hide');
+                            dataTable.ajax.reload();
+
+                        }
+                     else {
+
+                            console.log("Error while process aprove checkbox")
+                         }
+                    }
+                });
+            }
+            return false;
+        }
+    //parse the parameter
+        function getURLParameter(name) {
+            return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) || [null, ''])[1].replace(/\+/g, '%20')) || null;
+        }
+
+
+        $(function () {
+            $("#custom-close").on('click', function () {
+                $('#myModal').modal('hide');
+               $('body').removeClass('modal-open');
+                $('.modal-backdrop').remove();
+            });
+        });
+    //update database when admin update program request status
+        $('body').on('change', 'select.ddlProgramRequestStatus', function () {
+            //the selector $('select.ddlProgramRequestStatus')  doesn't work hence using event delegation
+            var ProgramRequestStatus = this.value;
+            var ProgramRequestID = $(this).attr('data-id');
+            var ProgramRequestModel = {
+
+                ProgramRequestID: ProgramRequestID,
+                RequestStatus: ProgramRequestStatus
+
+            }
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("UpdateProgramRequestStatus", "Admin")',
+                data: ProgramRequestModel,
+                dataType: "json",
+                success: function (data) {
+
+                    if (data.result === 'success') {
+                        dataTable.ajax.reload();
+                        alert("Request Status changed")
+
+                    } else {
+                        // The server returned a partial view => let's refresh
+                        // the corresponding section of our DOM with it
+                        if (data.error === 'AdminSessionID') {
+                            dataTable.ajax.reload();
+                            alert("Error : AdminSessionID Required!")
+
+                        }
+                        else {
+                            dataTable.ajax.reload();
+                            alert("Error : Speaker/Moderator Program Date not confirmed")
+
+                        }
+                    }
+                },
+                error: function () {
+
+                }
+            });
+        });
+        $('select.ddlProgramRequestStatus').change(function () {
+            alert('program request status dropdown update');
+            console.log('program request status dropdown update')
+
+
+        });
+        function ProcessCheckbox(checkbox) {
+
+            var id = checkbox.children[0].id;
+            var child = checkbox.children[0];
+            console.log(child);
+
+            if (document.getElementById(id).checked === true) {
+
+                var approvedModel = {
+
+                    ProgramRequestID: id,
+                    Approved: true
+
+                }
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("Approved", "Admin")',
+                    data: approvedModel,
+                    dataType: "json",
+                    success: function (result) {
+
+                        if (result) {
+                            dataTable.ajax.reload();
+
+
+                        } else {
+                            // The server returned a partial view => let's refresh
+                            // the corresponding section of our DOM with it
+                            console.log("Error while process aprove checkbox")
+                        }
+                    },
+                    error: function () {
+
+                    }
+                });
+
+            }
+
+            if (document.getElementById(id).checked === false) {
+
+                var approvedModel = {
+
+                    ProgramRequestID: id,
+                    Approved: false
+
+                }
+
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("Approved", "Admin")',
+                    data: approvedModel,
+                    dataType: "json",
+                    success: function (result) {
+
+                        if (result) {
+                            dataTable.ajax.reload();
+
+                        } else {
+                            // The server returned a partial view => let's refresh
+                            // the corresponding section of our DOM with it
+                            console.log("Error while process aprove checkbox")
+                        }
+                    },
+                    error: function () {
+
+                    }
+                });
+
+            }
+
+
+
+        }
+
+    @*$("#DataTable").on("change", "select", function () {
+
+
+
+        var status = this.value;
+
+        if (status === '3' || status === '2' || status === '5') {
+
+
+            var id = ($(this).attr('data-id'));
+
+            var statsModel = {
+
+                id: id,
+                status: status
+            }
+
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("UpdateRequestStatusByAdmin", "Admin")',
+                data: statsModel,
+                dataType: "json",
+                success: function (result) {
+                    debugger;
+
+                    if (result.result === 'success') {
+                        dataTable.ajax.reload();
+                        alert("Request Status changed to ")
+
+                    } else {
+                        // The server returned a partial view => let's refresh
+                        // the corresponding section of our DOM with it
+                        alert("There is no Session Confirm date or SessionId is not set")
+                    }
+                },
+                error: function () {
+
+                }
+            });
+        } // end of if statement for status check
+
+    });*@
+
+
+    </script>
+
+}
+

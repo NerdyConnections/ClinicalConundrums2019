@@ -1,0 +1,777 @@
+﻿@using ClinicalConundrums2019.Util
+@model ClinicalConundrums2019.ViewModels.PostSessionViewModel
+@{
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="https://fonts.googleapis.com/css?family=BenchNine" rel="stylesheet">
+    <title>Session Cancellation Request</title>
+    <style type="text/css">
+        #lblSystemMsg {
+            font-weight: bold;
+            font-size: large;
+        }
+
+        body {
+            font-family: BenchNine;
+            font-size: 13px;
+        }
+
+        .half {
+            width: 48%;
+        }
+
+        .rightandtop {
+            margin-left: 52%;
+            margin-top: -57px;
+        }
+    </style>
+</head>
+<body>
+
+    <!--don't these files, they are required at this location (not at head) for client side javascript to work-->
+
+    <script src="/Scripts/jquery-3.1.0.min.js"></script>
+    <script src="/Scripts/bootstrap.min.js"></script>
+    <script src="/Scripts/moment-with-locales.min.js"></script>
+    <script src="/Scripts/bootstrap-datetimepicker.min.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="/Scripts/bootstrap-datetimepicker.min.js"></script>
+
+    <script src="~/Scripts/jquery.validate.js"></script>
+
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+
+    <!--end of client side javascript-->
+
+    <div>
+        <div class="form-group">
+            Record ID:
+            @Model.ProgramRequestID
+        </div>
+        @using (Html.BeginForm("PostSession", "Admin", FormMethod.Post, new { onsubmit = "return SubmitPostSessionForm(this)" }))
+        {
+            @Html.HiddenFor(Model => Model.ProgramRequestID)
+            @Html.HiddenFor(Model => Model.UserID)
+            @Html.HiddenFor(Model => Model.ModeratorPaymentMethod)
+            @Html.HiddenFor(Model => Model.SpeakerPaymentMethod)
+            @Html.HiddenFor(Model => Model.Speaker2PaymentMethod)
+            <h2>Webinar </h2>
+            <div class="form-group">
+                @Html.LabelFor(model => model.WebinarEventURL, new { @class = "control-label" })
+                @Html.EditorFor(model => model.WebinarEventURL, new { htmlAttributes = new { @class = "form-control" } })
+
+            </div>
+            <h2>Venue</h2>
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.CCASent, new { @class = "control-label" })
+                @Html.CheckBoxFor(m => m.CCASent)
+
+
+
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.VenueReceipt, new { @class = "control-label" })
+                @Html.CheckBoxFor(m => m.VenueReceipt)
+
+
+
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.VenueNotes, new { @class = "control-label" })
+                @Html.EditorFor(model => model.VenueNotes, new { htmlAttributes = new { @class = "form-control" } })
+
+
+
+            </div>
+            <h2>3rd Party Payment</h2>
+
+
+            <div class="form-group">
+
+                <div class="half">
+                    @Html.LabelFor(model => model.VenueFees, new { @class = "control-label" })
+                    @Html.EditorFor(model => model.VenueFees, new { htmlAttributes = new { @class = "form-control" } })
+
+                </div>
+
+                <div class="half rightandtop">
+
+                    @Html.LabelFor(model => model.VenueFeesTaxes, new { @class = "control-label" })
+                    @Html.EditorFor(model => model.VenueFeesTaxes, new { htmlAttributes = new { @class = "form-control" } })
+
+                </div>
+
+            </div>
+
+
+            <div class="form-group">
+                <div class="half">
+                    @Html.LabelFor(model => model.AVFees, new { @class = "control-label" })
+                    @Html.EditorFor(model => model.AVFees, new { htmlAttributes = new { @class = "form-control" } })
+
+                </div>
+
+                <div class="half rightandtop">
+
+                    @Html.LabelFor(model => model.AVFeesTaxes, new { @class = "control-label" })
+                    @Html.EditorFor(model => model.AVFeesTaxes, new { htmlAttributes = new { @class = "form-control" } })
+
+                </div>
+
+            </div>
+            <div class="form-group">
+                <div class="half">
+                    @Html.LabelFor(model => model.OtherFees, new { @class = "control-label" })
+                    @Html.EditorFor(model => model.OtherFees, new { htmlAttributes = new { @class = "form-control" } })
+
+                </div>
+
+                <div class="half rightandtop">
+
+                    @Html.LabelFor(model => model.OtherFeesTaxes, new { @class = "control-label" })
+                    @Html.EditorFor(model => model.OtherFeesTaxes, new { htmlAttributes = new { @class = "form-control" } })
+
+                </div>
+
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.FinalAttendance, new { @class = "control-label" })
+                @Html.EditorFor(model => model.FinalAttendance, new { htmlAttributes = new { @class = "form-control" } })
+
+            </div>
+            <h2>CFPC</h2>
+
+            <div class="form-group">
+                Session ID
+                @Html.EditorFor(model => model.AdminSessionID, new { htmlAttributes = new { @class = "form-control" } })
+
+
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.CFPCDateSubmitted, new { @class = "control-label" })
+                @Html.EditorFor(model => model.CFPCDateSubmitted, new { htmlAttributes = new { @class = "form-control" } })
+
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.CFPCDateApproved, new { @class = "control-label" })
+                @Html.EditorFor(model => model.CFPCDateApproved, new { htmlAttributes = new { @class = "form-control" } })
+
+            </div>
+            <div class="form-group">
+                <div class="half">
+                    @Html.LabelFor(model => model.CFPCFees, new { @class = "control-label" })
+                    @Html.EditorFor(model => model.CFPCFees, new { htmlAttributes = new { @class = "form-control" } })
+
+                </div>
+                <div class="half rightandtop">
+                    @Html.LabelFor(model => model.CFPCFeeTaxes, new { @class = "control-label" })
+                    @Html.EditorFor(model => model.CFPCFeeTaxes, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>
+
+
+            <div class="form-group">
+
+                <div class="half">
+                    @Html.LabelFor(model => model.CFPCImplementationFees, new { @class = "control-label" })
+                    @Html.EditorFor(model => model.CFPCImplementationFees, new { htmlAttributes = new { @class = "form-control" } })
+
+                </div>
+
+                <div class="half rightandtop">
+                    @Html.LabelFor(model => model.CFPCImplementationFeesTaxes, new { @class = "control-label" })
+                    @Html.EditorFor(model => model.CFPCImplementationFeesTaxes, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>
+
+            <h2>Post Session Uploads</h2>
+
+            <h3>Upload Evaluation Form</h3>
+            <div style="position:relative;">
+                <button class=" form-control" style="width:360px; cursor: pointer; display: inline-block">
+                    Choose File
+                    <input id="Evaluation_Uploader" data-val="" type="file"
+                           style="cursor: pointer; position:absolute;z-index:2;top:0;left:0;filter: alpha(opacity=0);-ms-filter:&quot;progid:DXImageTransform.Microsoft.Alpha(Opacity=0)&quot;;opacity:0;background-color:transparent;color:transparent;" name="Evaluation_Uploader"
+                           accept=".pdf,.doc,.docx" size="40" class="form-group-sm form-control">
+                </button> <br /><span class="small-text" id="upload-file-info"></span>
+
+                <input id="uploadSucceess" value="" type="hidden" />
+            </div>
+
+            if (ViewBag.SessionUpload.EvaluationUploaded ?? false)
+            {
+                <h3>Evaluation Form</h3>
+                <a class="DownloadLink" href="/Admin/OpenFile?ProgramRequestID=@Model.ProgramRequestID&FileType=Evaluation&FileExt=@ViewBag.SessionUpload.EvaluationFileExt"><span class="glyphicon glyphicon-download-alt " style="font-size: 13px"></span> &nbsp;Evaluation Form</a>
+            }
+
+            <h3>Upload Sign In Sheet</h3>
+
+
+            <div style="position:relative;">
+                <button class=" form-control" style="width:360px; cursor: pointer; display: inline-block">
+                    Choose File
+                    <input id="SignIn_Uploader" data-val="" type="file"
+                           style="cursor: pointer; position:absolute;z-index:2;top:0;left:0;filter: alpha(opacity=0);-ms-filter:&quot;progid:DXImageTransform.Microsoft.Alpha(Opacity=0)&quot;;opacity:0;background-color:transparent;color:transparent;" name="SignIn_Uploader"
+                           accept=".pdf,.doc,.docx" size="40" class="form-group-sm form-control">
+                </button><br /> <span class="small-text" id="SigInUpload-file-info"></span>
+
+                <input id="SigInUploadSucceess" value="" type="hidden" />
+            </div>
+
+
+            if (ViewBag.SessionUpload.SignInUploaded ?? false)
+            {
+                <h3>SignUp Sheet</h3>
+                <a class="DownloadLink" href="/Admin/OpenFile?ProgramRequestID=@Model.ProgramRequestID&FileType=SignIn&FileExt=@ViewBag.SessionUpload.SignInFileExt"><span class="glyphicon glyphicon-download-alt " style="font-size: 13px"></span> &nbsp;Sign In Sheet</a>
+            }
+
+            <h3>Upload Other Form</h3>
+
+
+            <div style="position:relative;">
+                <button class=" form-control" style="width:360px; cursor: pointer; display: inline-block">
+                    Choose File
+                    <input id="UserOther_Uploader" data-val="" type="file"
+                           style="cursor: pointer; position:absolute;z-index:2;top:0;left:0;filter: alpha(opacity=0);-ms-filter:&quot;progid:DXImageTransform.Microsoft.Alpha(Opacity=0)&quot;;opacity:0;background-color:transparent;color:transparent;" name="UserOther_Uploader"
+                           accept=".pdf,.doc,.docx" size="40" class="form-group-sm form-control">
+                </button><br /> <span class="small-text" id="UserOther-file-info"></span>
+
+                <input id="UserOtherloadSucceess" value="" type="hidden" />
+            </div>
+
+
+            if (ViewBag.SessionUpload.UserOtherUploaded ?? false)
+            {
+                <h3>Other Form</h3>
+                <a class="DownloadLink" href="/Admin/OpenFile?ProgramRequestID=@Model.ProgramRequestID&FileType=UserOther&FileExt=@ViewBag.SessionUpload.UserOtherFileExt"><span class="glyphicon glyphicon-download-alt " style="font-size: 13px"></span> &nbsp;Other Form</a>
+            }
+
+
+            <h3>Upload Speaker Agreement Form</h3>
+
+
+            <div style="position:relative;">
+                <button class="form-control" style="width:360px; cursor: pointer; display: inline-block">
+                    Choose File
+                    <input id="SpeakerAgreement_Uploader" data-val="" type="file"
+                           style="cursor: pointer; position:absolute;z-index:2;top:0;left:0;filter: alpha(opacity=0);-ms-filter:&quot;progid:DXImageTransform.Microsoft.Alpha(Opacity=0)&quot;;opacity:0;background-color:transparent;color:transparent;" name="SpeakerAgreement_Uploader"
+                           accept=".pdf,.doc,.docx" size="40" class="form-group-sm form-control">
+                </button><br /> <span class="small-text" id="SpeakerAgreementUpload-file-info"></span>
+
+                <input id="SpeakerAgreementUploadSucceess" value="" type="hidden" />
+            </div>
+
+
+            if (ViewBag.SessionUpload.SpeakerAgreementUploaded ?? false)
+            {
+                <h3>Speaker Agreement Form</h3>
+                <a class="DownloadLink" href="/Admin/OpenFile?ProgramRequestID=@Model.ProgramRequestID&FileType=SpeakerAgreement&FileExt=@ViewBag.SessionUpload.SpeakerAgreementFileExt"><span class="glyphicon glyphicon-download-alt " style="font-size: 13px"></span> &nbsp;Speaker Agreement Form</a>
+            }
+
+
+            <h3>Upload Final Attendance List</h3>
+            <div style="position:relative;">
+                <button class=" form-control" style="width:360px; cursor: pointer; display: inline-block">
+                    Choose File
+                    <input id="FinalAttendanceList_Uploader" data-val="" type="file"
+                           style="cursor: pointer; position:absolute;z-index:2;top:0;left:0;filter: alpha(opacity=0);-ms-filter:&quot;progid:DXImageTransform.Microsoft.Alpha(Opacity=0)&quot;;opacity:0;background-color:transparent;color:transparent;" name="FinalAttendanceList_Uploader"
+                           accept=".pdf,.doc,.docx,.PDF,.DOC,.DOCX,.xls,.xlsx" size="40" class="form-group-sm form-control">
+                </button> <br /><span class="small-text" id="finalattendancelist-file-info"></span>
+
+                    <input id="finalattendancelistUploadSuccess" value="" type="hidden" />
+            </div>
+
+            if (ViewBag.SessionUpload.FinalAttendanceListUploaded ?? false)
+            {
+                <h3>Final Attendance List</h3>
+                <a class="DownloadLink" href="/Admin/OpenFile?ProgramRequestID=@Model.ProgramRequestID&FileType=FinalAttendanceList&FileExt=@ViewBag.SessionUpload.FinalAttendanceListFileExt"><span class="glyphicon glyphicon-download-alt " style="font-size: 13px"></span> &nbsp;Final Attendance List</a>
+            }
+            <h2>Honorium (Speaker)</h2>
+            <div class="form-group">
+                <div class="half">
+                    @Html.LabelFor(model => model.SpeakerHonorium, new { @class = "control-label" })
+                    @Html.EditorFor(model => model.SpeakerHonorium, new { htmlAttributes = new { @class = "form-control" } })
+
+                </div>
+
+                <div class="half rightandtop">
+                    @Html.LabelFor(model => model.SpeakerHonoriumTaxes, new { @class = "control-label" })
+                    @Html.EditorFor(model => model.SpeakerHonoriumTaxes, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="half">
+                    @Html.LabelFor(model => model.SpeakerExpenses, new { @class = "control-label" })
+                    @Html.EditorFor(model => model.SpeakerExpenses, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+
+                <div class="half rightandtop">
+                    @Html.LabelFor(model => model.SpeakerExpensesTaxes, new { @class = "control-label" })
+                    @Html.EditorFor(model => model.SpeakerExpensesTaxes, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+
+            </div>
+
+            <div class="form-group">
+                Payment Method: Cheque
+            </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.SpeakerPaymentSentDate, new { @class = "control-label" })
+                    @Html.EditorFor(model => model.SpeakerPaymentSentDate, new { htmlAttributes = new { @class = "form-control", @id = "dpSpeakerPaymentSentDate" } })
+                </div>
+
+
+                <h2>Honorium (Speaker 2)</h2>
+                <div class="form-group">
+                    <div class="half">
+                        @Html.LabelFor(model => model.Speaker2Honorium, new { @class = "control-label" })
+                        @Html.EditorFor(model => model.Speaker2Honorium, new { htmlAttributes = new { @class = "form-control" } })
+
+                    </div>
+                    <div class="half rightandtop">
+                        @Html.LabelFor(model => model.Speaker2HonoriumTaxes, new { @class = "control-label" })
+                        @Html.EditorFor(model => model.Speaker2HonoriumTaxes, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="half">
+                        @Html.LabelFor(model => model.Speaker2Expenses, new { @class = "control-label" })
+                        @Html.EditorFor(model => model.Speaker2Expenses, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+
+                    <div class="half rightandtop">
+                        @Html.LabelFor(model => model.Speaker2ExpensesTaxes, new { @class = "control-label" })
+                        @Html.EditorFor(model => model.Speaker2ExpensesTaxes, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+                <div class="form-group">
+                    Payment Method: Cheque
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Speaker2PaymentSentDate, new { @class = "control-label" })
+                    @Html.EditorFor(model => model.Speaker2PaymentSentDate, new { htmlAttributes = new { @class = "form-control", @id = "dpSpeaker2PaymentSentDate" } })
+                </div>
+
+
+                <h2>Honorium (Moderator)</h2>
+                <div class="form-group">
+                    <div class="half">
+                        @Html.LabelFor(model => model.ModeratorHonorium, new { @class = "control-label" })
+                        @Html.EditorFor(model => model.ModeratorHonorium, new { htmlAttributes = new { @class = "form-control" } })
+
+                    </div>
+
+                    <div class="half rightandtop">
+                        @Html.LabelFor(model => model.ModeratorHonoriumTaxes, new { @class = "control-label" })
+                        @Html.EditorFor(model => model.ModeratorHonoriumTaxes, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    <div class="half">
+                        @Html.LabelFor(model => model.ModeratorExpenses, new { @class = "control-label" })
+                        @Html.EditorFor(model => model.ModeratorExpenses, new { htmlAttributes = new { @class = "form-control" } })
+
+                    </div>
+
+                    <div class="half rightandtop">
+                        @Html.LabelFor(model => model.ModeratorExpensesTaxes, new { @class = "control-label" })
+                        @Html.EditorFor(model => model.ModeratorExpensesTaxes, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+
+                </div>
+
+
+                <div class="form-group">
+                    Payment Method: Cheque
+
+
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ModeratorPaymentSentDate, new { @class = "control-label" })
+                    @Html.EditorFor(model => model.ModeratorPaymentSentDate, new { htmlAttributes = new { @class = "form-control", @id = "dpModeratorPaymentSentDate" } })
+
+                </div>
+
+
+
+
+
+                <div class="form-group form-group-sm col-sm-2 pull-right">
+                    <!-- Trigger the modal with a button -->
+                    <input type="submit" value="Submit" id="btnCancelSession" class="btn btn-default" />
+                </div>
+
+                            <div class="form-group">
+                                <span id="lblSystemMsg"></span>
+                            </div>
+
+        }
+    </div>
+    <script>
+
+        $(document).ready(function(){
+            $('#dpModeratorPaymentSentDate, #dpSpeakerPaymentSentDate, #dpSpeaker2PaymentSentDate').datetimepicker({
+                format: 'DD/MM/YYYY'
+            });
+
+            $('#CFPCDateSubmitted, #CFPCDateApproved').datetimepicker({
+                format: 'DD/MM/YYYY'
+            });
+            @*var readOnly = '@Model.CancellationRequested';
+            ///debugger;  works with developer tool f12 to stop the flow of the program and allow you to step through the code
+            if (readOnly === 'True') {
+
+                $('input[type=text], textarea').attr('readonly', true);
+
+                $(':input[type="submit"]').prop('disabled', true);
+
+
+            }*@
+        });
+        function SubmitPostSessionForm(form) {
+
+            $.validator.unobtrusive.parse(form);
+
+            if ($(form).valid()) {
+                $.ajax({
+                    type: "POST",
+                    url: form.action,
+                    data: $(form).serialize(),
+
+                    success: function (result) {
+                        debugger;
+                        if (result.success) {
+                            $('#lblSystemMsg').removeClass("text-danger");
+                            $('#lblSystemMsg').addClass("text-sucess");
+                            $('#lblSystemMsg').html("Post Session Information is now saved.");
+
+                          //  $('#myModal').modal('hide');
+                            //dataTable.ajax.reload();
+
+                        }
+                        else {
+                            $('#lblSystemMsg').html("Unable to save Post Session Information.  Please contact IT support.");
+                            console.log("Error while process aprove checkbox")
+                        }
+                        $("#closePostSessionModal").click();
+                    }
+                });
+            }
+            return false;
+        }
+        $('#Evaluation_Uploader').on('change', function (e) {
+
+            var files = e.target.files;
+            var ProgramRequestID = '@ViewBag.ProgramRequestID';
+            var UserID = '@ViewBag.UserID';
+
+            if (files.length > 0) {
+                if (window.FormData !== undefined) {//making sure it support html 5 control
+                    var fileSize = files[0].size / 1024 / 1024;
+                    var filename = files[0].name;
+                    var extension = filename.substr((filename.lastIndexOf('.') + 1));
+                    if (fileSize < 20.00) {
+                        $('#upload-file-info').html(filename);
+                        $("#UploadEvaluationForm").attr("data-val", "true");
+                       // document.getElementById('EvaluationFileExt').value = extension;
+                        //document.getElementById('EvaluationFileName').value = filename;
+                        //document.getElementById('EvaluationUploaded').value = 1;
+                        //upload file to server
+                        var data = new FormData();
+                        data.append(files[0].name, files[0])
+                        $.ajax({
+                            type: "POST",
+                            url: '/Dashboard/EvaluationFormUpload?ProgramRequestID=' + ProgramRequestID,
+                            contentType: false,
+                            processData: false,
+                            data: data,
+                            success: function (result) {
+                                if (result.success) {
+                                    debugger;
+                                    console.log(result.success.msg);
+                                    $('#upload-file-info').html(result.success.uploadedFilename + " Uploaded");
+                                    $('#upload-file-info').removeClass("text-danger");
+                                    $('#upload-file-info').addClass("text-sucess");
+                                    $('#SessionFileName').val(result.success.returnFileName);
+                                    $('#IsFileUploaded').val(true);
+                                    console.log($('#SessionFileName').val());
+                                    $("#Evaluation_Uploader").attr("data-val", true);
+
+                                } else {
+                                    console.log(result.error);
+                                    debugger;
+                                    $('#upload-file-info').html(result.error);
+                                    $('#upload-file-info').addClass("text-danger");
+                                }
+                            }
+                        });
+
+                    }
+                    else {
+                        $('#upload-file-info').html("File Size is too big. Please upload another file");
+                        $("#UploadEvaluationForm").attr("data-val", "false");
+
+                    }
+
+                }
+            }
+
+
+        });
+
+        $('#SignIn_Uploader').on('change', function (e) {
+            debugger;
+            var files = e.target.files;
+            var ProgramRequestID = '@ViewBag.ProgramRequestID';
+            var UserID = '@ViewBag.UserID';
+
+            if (files.length > 0) {
+                if (window.FormData !== undefined) {//making sure it support html 5 control
+                    var fileSize = files[0].size / 1024 / 1024;
+                    var filename = files[0].name;
+                    var extension = filename.substr((filename.lastIndexOf('.') + 1));
+                    if (fileSize < 20.00) {
+                        $('#SignInUpload-file-info').html(filename);
+                        $("#SignIn_Uploader").attr("data-val", "true");
+                    //    document.getElementById('SignInFileExt').value = extension;
+                      //  document.getElementById('SignInFileName').value = filename;
+                      //  document.getElementById('SignInUploaded').value = 1;
+                        //upload file to server
+                        var data = new FormData();
+                        data.append(files[0].name, files[0])
+                        $.ajax({
+                            type: "POST",
+                            url: '/Dashboard/SignInUpload?ProgramRequestID=' + ProgramRequestID,
+                            contentType: false,
+                            processData: false,
+                            data: data,
+                            success: function (result) {
+                                if (result.success) {
+                                    debugger;
+                                    console.log(result.success.msg);
+                                    $('#SigInUpload-file-info').html(result.success.uploadedFilename + " Uploaded");
+                                    $('#SigInUpload-file-info').removeClass("text-danger");
+                                    $('#SigInUpload-file-info').addClass("text-sucess");
+                                    $('#SignInFileName').val(result.success.returnFileName);
+                                    $('#IsFileUploaded').val(true);
+                                    console.log($('#SignInFileName').val());
+                                    $("#SignIn_Uploader").attr("data-val", true);
+
+                                } else {
+                                    console.log(result.error);
+                                    debugger;
+                                    $('#SigInUpload-file-info').html(result.error);
+                                    $('#SigInUpload-file-info').addClass("text-danger");
+                                }
+                            }
+                        });
+
+                    }
+                    else {
+                        $('#SigInUpload-file-info').html("File Size is too big. Please upload another file");
+                        $("#SignIn_Uploader").attr("data-val", "false");
+
+                    }
+
+                }
+            }
+
+
+        });
+
+        $('#UserOther_Uploader').on('change', function (e) {
+            debugger;
+            var files = e.target.files;
+            var ProgramRequestID = '@ViewBag.ProgramRequestID';
+            var UserID = '@ViewBag.UserID';
+
+            if (files.length > 0) {
+                if (window.FormData !== undefined) {//making sure it support html 5 control
+                    var fileSize = files[0].size / 1024 / 1024;
+                    var filename = files[0].name;
+                    var extension = filename.substr((filename.lastIndexOf('.') + 1));
+                    if (fileSize < 20.00) {
+                        $('#UserOtherUpload-file-info').html(filename);
+                        $("#UserOther_Uploader").attr("data-val", "true");
+                     //   document.getElementById('UserOtherFileExt').value = extension;
+                       // document.getElementById('UserOtherFileName').value = filename;
+                       // document.getElementById('UserOtherUploaded').value = 1;
+                        //upload file to server
+                        var data = new FormData();
+                        data.append(files[0].name, files[0])
+                        $.ajax({
+                            type: "POST",
+                            url: '/Dashboard/UserOtherUpload?ProgramRequestID=' + ProgramRequestID,
+                            contentType: false,
+                            processData: false,
+                            data: data,
+                            success: function (result) {
+                                if (result.success) {
+                                    debugger;
+                                    console.log(result.success.msg);
+                                    $('#UserOther-file-info').html(result.success.uploadedFilename + " Uploaded");
+                                    $('#UserOther-file-info').removeClass("text-danger");
+                                    $('#UserOther-file-info').addClass("text-sucess");
+                                    $('#UserOtherFileName').val(result.success.returnFileName);
+                                    $('#IsFileUploaded').val(true);
+                                    console.log($('#UserOtherFileName').val());
+                                    $("#UserOther_Uploader").attr("data-val", true);
+
+                                } else {
+                                    console.log(result.error);
+                                    debugger;
+                                    $('#UserOther-file-info').html(result.error);
+                                    $('#UserOther-file-info').addClass("text-danger");
+
+                                }
+                            }
+                        });
+
+                    }
+                    else {
+                        $('#UserOther-file-info').html("File Size is too big. Please upload another file");
+                        $("#UserOther_Uploader").attr("data-val", "false");
+
+                    }
+
+                }
+            }
+
+
+        });
+        $('#FinalAttendanceList_Uploader').on('change', function (e) {
+
+            var files = e.target.files;
+            var ProgramRequestID = '@ViewBag.ProgramRequestID';
+            var UserID = '@ViewBag.UserID';
+
+            if (files.length > 0) {
+                if (window.FormData !== undefined) {//making sure it support html 5 control
+                    var fileSize = files[0].size / 1024 / 1024;
+                    var filename = files[0].name;
+                    var extension = filename.substr((filename.lastIndexOf('.') + 1));
+                    if (fileSize < 20.00) {
+                        $('#finalattendancelist-file-info').html(filename);
+                        $("#UploadFinalAttendanceList").attr("data-val", "true");
+                        // document.getElementById('EvaluationFileExt').value = extension;
+                        //document.getElementById('EvaluationFileName').value = filename;
+                        //document.getElementById('EvaluationUploaded').value = 1;
+                        //upload file to server
+                        var data = new FormData();
+                        data.append(files[0].name, files[0])
+                        $.ajax({
+                            type: "POST",
+                            url: '/Dashboard/FinalAttendanceListUpload?ProgramRequestID=' + ProgramRequestID,
+                            contentType: false,
+                            processData: false,
+                            data: data,
+                            success: function (result) {
+                                if (result.success) {
+                                    debugger;
+                                    console.log(result.success.msg);
+                                    $('#finalattendancelist-file-info').html(result.success.uploadedFilename + " Uploaded");
+                                    $('#finalattendancelist-file-info').removeClass("text-danger");
+                                    $('#finalattendancelist-file-info').addClass("text-sucess");
+                                    $('#finalattendancelistFileName').val(result.success.returnFileName);
+                                    $('#IsfinalattendancelistUploaded').val(true);
+                                    console.log($('#finalattendancelistFileName').val());
+                                    $("#FinalAttendanceList_Uploader").attr("data-val", true);
+
+                                } else {
+                                    console.log(result.error);
+                                    debugger;
+                                    $('#finalattendancelist-file-info').html(result.error);
+                                    $('#finalattendancelist-file-info').addClass("text-danger");
+                                }
+                            }
+                        });
+
+                    }
+                    else {
+                        $('#finalattendancelist-file-info').html("File Size is too big. Please upload another file");
+                        $("#UploadFinalAttendanceList").attr("data-val", "false");
+
+                    }
+
+                }
+            }
+
+
+        });
+
+        $('#SpeakerAgreement_Uploader').on('change', function (e) {
+            debugger;
+            var files = e.target.files;
+            var ProgramRequestID = '@ViewBag.ProgramRequestID';
+            var UserID = '@ViewBag.UserID';
+
+            if (files.length > 0) {
+                if (window.FormData !== undefined) {//making sure it support html 5 control
+                    var fileSize = files[0].size / 1024 / 1024;
+                    var filename = files[0].name;
+                    var extension = filename.substr((filename.lastIndexOf('.') + 1));
+                    if (fileSize < 20.00) {
+                        $('#SpeakerAgreementUpload-file-info').html(filename);
+                        $('#SpeakerAgreement_Uploader').attr("data-val", "true");
+
+                        //upload file to server
+                        var data = new FormData();
+                        data.append(files[0].name, files[0])
+                        $.ajax({
+                            type: "POST",
+                            url: '/Dashboard/SpeakerAgreementUpload?ProgramRequestID=' + ProgramRequestID,
+                            contentType: false,
+                            processData: false,
+                            data: data,
+                            success: function (result) {
+                                if (result.success) {
+                                    debugger;
+                                    console.log(result.success.msg);
+                                    $('#SpeakerAgreementUpload-file-info').html(result.success.uploadedFilename + " Uploaded");
+                                    $('#SpeakerAgreementUpload-file-info').removeClass("text-danger");
+                                    $('#SpeakerAgreementUpload-file-info').addClass("text-sucess");
+                                    $('#SpeakerAgreementFileName').val(result.success.returnFileName);
+                                    $('#IsFileUploaded').val(true);
+                                    console.log($('#SpeakerAgreementFileName').val());
+                                    $("#SpeakerAgreement_Uploader").attr("data-val", true);
+
+                                } else {
+                                    console.log(result.error);
+                                    debugger;
+                                    $('#SpeakerAgreementUpload-file-info').html(result.error);
+                                    $('#SpeakerAgreementUpload-file-info').addClass("text-danger");
+                                }
+                            }
+                        });
+
+                    }
+                    else {
+                        $('#SpeakerAgreementUpload-file-info').html("File Size is too big. Please upload another file");
+                        $("#SpeakerAgreement_Uploader").attr("data-val", "false");
+
+                    }
+
+                }
+            }
+
+
+        });
+
+
+    </script>
+</body>
+</html>

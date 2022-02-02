@@ -1,0 +1,199 @@
+﻿@using ClinicalConundrums2019.Models
+@model SpeakerModel
+
+@{
+    ViewBag.Title = "Speaker/Moderator Request Form";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@using (Html.BeginForm("NewSpeaker", "Speaker", FormMethod.Post, new { @id = "frm-new-speaker", onsubmit = "return SubmitNewSpeakerForm(this)" }))
+{ 
+<div class="pnl-portal frmProgramRequest">
+    <div class="row">
+        <div class="col-md-12">
+            <!-- <h1 id="lblTitle"></h1>-->
+            <h1>Speaker / Moderator Request Form </h1>
+            <div class="lead1">Please complete the fields below</div>
+            <!--<div class="btn-back"><span class="glyphicon glyphicon-chevron-left"></span><span>Back</span></div>-->
+            <!--<div class="lead1" style="color: #534d4d"></div>-->
+        </div>
+    </div>
+
+    
+    <div class="row">
+        <div class="form-group form-group-sm col-sm-2">        
+            First Name:
+            @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "errorMssg" })           
+        </div>
+
+        <div class="form-group form-group-sm col-sm-2">
+            Last Name:
+            @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.LastName, "", new { @class = "errorMssg" })
+        </div>
+
+        <div class="form-group form-group-sm col-sm-2">
+            Specialty:
+            @Html.TextBoxFor(m => m.Specialty, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Specialty, "", new { @class = "errorMssg" })
+        </div>
+
+
+        <div class="form-group form-group-sm col-sm-2">
+            Role:
+            @Html.DropDownListFor(model => model.AssignedRole, new SelectList(new List<SelectListItem>
+            {
+                    new SelectListItem {Text = "Speaker", Value = "1"},
+                    new SelectListItem {Text = "Moderator" , Value = "2"},
+                    new SelectListItem {Text = "Both" , Value = "3"},
+            }, "Value", "Text"), "Please select", new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.AssignedRole, "", new { @class = new { @class = "errorMssg"} })
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="form-group form-group-sm col-sm-2">
+            Clinic Name:
+            @Html.TextBoxFor(m => m.ClinicName, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.ClinicName, "", new { @class = "errorMssg" })
+        </div>
+
+        <div class="form-group form-group-sm col-sm-4">
+            Address:
+            @Html.TextBoxFor(m => m.Address, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Address, "", new { @class = "errorMssg" })
+        </div>
+
+        <div class="form-group form-group-sm col-sm-2">
+            City:
+            @Html.TextBoxFor(m => m.City, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.City, "", new { @class = "errorMssg" })
+        </div>
+
+        <div class="form-group form-group-sm col-sm-2">
+            Province:
+            @Html.DropDownListFor(model => model.Province, new SelectList(new List<SelectListItem>
+            {
+                    new SelectListItem {Text = "Alberta", Value = "1"},
+                    new SelectListItem {Text = "British Columbia" , Value = "2"},
+                    new SelectListItem {Text = "Manitoba" , Value = "3"},
+                    new SelectListItem {Text = "New Brunswick", Value = "4"},
+                    new SelectListItem {Text = "Newfoundland and Labrador" , Value = "5"},
+                    new SelectListItem {Text = "Nova Scotia" , Value = "6"},
+                    new SelectListItem {Text = "Ontario", Value = "7"},
+                    new SelectListItem {Text = "Prince Edward Island" , Value = "8"},
+                    new SelectListItem {Text = "Quebec" , Value = "9"},
+                    new SelectListItem {Text = "Saskatchewan" , Value = "10"}
+            }, "Value", "Text"), "Please select a province", new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.Province, "", new { @class = new { @class = "errorMssg" } })
+        </div>
+
+
+        <div class="form-group form-group-sm col-sm-2">
+            Postal Code:
+            @Html.TextBoxFor(m => m.PostalCode, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.PostalCode, "", new { @class = "errorMssg" })
+        </div>
+</div>
+
+<div class="row">
+        <div class="form-group form-group-sm col-sm-2">
+            Phone:
+            @Html.TextBoxFor(m => m.Phone, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Phone, "", new { @class = "errorMssg" })
+        </div>
+
+        <div class="form-group form-group-sm col-sm-2">
+            Fax:
+            @Html.TextBoxFor(m => m.Fax, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Fax, "", new { @class = "errorMssg" })
+        </div>
+
+        <div class="form-group form-group-sm col-sm-2">
+            Email:
+            @Html.TextBoxFor(m => m.EmailAddress, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.EmailAddress, "", new { @class = "errorMssg" })
+        </div>
+
+        <div class="form-group form-group-sm col-sm-4">
+            Comments:
+            @Html.TextBoxFor(m => m.Comment, new { @class = "form-control" })
+            @Html.ValidationMessageFor(m => m.Comment, "", new { @class = "errorMssg" })
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="form-group form-group-sm col-sm-2 pull-right">
+            <!-- Trigger the modal with a button -->
+            <button type="submit" class="form-control btn btn-default btn-sm" id="submit">SUBMIT</button><br />
+            
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="successLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button><h4 class="modal-title">Thank you!</h4></div><div class="modal-body">
+                            <div>
+                                <p>We will review your request within 24-48 business hours.&nbsp; </p>
+                                You will be notified as following:<br>
+                                <ul>
+                                    <li>New Speaker Request Approved: Once approved, the speaker will be invited. </li>
+                                    <ul>
+                                        <li>If the speaker accepts the invitation, his or her name will appear in the drop-down menu of the “New Session Request Form”. </li>
+                                        <li>&nbsp;If the speaker declines the invitation, the status column in the <strong>Speaker &amp; Moderator Management</strong> page will be updated to “Declined”</li>
+                                    </ul>
+                                    <li>New Speaker Request Declined: You will receive a notification with reason(s) for declining the request </li>
+                                </ul>
+                            </div>
+                        </div><div class="modal-footer"><button class="btn btn-default btn-sm" data-dismiss="modal">Close</button></div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+}
+
+<div class="row">
+<div class="form-group form-group-sm col-sm-4">
+    <span class="text-danger" id="SystemMsg"></span>
+</div>
+</div>
+
+
+
+<script>
+    $(document).ready(function () {
+        $('#myModal').on('hidden.bs.modal', function () {
+            window.location = "/Speaker/Index";
+            dataTable.ajax.reload();
+        })
+
+    });
+
+
+    function SubmitNewSpeakerForm(form) {
+        //$("#myModal").modal('show');
+        $.validator.unobtrusive.parse(form);
+        if ($(form).valid()) {
+            $.ajax({
+                type: "POST",
+                url: form.action,
+                data: $(form).serialize(),
+                success: function (data) {                   
+                    if (data.success) {
+                        $("#myModal").modal('show');
+                    }
+                    else {
+                        document.getElementById("SystemMsg").innerHTML = data.error;
+                    }
+                }
+            });
+        }
+        return false;
+    }
+
+</script>

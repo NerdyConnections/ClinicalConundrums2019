@@ -1,0 +1,423 @@
+﻿@using ClinicalConundrums2019.Util
+@model ClinicalConundrums2019.Models.SessionUpload
+
+@{
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Upload Required Documents</title>
+    <style>
+        .DownloadLink, a:hover, a:visited, a:active {
+            font-size: 20px;
+            text-decoration: none;
+            cursor: pointer;
+            font-family: 'BenchNine','oswald','Fjalla One','Open Sans Condensed', 'Oswald',sans-serif !important;
+            color: #4a4848 !important;
+        }
+    </style>
+</head>
+<body style="border:none">
+
+    <!--don't these files, they are required at this location (not at head) for client side javascript to work-->
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+
+    <script src="~/Scripts/bootstrap.js"></script>
+
+
+    <script src="~/Scripts/jquery.validate.js"></script>
+
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+
+    <!--end of client side javascript-->
+    <!--using (Html.BeginForm("FileUpload", "DashBoard", FormMethod.Post, new { id = "frmFileUpload", enctype = "multipart/form-data"}))-->
+
+    @Html.HiddenFor(m => m.ProgramRequestID, new { id = "ProgramRequestID" })
+
+    <table id="UploadTable" border="0" style="margin-left:10px;font-size:12px;width:100%;    border: none" align="left">
+        <tr>
+            <td>
+                <h1>Evaluation Form</h1><br />
+                <div id="DivEvaluationfileupload" class="form-group">
+                    <label width="50%" title="Upload">
+                        @if (Model.EvaluationUploaded ?? false)
+                        {
+                            <a style="color:#C6E6EA" class="DownloadLink" href="/Dashboard/OpenFile?ProgramRequestID=@Model.ProgramRequestID&FileType=Evaluation&FileExt=@Model.EvaluationFileExt"><span class="glyphicon glyphicon-download-alt " style="font-size: 13px"></span> &nbsp;Evaluation Form</a>
+                        }
+                    </label>
+                    <br />
+                    <div style="position:relative;">
+                        <a class="link-blue" style="width:300px;cursor: pointer; display: inline-block;font-weight:400">
+                            <img src="~/Images/chooseFile_btn.png" />
+                            <input id="Evaluation_Uploader" data-val="" type="file"
+                                   style="cursor: pointer; position:absolute;z-index:2;top:0;left:0;filter: alpha(opacity=0);-ms-filter:&quot;progid:DXImageTransform.Microsoft.Alpha(Opacity=0)&quot;;opacity:0;background-color:transparent;color:transparent;" name="Evaluation_Uploader"
+                                   accept=".pdf,.doc,.docx" size="40" class="form-group-sm form-control">
+                        </a> <br /><span class="small-text" id="upload-file-info"></span>
+                        @Html.HiddenFor(m => m.EvaluationFileExt, new { id = "EvaluationFileExt" })
+                        @Html.HiddenFor(m => m.EvaluationFileName, new { id = "EvaluationFileName" })
+                        @Html.HiddenFor(m => m.EvaluationUploaded, new { id = "EvaluationUploaded" })
+                        <input id="uploadSucceess" value="" type="hidden" />
+                    </div>
+
+                </div>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <h1>Sign In Sheet</h1><br />
+                <div id="DivSignInfileupload" class="form-group form-group-sm col-sm-4">
+                    <label class="" title="Upload">
+                        @if (Model.SignInUploaded ?? false)
+                        {
+                            <a class="DownloadLink" href="/Dashboard/OpenFile?ProgramRequestID=@Model.ProgramRequestID&FileType=SignIn&FileExt=@Model.SignInFileExt"><span class="glyphicon glyphicon-download-alt " style="font-size: 13px"></span> &nbsp;SignIn Sheet</a>
+                        }
+                    </label>
+                    <div style="position:relative;">
+                        <a class="link-blue" style="width:300px;cursor: pointer; display: inline-block;font-weight:400">
+                            <img src="~/Images/chooseFile_btn.png" />
+                            <input id="SignIn_Uploader" data-val="" type="file"
+                                   style="cursor: pointer; position:absolute;z-index:2;top:0;left:0;filter: alpha(opacity=0);-ms-filter:&quot;progid:DXImageTransform.Microsoft.Alpha(Opacity=0)&quot;;opacity:0;background-color:transparent;color:transparent;" name="SignIn_Uploader"
+                                   accept=".pdf,.doc,.docx" size="360" class="form-group-sm form-control">
+                        </a><br /> <span class="small-text" id="SigInUpload-file-info"></span>
+                        @Html.HiddenFor(m => m.SignInFileExt, new { id = "SignInFileExt" })
+                        @Html.HiddenFor(m => m.SignInFileName, new { id = "SignInFileName" })
+                        @Html.HiddenFor(m => m.SignInUploaded, new { id = "SignInUploaded" })
+                        <input id="SigInUploadSucceess" value="" type="hidden" />
+                    </div>
+
+                </div>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <h1>Speaker Agreement Form</h1><br />
+                <div id="DivSpeakerAgreementfileupload" class="form-group form-group-sm col-sm-4">
+                    <label class="" title="Upload">
+                        @if (Model.SpeakerAgreementUploaded ?? false)
+                        {
+                            <a class="DownloadLink" href="/Dashboard/OpenFile?ProgramRequestID=@Model.ProgramRequestID&FileType=SpeakerAgreement&FileExt=@Model.SpeakerAgreementFileExt"><span class="glyphicon glyphicon-download-alt " style="font-size: 13px"></span> &nbsp;Speaker Agreement Form</a>
+                        }
+                    </label>
+                    <div style="position:relative;">
+                        <a class="link-blue" style="width:300px;cursor: pointer; display: inline-block;font-weight:400">
+                            <img src="~/Images/chooseFile_btn.png" />
+                            <input id="SpeakerAgreement_Uploader" data-val="" type="file"
+                                   style="cursor: pointer; position:absolute;z-index:2;top:0;left:0;filter: alpha(opacity=0);-ms-filter:&quot;progid:DXImageTransform.Microsoft.Alpha(Opacity=0)&quot;;opacity:0;background-color:transparent;color:transparent;" name="SpeakerAgreement_Uploader"
+                                   accept=".pdf,.doc,.docx" size="40" class="form-group-sm form-control">
+                        </a><br /> <span class="small-text" id="SpeakerAgreementUpload-file-info"></span>
+                        @Html.HiddenFor(m => m.SpeakerAgreementFileExt, new { id = "SpeakerAgreementFileExt" })
+                        @Html.HiddenFor(m => m.SpeakerAgreementFileName, new { id = "SpeakerAgreementFileName" })
+                        @Html.HiddenFor(m => m.SpeakerAgreementUploaded, new { id = "SpeakerAgreementUploaded" })
+                        <input id="SpeakerAgreementUploadSucceess" value="" type="hidden" />
+                    </div>
+
+                </div>
+
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <h1>Additional Other Documents</h1><br />
+                <div id="DivUserOtherfileupload" class="form-group form-group-sm col-sm-4">
+                    <label class="" title="Upload">
+                        @if (Model.UserOtherUploaded ?? false)
+                        {
+                            <a class="DownloadLink" href="/Dashboard/OpenFile?ProgramRequestID=@Model.ProgramRequestID&FileType=UserOther&FileExt=@Model.UserOtherFileExt"><span class="glyphicon glyphicon-download-alt " style="font-size: 13px"></span> &nbsp;Additional Other Document</a>
+                        }
+                    </label>
+                    <div style="position:relative;">
+                        <a class="link-blue" style="width:300px;cursor: pointer; display: inline-block;font-weight:400">
+                            <img src="~/Images/chooseFile_btn.png" />
+                            <input id="UserOther_Uploader" data-val="" type="file"
+                                   style="cursor: pointer; position:absolute;z-index:2;top:0;left:0;filter: alpha(opacity=0);-ms-filter:&quot;progid:DXImageTransform.Microsoft.Alpha(Opacity=0)&quot;;opacity:0;background-color:transparent;color:transparent;" name="UserOther_Uploader"
+                                   accept=".pdf,.doc,.docx" size="40" class="form-group-sm form-control">
+                        </a><br /> <span class="small-text" id="UserOther-file-info"></span>
+                        @Html.HiddenFor(m => m.SignInFileExt, new { id = "UserOtherFileExt" })
+                        @Html.HiddenFor(m => m.SignInFileName, new { id = "UserOtherFileName" })
+                        @Html.HiddenFor(m => m.SignInUploaded, new { id = "UserOtherUploaded" })
+                        <input id="UserOtherloadSucceess" value="" type="hidden" />
+                    </div>
+
+                </div>
+
+
+            </td>
+        </tr>
+        <tr><td>&nbsp;</td></tr>
+        <tr>
+            <td align="right">
+
+                <button style="margin-right:10px" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+            </td>
+        </tr>
+    </table>
+
+
+
+
+    <script>
+
+        $(document).ready(function () {
+
+            @*var readOnly = '@Model.CancellationRequested';
+            ///debugger;  works with developer tool f12 to stop the flow of the program and allow you to step through the code
+            if (readOnly === 'True') {
+
+                $('input[type=text], textarea').attr('readonly', true);
+
+                $(':input[type="submit"]').prop('disabled', true);
+
+
+            }*@
+
+
+        });//end of document.ready
+
+        $('#Evaluation_Uploader').on('change', function (e) {
+
+            var files = e.target.files;
+            var ProgramRequestID = '@ViewBag.ProgramRequestID';
+            var UserID = '@ViewBag.UserID';
+
+            if (files.length > 0) {
+                if (window.FormData !== undefined) {//making sure it support html 5 control
+                    var fileSize = files[0].size / 1024 / 1024;
+                    var filename = files[0].name;
+                    var extension = filename.substr((filename.lastIndexOf('.') + 1));
+                    if (fileSize < 20.00) {
+                        $('#upload-file-info').html(filename);
+                        $("#UploadEvaluationForm").attr("data-val", "true");
+                        document.getElementById('EvaluationFileExt').value = extension;
+                        document.getElementById('EvaluationFileName').value = filename;
+                        document.getElementById('EvaluationUploaded').value = 1;
+                        //upload file to server
+                        var data = new FormData();
+                        data.append(files[0].name, files[0])
+                        $.ajax({
+                            type: "POST",
+                            url: '/Dashboard/EvaluationFormUpload?ProgramRequestID=' + ProgramRequestID,
+                            contentType: false,
+                            processData: false,
+                            data: data,
+                            success: function (result) {
+                                if (result.success) {
+                                    debugger;
+                                    console.log(result.success.msg);
+                                    $('#upload-file-info').html(result.success.uploadedFilename + " Uploaded");
+                                    $('#upload-file-info').removeClass("text-danger");
+                                    $('#upload-file-info').addClass("text-sucess");
+                                    $('#SessionFileName').val(result.success.returnFileName);
+                                    $('#IsFileUploaded').val(true);
+                                    console.log($('#SessionFileName').val());
+                                    $("#Evaluation_Uploader").attr("data-val", true);
+
+                                } else {
+                                    console.log(result.error);
+                                    debugger;
+                                    $('#upload-file-info').html(result.error);
+                                    $('#upload-file-info').addClass("text-danger");
+                                }
+                            }
+                        });
+
+                    }
+                    else {
+                        $('#upload-file-info').html("File Size is too big. Please upload another file");
+                        $("#UploadEvaluationForm").attr("data-val", "false");
+
+                    }
+
+                }
+            }
+
+
+        });
+
+        $('#SignIn_Uploader').on('change', function (e) {
+            debugger;
+            var files = e.target.files;
+            var ProgramRequestID = '@ViewBag.ProgramRequestID';
+            var UserID = '@ViewBag.UserID';
+
+            if (files.length > 0) {
+                if (window.FormData !== undefined) {//making sure it support html 5 control
+                    var fileSize = files[0].size / 1024 / 1024;
+                    var filename = files[0].name;
+                    var extension = filename.substr((filename.lastIndexOf('.') + 1));
+                    if (fileSize < 20.00) {
+                        $('#SignInUpload-file-info').html(filename);
+                        $("#SignIn_Uploader").attr("data-val", "true");
+                        document.getElementById('SignInFileExt').value = extension;
+                        document.getElementById('SignInFileName').value = filename;
+                        document.getElementById('SignInUploaded').value = 1;
+                        //upload file to server
+                        var data = new FormData();
+                        data.append(files[0].name, files[0])
+                        $.ajax({
+                            type: "POST",
+                            url: '/Dashboard/SignInUpload?ProgramRequestID=' + ProgramRequestID,
+                            contentType: false,
+                            processData: false,
+                            data: data,
+                            success: function (result) {
+                                if (result.success) {
+                                    debugger;
+                                    console.log(result.success.msg);
+                                    $('#SigInUpload-file-info').html(result.success.uploadedFilename + " Uploaded");
+                                    $('#SigInUpload-file-info').removeClass("text-danger");
+                                    $('#SigInUpload-file-info').addClass("text-sucess");
+                                    $('#SignInFileName').val(result.success.returnFileName);
+                                    $('#IsFileUploaded').val(true);
+                                    console.log($('#SignInFileName').val());
+                                    $("#SignIn_Uploader").attr("data-val", true);
+
+                                } else {
+                                    console.log(result.error);
+                                    debugger;
+                                    $('#SigInUpload-file-info').html(result.error);
+                                    $('#SigInUpload-file-info').addClass("text-danger");
+                                }
+                            }
+                        });
+
+                    }
+                    else {
+                        $('#SigInUpload-file-info').html("File Size is too big. Please upload another file");
+                        $("#SignIn_Uploader").attr("data-val", "false");
+
+                    }
+
+                }
+            }
+
+
+        });
+        $('#SpeakerAgreement_Uploader').on('change', function (e) {
+            debugger;
+            var files = e.target.files;
+            var ProgramRequestID = '@ViewBag.ProgramRequestID';
+            var UserID = '@ViewBag.UserID';
+
+            if (files.length > 0) {
+                if (window.FormData !== undefined) {//making sure it support html 5 control
+                    var fileSize = files[0].size / 1024 / 1024;
+                    var filename = files[0].name;
+                    var extension = filename.substr((filename.lastIndexOf('.') + 1));
+                    if (fileSize < 20.00) {
+                        $('#SpeakerAgreementUpload-file-info').html(filename);
+                        $("#SpeakerAgreement_Uploader").attr("data-val", "true");
+                        document.getElementById('SpeakerAgreementFileExt').value = extension;
+                        document.getElementById('SpeakerAgreementFileName').value = filename;
+                        document.getElementById('SpeakerAgreementUploaded').value = 1;
+                        //upload file to server
+                        var data = new FormData();
+                        data.append(files[0].name, files[0])
+                        $.ajax({
+                            type: "POST",
+                            url: '/Dashboard/SpeakerAgreementUpload?ProgramRequestID=' + ProgramRequestID,
+                            contentType: false,
+                            processData: false,
+                            data: data,
+                            success: function (result) {
+                                if (result.success) {
+                                    debugger;
+                                    console.log(result.success.msg);
+                                    $('#SpeakerAgreementUpload-file-info').html(result.success.uploadedFilename + " Uploaded");
+                                    $('#SpeakerAgreementUpload-file-info').removeClass("text-danger");
+                                    $('#SpeakerAgreementUpload-file-info').addClass("text-sucess");
+                                    $('#SpeakerAgreementFileName').val(result.success.returnFileName);
+                                    $('#IsFileUploaded').val(true);
+                                    console.log($('#SpeakerAgreementFileName').val());
+                                    $("#SpeakerAgreement_Uploader").attr("data-val", true);
+
+                                } else {
+                                    console.log(result.error);
+                                    debugger;
+                                    $('#SpeakerAgreementUpload-file-info').html(result.error);
+                                    $('#SpeakerAgreementUpload-file-info').addClass("text-danger");
+                                }
+                            }
+                        });
+
+                    }
+                    else {
+                        $('#SpeakerAgreementUpload-file-info').html("File Size is too big. Please upload another file");
+                        $("#SpeakerAgreement_Uploader").attr("data-val", "false");
+
+                    }
+
+                }
+            }
+
+
+        });
+        $('#UserOther_Uploader').on('change', function (e) {
+            debugger;
+            var files = e.target.files;
+            var ProgramRequestID = '@ViewBag.ProgramRequestID';
+            var UserID = '@ViewBag.UserID';
+
+            if (files.length > 0) {
+                if (window.FormData !== undefined) {//making sure it support html 5 control
+                    var fileSize = files[0].size / 1024 / 1024;
+                    var filename = files[0].name;
+                    var extension = filename.substr((filename.lastIndexOf('.') + 1));
+                    if (fileSize < 20.00) {
+                        $('#UserOtherUpload-file-info').html(filename);
+                        $("#UserOther_Uploader").attr("data-val", "true");
+                        document.getElementById('UserOtherFileExt').value = extension;
+                        document.getElementById('UserOtherFileName').value = filename;
+                        document.getElementById('UserOtherUploaded').value = 1;
+                        //upload file to server
+                        var data = new FormData();
+                        data.append(files[0].name, files[0])
+                        $.ajax({
+                            type: "POST",
+                            url: '/Dashboard/UserOtherUpload?ProgramRequestID=' + ProgramRequestID,
+                            contentType: false,
+                            processData: false,
+                            data: data,
+                            success: function (result) {
+                                if (result.success) {
+                                    debugger;
+                                    console.log(result.success.msg);
+                                    $('#UserOther-file-info').html(result.success.uploadedFilename + " Uploaded");
+                                    $('#UserOther-file-info').removeClass("text-danger");
+                                    $('#UserOther-file-info').addClass("text-sucess");
+                                    $('#UserOtherFileName').val(result.success.returnFileName);
+                                    $('#IsFileUploaded').val(true);
+                                    console.log($('#UserOtherFileName').val());
+                                    $("#UserOther_Uploader").attr("data-val", true);
+
+                                } else {
+                                    console.log(result.error);
+                                    debugger;
+                                    $('#UserOther-file-info').html(result.error);
+                                    $('#UserOther-file-info').addClass("text-danger");
+
+                                }
+                            }
+                        });
+
+                    }
+                    else {
+                        $('#UserOther-file-info').html("File Size is too big. Please upload another file");
+                        $("#UserOther_Uploader").attr("data-val", "false");
+
+                    }
+
+                }
+            }
+
+
+        });
+    </script>
+</body>
+</html>

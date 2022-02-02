@@ -1,0 +1,144 @@
+﻿@model  ClinicalConundrums2019.Models.PayeeModel
+@using ClinicalConundrums2019.Util
+@{
+    Layout = null;
+}
+
+
+<style>
+    input[type=text].form-control, input[type=password].form-control {
+        background: transparent;
+        border: 1px solid #808080;
+    }
+
+
+
+    .form-control {
+        display: block;
+        width: 100%;
+        height: 34px;
+        padding: 6px 12px;
+        font-size: 14px;
+        line-height: 1.428571429;
+        color: #555555;
+        vertical-align: middle;
+        background: none;
+        border-radius: 4px;
+    }
+
+    label {
+        color: black;
+    }
+
+    .field-validation-error {
+        color: crimson;
+    }
+
+    select {
+        width: 100%;
+        margin-left: 2%;
+    }
+</style>
+<!--don't these files, they are required at this location (not at head) for client side javascript to work-->
+<script src="~/Scripts/jquery-1.10.2.js"></script>
+
+<script src="~/Scripts/bootstrap.js"></script>
+
+
+<script src="~/Scripts/jquery.validate.js"></script>
+
+<script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+
+<!--end of client side javascript-->
+@using (Html.BeginForm("EditPayee", "Admin", FormMethod.Post, new { onsubmit = "return SubmitPayeeForm(this)" }))
+{
+
+
+    @Html.HiddenFor(model => model.UserId)
+    <div>
+        @*<label><input type="radio" name="issuecheque"> To a Company Name</label> &nbsp;&nbsp;*@
+        <label>@Html.RadioButtonFor(m => m.PaymentMethod, "Institution", new { id = "chkInstitution" }) To a Company Name</label> &nbsp;&nbsp;
+
+
+        <label>@Html.RadioButtonFor(m => m.PaymentMethod, "Personal", new { id = "chkPersonal" }) To me Personally</label>
+        &nbsp; <label> </label>
+        @Html.ValidationMessageFor(m => m.PaymentMethod, "", new { @class = "text-danger" })
+    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.AttentionTo, new { @class = "control-label" })
+                        @Html.EditorFor(model => model.AttentionTo, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.AttentionTo, "", new { htmlAttributes = new { @class = "error" } })
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.PayableTo, new { @class = "control-label" })
+                        @Html.EditorFor(model => model.PayableTo, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.PayableTo, "", new { htmlAttributes = new { @class = "error" } })
+                    </div>
+
+
+
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.MailingAddress1, new { @class = "control-label" })
+                        @Html.EditorFor(model => model.MailingAddress1, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.MailingAddress1, "", new { htmlAttributes = new { @class = "error" } })
+                    </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.MailingAddress2, new { @class = "control-label" })
+                            @Html.EditorFor(model => model.MailingAddress2, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.MailingAddress2, "", new { htmlAttributes = new { @class = "error" } })
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.City, new { @class = "control-label" })
+                            @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.City, "", new { htmlAttributes = new { @class = "error" } })
+                        </div>
+
+                        <div class="form-group">
+                            <label class="" title="Province" />
+
+                            @Html.LabelFor(model => model.Province, new { @class = "control-label" })
+                            @Html.DropDownListFor(model => model.Province, new SelectList(UserHelper.GetProvinces(), "Value", "Text"), "Please Select Province", new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Province, "", new { htmlAttributes = new { @class = "error" } })
+                        </div>
+
+
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.PostalCode, new { @class = "control-label" })
+                            @Html.EditorFor(model => model.PostalCode, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.PostalCode, "", new { htmlAttributes = new { @class = "error" } })
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.IRN, new { @class = "control-label" })
+                            @Html.EditorFor(model => model.IRN, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.IRN, "", new { htmlAttributes = new { @class = "error" } })
+                        </div>
+                        <div class="form-group">
+                            <label class="" title="Tax Number (HST / Other)">Tax Number (HST / Other):</label>
+                            @Html.TextBoxFor(model => model.TaxNumber, new { @class = "form-control", id = "TaxNumber" })
+
+                        </div>
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Instructions, new { @class = "control-label" })
+                            @Html.EditorFor(model => model.Instructions, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Instructions, "", new { htmlAttributes = new { @class = "error" } })
+                        </div>
+
+    if (Model.UserId != 0)
+    {
+        Console.WriteLine("UserId:" + Model.UserId);
+        <div class="form-group">
+            <input type="submit" value="Update Payee Details" id="btnPayeeFormEdit" class="btn btn-default" />
+        </div>
+
+
+    }
+}
+@*<div class="form-group">
+        <input type="button" value="" id="btnPayeeClose" class="btn btn-default" />
+    </div>*@
+

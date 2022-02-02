@@ -1,0 +1,45 @@
+
+Log Entry : 4:32:45 PM Thursday, July 18, 2019
+  :
+  :Uploading COISlide...
+-------------------------------
+
+Log Entry : 4:33:38 PM Thursday, July 18, 2019
+  :
+  :Uploading COISlide...
+-------------------------------
+
+Log Entry : 4:21:33 PM Wednesday, July 24, 2019
+  :
+  :Uploading COISlide...
+-------------------------------
+
+Log Entry : 2:51:16 PM Monday, July 06, 2020
+  :
+  :Uploading COISlide...
+-------------------------------
+
+Log Entry : 5:57:51 PM Monday, July 06, 2020
+  :
+  :Uploading COISlide...
+-------------------------------
+
+Log Entry : 6:02:42 PM Monday, July 06, 2020
+  :
+  :Uploading COISlide...
+-------------------------------
+
+Log Entry : 6:05:03 PM Monday, July 06, 2020
+  :
+  :Error UpdateCOISlides...Validation failed for one or more entities. See 'EntityValidationErrors' property for more details.
+-------------------------------
+
+Log Entry : 6:07:04 PM Monday, July 06, 2020
+  :
+  :Error UpdateCOISlides... Inner Exception
+-------------------------------
+
+Log Entry : 6:09:26 PM Monday, July 06, 2020
+  :
+  :Uploading COISlide...
+-------------------------------

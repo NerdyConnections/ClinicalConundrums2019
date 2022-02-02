@@ -1,0 +1,43 @@
+﻿@using ClinicalConundrums2019.Models;
+@model List<COISlide>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>COISlides Upload</title>
+</head>
+<body>
+
+    @if (Model.Count > 0)
+    {
+        <h1>Download COISlides</h1>
+        <table>
+            @foreach (var slide in Model)
+            {
+                string COISlidePath = "<a style=\"text-decoration: none;\" target=\"_blank\" href=" + @ViewBag.SpeakerBaseURL + "COISlides/" + slide.UserID + "/" + slide.ProgramID + "/COISlides.pptx" + "><span class=\"glyphicon glyphicon-download - alt\" style=\"font - size: 13px\"></span>" + slide.ProgramName + "</a>";
+                <tr>
+                    <td>
+                        @Html.Raw(@COISlidePath)
+                        <script>Console.log("COISlidePath:" + @Html.Raw(@COISlidePath))</script>
+                    </td>
+                </tr>
+            }
+        </table>
+    }
+
+    else
+    {
+        <div class="row">
+            <div class="col-md-12">
+                <h1 id="lblTitle" style="color: rgb(255, 75, 75);">No COISlide is currently available</h1>
+
+            </div>
+        </div>
+    }
+</body>
+</html>

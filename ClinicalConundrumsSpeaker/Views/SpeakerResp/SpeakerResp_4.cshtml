@@ -1,0 +1,196 @@
+﻿@using ClinicalConundrumsSpeaker.Models
+@using ClinicalConundrumsSpeaker.Util
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="pnl-portal">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 id="lblTitle"></h1>
+            <!--div class="btn-back"><span class="glyphicon glyphicon-chevron-left"></span><span>Back</span></!--div-->
+            <!-- <div class="lead1" style="color: #534d4d">CFPC &nbsp;&nbsp; FMOQ</div>-->
+        </div>
+    </div>
+
+    <div class="row">
+
+        @{
+
+            Html.RenderPartial("_LeftNav", UserHelper.GetLoggedInUser());
+        }
+        <div class="col-md-9" style="margin-bottom: 2px; color: #2b2b2b">
+            <div class="1">
+                <h1>Speaker Responsibilities</h1>
+                <!-- <div class="link-blue"><a class="link-blue" href="javascript:void(0)">Download Process Document</a></div>-->
+
+                <div class="margin-top-24">
+                    <p>Thank you for accepting our invitation as subject matter expert for a certified educational activity on Atrial Fibrillation. You will assist us in delivering the content of this activity at regional sessions across Canada. Your expertise in management of patients with Atrial Fibrillation and the related co-morbidities is essential to the overall success of the program.                               </p>
+                    <p> The Scientific Planning Committee oversaw the design of this program to be scientifically rigorous, educationally sound, fair balanced, and free of commercial bias. As per the CFPC guidelines for certified activities, you are required to use the presentation materials that will be provided to you and are not permitted to make any changes.                                </p>
+                    <p>This certified educational activity was developed by the Canadian Heart Research Centre, a not-for-profit Physician Organization and is intended for primary care physicians. This program has received an educational grant and in-kind support from BMS/Pfizer Alliance Canada. </p>
+                </div>
+
+                <div class="margin-top-24">
+                    <h3>Educational Content</h3>
+                    <ul>
+                        <li>This program contains two core didactic presentation as well as ten case-based modules</li>
+                    </ul>
+                </div>
+
+                <div class="margin-top-24">
+                    <h3>Overall Learning Objectives: Upon completion of this activity, participants will be able to:</h3>
+                    <ul>
+                        <li>Select personalized treatment options for stroke prevention in atrial fibrillation using current Canadian Practice Guidelines supplemented with reassuring “Real World” experience                                  </li>
+                        <li>Assess and optimize bleeding risk of atrial fibrillation patients requiring long-term DOAC stroke prevention treatment                                  </li>
+                        <li>Recognize the current treatment gap in Canada and take steps at ensuring appropriate dosage selection and long-term compliance with oral anticoagulation among AF patients</li>
+                    </ul>
+
+                </div>
+                <div class="margin-top-24">
+                    <h3>Educational Format</h3>
+                    <strong>This program is designed as a Mainpro+ one-credit-per hour and includes the following interactive components</strong>
+                    <ul>
+                        <li>Multiple Choice Audience Questions</li>
+                        <li>Case-Based Learning</li>
+                    </ul>
+                </div>
+                <div class="margin-top-24">
+                    <h3>Conflict of Interest</h3>
+
+                    The College of Family Physicians of Canada and the Canadian Heart Research Centre requires instructors, presenters, planners, managers and other individuals who are in a position to control and/or deliver the content of this activity to disclose any real or apparent conflict of interest they
+
+                    may have as related to the content of this activity. All identified conflicts of interest are thoroughly vetted by the Canadian Heart Research Centre for fair balance, scientific objectivity of studies mentioned in the materials or used as the basis for content, and appropriateness of patient care recommendations.
+                    <ul>
+                        <li>You must complete and submit the Conflict of Interest Form to the Canadian Heart Research Centre.</li>
+                        <li>You must disclose any real or apparent conflicts of interest to the program participants prior to the start of the program.</li>
+                    </ul>
+                </div>
+                <div class="margin-top-24">
+                    <h3>Honorarium</h3>
+                    <p>To make your participation possible, the Canadian Heart Research Centre will provide you with:</p>
+
+                    <ul>
+                        <li>An honorarium for presenting the program materials. The honoraria amount for your role and a presenter and/or a moderator was provided in the initial invitation. If you have any questions, please do not hesitate to contact us at <a href="mailto:@System.Configuration.ConfigurationManager.AppSettings["ContactEmail"]">@System.Configuration.ConfigurationManager.AppSettings["ContactEmail"]</a></li>
+                        <li>Reimbursement of transportation costs (/taxi fares/parking). You will be asked to provide a copy of the receipts.</li>
+                    </ul>
+
+                    <p>The Canadian Heart Research Centre is committed to providing quality education. We appreciate the opportunity to work with you.</p>
+                    <p>Please do not hesitate to get in touch with us should you have any questions.</p>
+                    <p>With best regards,</p>
+                    <p>
+                        Lianne Goldin <br>
+                        Executive Director<br>
+                        Continuing Professional Development
+                    </p>
+                </div> <div class="margin-top-24">
+                    <h3>Important Links:</h3>
+                    <ul>
+                        <li><a href="/PDF/QuickTips_COI_Final_ENGLISH.pdf" target="new">Quick Tips: Identification and Management of Conflicts of Interest and Transparency to Learners</a></li>
+                        <li><a href="/PDF/cma-policy-guidelines-for-physicians-in-interactions-with-industry-pd08-01-e.pdf" target="new">CMA Guidelines for Physicians in Interactions with Industry </a></li>
+                        <li><a href="/PDF/Code-Formatted_Regular_EN-2.pdf" target="new">Innovative Medicines Canada Code of Ethical Practices</a></li>
+                    </ul>
+                </div>
+
+            </div>
+
+
+
+
+            <!-- <div class="2 margin-top-24">
+            <h3>Program Description</h3>
+            <div style="border: 3px solid #fff; height: 100px; width: 95%"></div>
+        </div>-->
+            <!--<div class="3 margin-top-24">
+            <div style="border: 3px solid #fff; width: 95%">
+                <table style="width: 100%">
+                    <tr>
+                        <td style="background: #333; color: #fff; padding: 2px 0px 2px 5px">PROVINCE</td>
+                        <td style="width: 220px; background: #24c878; color: #fff; padding: 2px 0px 2px 5px">ACTIVE</td>
+                        <td style="width: 220px; background: #3d7f9c; color: #fff; padding: 2px 0px 2px 5px">COMPLETED</td>
+                        <td style="width: 220px; background: #e60c41; color: #fff; padding: 2px 0px 2px 5px">CANCELLED</td>
+                    </tr>
+
+                    <tr>
+                        <td style="padding: 2px 0px 2px 5px">BC</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+
+                    <tr>
+                        <td style="padding: 2px 0px 2px 5px">AB</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+
+                    <tr>
+                        <td style="padding: 2px 0px 2px 5px">SK</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+
+                    <tr>
+                        <td style="padding: 2px 0px 2px 5px">MB</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+
+                    <tr>
+                        <td style="padding: 2px 0px 2px 5px">ON</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+
+                    <tr>
+                        <td style="padding: 2px 0px 2px 5px">QC</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+
+                    <tr>
+                        <td style="padding: 2px 0px 2px 5px">NS</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+
+                    <tr>
+                        <td style="padding: 2px 0px 2px 5px">NB</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+
+                    <tr>
+                        <td style="padding: 2px 0px 2px 5px">NFLD</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+
+                    <tr>
+                        <td style="padding: 2px 0px 2px 5px">PEI</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+
+                </table>
+            </div>
+        </div>-->
+
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">&nbsp;</div>
+    </div>
+</div>
+

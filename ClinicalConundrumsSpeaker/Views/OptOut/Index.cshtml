@@ -1,0 +1,139 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LoginMaster.cshtml";
+}
+
+
+<style>
+    .error {
+        color: crimson;
+    }
+</style>
+
+<section>
+    <div role="main" class="container overlay-z2">
+        <div class="pnl-portal frmProgramRequest">
+            <div class="row">
+                <div class="col-md-12">
+                    <!-- <h1 id="lblTitle"></h1>-->
+                    <h1>SPEAKER RESOURCE PORTAL OPT-OUT</h1>
+
+
+                    <!--<div class="lead1" style="color: #534d4d"></div>-->
+                </div>
+            </div>
+
+
+
+            <div class="row">
+                <div class="form-group form-group-sm col-sm-4">
+                    <label class="" title="Please Enter your email address">Please Enter your email address:</label>
+                    <input id="email" type="text" name="email" required class="form-control" placeholder="" />
+                    <div id="lblEmail" class="error">  </div>
+                </div>
+
+                <div class="form-group form-group-sm col-sm-4">
+                    <label class="" title="Please enter your full name">Please enter your full name:</label>
+                    <input class="form-control" name="fullName " id="fullName" type="text" value="">
+                    <div id="lblfullName" class="error">  </div>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="form-group form-group-sm col-sm-2 pull-right">
+                    <!-- Trigger the modal with a button -->
+                    <button type="button" class="form-control btn btn-default btn-sm" id="btnSubmit">SUBMIT</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+
+    var userid = '@ViewBag.id';
+
+
+    $( document ).ready(function() {
+
+        var veiwbagEmail = '@ViewBag.Email';
+
+
+        $("#email").val(veiwbagEmail);
+
+
+
+    });
+
+
+
+    $(document).on('click', '#btnSubmit', function (e) {
+        e.preventDefault();
+
+
+        if (!(isEmail($("#email").val()))) {
+
+            $('#lblEmail').html("Incorrect Email Format");
+            return;
+        }
+
+        else {
+            $('#lblEmail').empty();
+        }
+
+        console.log($('#fullName').val().length);
+
+        if ($('#fullName').val().length === 0) {
+
+            $('#lblfullName').html("*Required");
+            return;
+        }
+        else {
+
+            $('#lblfullName').html("");
+        }
+
+
+        var obj = {
+
+            userid : userid,
+             email :  $("#email").val(),
+             fullName : $('#fullName').val()
+
+        }
+
+
+
+        $.ajax({
+            type: "POST",
+            url: '@Url.Action("Index", "OptOut")',
+            data: obj,
+            dataType: "json",
+            success: function (result) {
+                debugger;
+                if (result.redirectTo) {
+                    // The operation was a success on the server as it returned
+                    // a JSON objet with an url property pointing to the location
+                    // you would like to redirect to => now use the window.location.href
+                    // property to redirect the client to this location
+                    window.location.href = result.redirectTo;
+                } else {
+                    // The server returned a partial view => let's refresh
+                    // the corresponding section of our DOM with it
+                    $('#lblEmail').html(result.Error);
+                }
+            },
+            error: function () {
+
+            }
+        });
+    });
+
+    function isEmail(email) {
+        var regex = /^([a-zA-Z0-9_.+-])+\@@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+        return regex.test(email);
+    }
+</script>
+

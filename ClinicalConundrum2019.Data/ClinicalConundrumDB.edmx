@@ -1,0 +1,1621 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ClinicalConundrums2019Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ClinicalConundrums2019.dbo.AssignedRole' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="AssignedRole">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="RoleDescription" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="COISlidesUpload">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="ProgramID" Type="int" Nullable="false" />
+          <Property Name="COISlides" Type="bit" />
+          <Property Name="COISlidesExt" Type="varchar" MaxLength="8" Nullable="false" />
+          <Property Name="LastUpdated" Type="datetime" />
+        </EntityType>
+        <EntityType Name="HandoutRequest">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="Number" Type="int" />
+          <Property Name="Language" Type="varchar" MaxLength="10" />
+          <Property Name="DateRequiredBy" Type="datetime" />
+          <Property Name="ContactName" Type="varchar" MaxLength="100" />
+          <Property Name="EmailAddress" Type="varchar" MaxLength="100" />
+          <Property Name="MailingAddress" Type="varchar" MaxLength="500" />
+          <Property Name="City" Type="varchar" MaxLength="50" />
+          <Property Name="Province" Type="varchar" MaxLength="50" />
+          <Property Name="PostalCode" Type="varchar" MaxLength="10" />
+          <Property Name="PhoneNumber" Type="varchar" MaxLength="20" />
+          <Property Name="MailToPresenter" Type="bit" />
+          <Property Name="PresenterName" Type="varchar" MaxLength="100" />
+          <Property Name="PresenterMailingAddress" Type="varchar" MaxLength="500" />
+          <Property Name="PresenterCity" Type="varchar" MaxLength="50" />
+          <Property Name="PresenterProvince" Type="varchar" MaxLength="50" />
+          <Property Name="PresenterPostalCode" Type="varchar" MaxLength="10" />
+          <Property Name="AdditionalInfo" Type="varchar" MaxLength="500" />
+          <Property Name="SubmittedOn" Type="datetime" />
+        </EntityType>
+        <EntityType Name="PayeeInfo">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="PaymentMethod" Type="varchar" MaxLength="25" />
+          <Property Name="ChequePayableTo" Type="varchar" MaxLength="100" />
+          <Property Name="InternalRefNum" Type="varchar" MaxLength="50" />
+          <Property Name="MailingAddr1" Type="varchar" MaxLength="250" />
+          <Property Name="MailingAddr2" Type="varchar" MaxLength="250" />
+          <Property Name="AttentionTo" Type="varchar" MaxLength="100" />
+          <Property Name="City" Type="varchar" MaxLength="75" />
+          <Property Name="ProvinceID" Type="varchar" MaxLength="3" />
+          <Property Name="PostalCode" Type="varchar" MaxLength="10" />
+          <Property Name="TaxNumber" Type="varchar" MaxLength="50" />
+          <Property Name="AdditionalInstructions" Type="varchar" MaxLength="255" />
+          <Property Name="LastUpdated" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Program">
+          <Key>
+            <PropertyRef Name="ProgramID" />
+          </Key>
+          <Property Name="ProgramID" Type="int" Nullable="false" />
+          <Property Name="TherapeuticID" Type="int" />
+          <Property Name="ProgramID_CHRC" Type="int" />
+          <Property Name="ProgramName" Type="varchar" MaxLength="500" />
+          <Property Name="DevelopedBy" Type="varchar" MaxLength="500" />
+          <Property Name="CertifiedBy" Type="varchar" MaxLength="500" />
+          <Property Name="ExpirationDate" Type="varchar" MaxLength="500" />
+          <Property Name="TargetAudience" Type="varchar" MaxLength="500" />
+          <Property Name="CreditHours" Type="decimal" Precision="18" Scale="1" />
+          <Property Name="ProgramCompleted" Type="datetime" />
+          <Property Name="CustomProgram" Type="bit" />
+        </EntityType>
+        <EntityType Name="ProgramRequest">
+          <Key>
+            <PropertyRef Name="ProgramRequestID" />
+          </Key>
+          <Property Name="ProgramRequestID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="ProgramID" Type="int" />
+          <Property Name="SponsorID" Type="int" />
+          <Property Name="ContactFirstName" Type="varchar" MaxLength="500" />
+          <Property Name="ContactLastName" Type="varchar" MaxLength="500" />
+          <Property Name="ContactPhone" Type="varchar" MaxLength="25" />
+          <Property Name="ContactEmail" Type="varchar" MaxLength="500" />
+          <Property Name="SessionAgendaFileName" Type="varchar" MaxLength="500" />
+          <Property Name="SessionAgendaUploaded" Type="bit" />
+          <Property Name="ProgramDate1" Type="datetime" />
+          <Property Name="ProgramDate2" Type="datetime" />
+          <Property Name="ProgramDate3" Type="datetime" />
+          <Property Name="SpeakerStatus" Type="varchar" MaxLength="50" />
+          <Property Name="SpeakerConfirmedProgramDate" Type="datetime" />
+          <Property Name="SpeakerProgramDateNA" Type="bit" />
+          <Property Name="SpeakerConfirmationDate" Type="datetime" />
+          <Property Name="SpeakerDeclined" Type="bit" />
+          <Property Name="SpeakerChosenProgramDate" Type="bit" />
+          <Property Name="Speaker2Status" Type="varchar" MaxLength="50" />
+          <Property Name="Speaker2ConfirmedProgramDate" Type="datetime" />
+          <Property Name="Speaker2ProgramDateNA" Type="bit" />
+          <Property Name="Speaker2ConfirmationDate" Type="datetime" />
+          <Property Name="Speaker2Declined" Type="bit" />
+          <Property Name="Speaker2ChosenProgramDate" Type="bit" />
+          <Property Name="ModeratorStatus" Type="varchar" MaxLength="50" />
+          <Property Name="ModeratorConfirmedProgramDate" Type="datetime" />
+          <Property Name="ModeratorProgramDateNA" Type="bit" />
+          <Property Name="ModeratorConfirmationDate" Type="datetime" />
+          <Property Name="ModeratorDeclined" Type="bit" />
+          <Property Name="ModeratorChosenProgramDate" Type="bit" />
+          <Property Name="ConfirmedSessionDate" Type="datetime" />
+          <Property Name="MealStartTime" Type="datetime" />
+          <Property Name="ProgramStartTime" Type="datetime" />
+          <Property Name="ProgramEndTime" Type="datetime" />
+          <Property Name="ProgramCredits" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="MultiSession" Type="varchar" MaxLength="1" />
+          <Property Name="RegistrationFees" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="ProgramSpeakerID" Type="int" />
+          <Property Name="ProgramSpeaker2ID" Type="int" />
+          <Property Name="ProgramModeratorID" Type="int" />
+          <Property Name="VenueContacted" Type="varchar" MaxLength="2" />
+          <Property Name="LocationType" Type="varchar" MaxLength="500" />
+          <Property Name="LocationTypeOther" Type="varchar" MaxLength="500" />
+          <Property Name="LocationName" Type="varchar" MaxLength="500" />
+          <Property Name="LocationAddress" Type="varchar" MaxLength="500" />
+          <Property Name="LocationCity" Type="varchar" MaxLength="500" />
+          <Property Name="LocationProvince" Type="varchar" MaxLength="5" />
+          <Property Name="LocationPhoneNumber" Type="varchar" MaxLength="25" />
+          <Property Name="LocationWebsite" Type="varchar" MaxLength="500" />
+          <Property Name="CostPerPerson" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="CostByParticipant" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="MealType" Type="varchar" MaxLength="50" />
+          <Property Name="Proximity" Type="varchar" MaxLength="50" />
+          <Property Name="AVEquipment" Type="varchar" MaxLength="50" />
+          <Property Name="Comments" Type="varchar" MaxLength="500" />
+          <Property Name="CancellationReason" Type="varchar(max)" />
+          <Property Name="CancellationRequested" Type="bit" />
+          <Property Name="ModifyReason" Type="varchar(max)" />
+          <Property Name="ModifyRequested" Type="bit" />
+          <Property Name="SubmittedDate" Type="datetime" />
+          <Property Name="LastUpdatedDate" Type="datetime" />
+          <Property Name="RequestStatus" Type="int" />
+          <Property Name="AdminVenueAvailable" Type="varchar" MaxLength="3" />
+          <Property Name="AdminCCASent" Type="bit" />
+          <Property Name="AdminVenueReceipt" Type="bit" />
+          <Property Name="AdminVenueNotes" Type="varchar" MaxLength="150" />
+          <Property Name="AdminCFPCDateSubmitted" Type="datetime" />
+          <Property Name="AdminCFPCDateApproved" Type="datetime" />
+          <Property Name="AdminCFPCFees" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="AdminCFPCImplementationFees" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="AdminCFPCImplementationFeesTaxes" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="AdminCFPCFeesTaxes" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="AdminSessionID" Type="varchar" MaxLength="150" />
+          <Property Name="AdminSpeakerHonorium" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="AdminSpeakerHonoriumTaxes" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="AdminSpeakerExpense" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="AdminSpeakerExpenseTaxes" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="AdminSpeaker2Honorium" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="AdminSpeaker2HonoriumTaxes" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="AdminSpeaker2Expense" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="AdminSpeaker2ExpenseTaxes" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="AdminModeratorExpense" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="AdminModeratorExpenseTaxes" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="AdminSpeakerPaymentMethod" Type="varchar" MaxLength="50" />
+          <Property Name="AdminSpeakerPaymentSentDate" Type="datetime" />
+          <Property Name="AdminSpeaker2PaymentMethod" Type="varchar" MaxLength="50" />
+          <Property Name="AdminSpeaker2PaymentSentDate" Type="datetime" />
+          <Property Name="AdminModeratorHonorium" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="AdminModeratorHonoriumTaxes" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="AdminModeratorPaymentMethod" Type="varchar" MaxLength="50" />
+          <Property Name="AdminModeratorPaymentSentDate" Type="datetime" />
+          <Property Name="AdminVenueFees" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="AdminVenueFeesTaxes" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="AdminAVFees" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="AdminAVFeesTaxes" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="AdminOtherFees" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="AdminOtherFeesTaxes" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="AdminFinalAttendance" Type="int" />
+          <Property Name="AdminActionItems" Type="varchar(max)" />
+          <Property Name="AdminEdited" Type="bit" />
+          <Property Name="AdminUserID" Type="int" />
+          <Property Name="AdminEditDate" Type="datetime" />
+          <Property Name="Approved" Type="bit" />
+          <Property Name="ApprovedDate" Type="datetime" />
+          <Property Name="ReadOnly" Type="bit" />
+          <Property Name="AdditionalSessionContact" Type="varchar" MaxLength="1" />
+          <Property Name="AdditionalContactName" Type="varchar" MaxLength="500" />
+          <Property Name="AdditionalContactPhone" Type="varchar" MaxLength="25" />
+          <Property Name="AdditionalContactEmail" Type="varchar" MaxLength="500" />
+          <Property Name="EventType" Type="varchar" MaxLength="50" />
+          <Property Name="EventTypeQuestion1" Type="varchar" MaxLength="500" />
+          <Property Name="EventTypeQuestion2" Type="varchar" MaxLength="500" />
+          <Property Name="EventTypeQuestion3" Type="varchar" MaxLength="500" />
+          <Property Name="EventTypeQuestion4" Type="varchar" MaxLength="500" />
+          <Property Name="EventTypeQuestion5" Type="varchar" MaxLength="500" />
+          <Property Name="RegistrationArrivalTime" Type="datetime" />
+          <Property Name="MealOption" Type="varchar" MaxLength="50" />
+          <Property Name="WebinarEventURL" Type="varchar(max)" />
+        </EntityType>
+        <EntityType Name="ProgramRequestFileUpload">
+          <Key>
+            <PropertyRef Name="ProgramRequestID" />
+          </Key>
+          <Property Name="ProgramRequestID" Type="int" Nullable="false" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="EvaluationFullPath" Type="varchar(max)" />
+          <Property Name="EvaluationUploaded" Type="bit" />
+          <Property Name="EvaluationFileName" Type="varchar(max)" />
+          <Property Name="EvaluationFileExt" Type="varchar" MaxLength="8" />
+          <Property Name="SignInFullPath" Type="varchar(max)" />
+          <Property Name="SignInUploaded" Type="bit" />
+          <Property Name="SignInFileName" Type="varchar(max)" />
+          <Property Name="SignInFileExt" Type="varchar" MaxLength="8" />
+          <Property Name="UserOtherFullPath" Type="varchar(max)" />
+          <Property Name="UserOtherUploaded" Type="bit" />
+          <Property Name="UserOtherFileName" Type="varchar(max)" />
+          <Property Name="UserOtherFileExt" Type="varchar" MaxLength="8" />
+          <Property Name="SpeakerAgreementFullPath" Type="varchar(max)" />
+          <Property Name="SpeakerAgreementUploaded" Type="bit" />
+          <Property Name="SpeakerAgreementFileName" Type="varchar(max)" />
+          <Property Name="SpeakerAgreementFileExt" Type="varchar" MaxLength="8" />
+          <Property Name="FinalAttendanceListFullPath" Type="varchar(max)" />
+          <Property Name="FinalAttendanceListUploaded" Type="bit" />
+          <Property Name="FinalAttendanceListFileName" Type="varchar(max)" />
+          <Property Name="FinalAttendanceListFileExt" Type="varchar" MaxLength="8" />
+          <Property Name="LastUpdated" Type="datetime" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'ClinicalConundrums2019.dbo.ProgramRequestFileUploadOther' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ProgramRequestFileUploadOther">
+          <Key>
+            <PropertyRef Name="ProgramRequestID" />
+          </Key>
+          <Property Name="ProgramRequestID" Type="int" Nullable="false" />
+          <Property Name="FileType" Type="varchar" MaxLength="50" />
+          <Property Name="FileName" Type="varchar(max)" />
+          <Property Name="FileExt" Type="varchar" MaxLength="8" />
+        </EntityType>
+        <EntityType Name="ProgramRequestSessionCredits">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SessionCreditID" Type="int" Nullable="false" />
+          <Property Name="ProgramRequestID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Region">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RegionName" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="RequestStatusLookup">
+          <Key>
+            <PropertyRef Name="RequestStatusID" />
+          </Key>
+          <Property Name="RequestStatusID" Type="int" Nullable="false" />
+          <Property Name="RequestStatusDescription" Type="varchar" MaxLength="50" />
+          <Property Name="ActionItems" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="255" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SessionCreditLookUp">
+          <Key>
+            <PropertyRef Name="SessionCreditID" />
+          </Key>
+          <Property Name="SessionCreditID" Type="int" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="250" />
+          <Property Name="Value" Type="decimal" Precision="18" Scale="2" />
+        </EntityType>
+        <EntityType Name="SpeakerPayment">
+          <Key>
+            <PropertyRef Name="PaymentID" />
+          </Key>
+          <Property Name="PaymentID" Type="int" Nullable="false" />
+          <Property Name="ProgramRequestID" Type="int" />
+          <Property Name="Speakeruserid" Type="int" />
+          <Property Name="PaymentAmount" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="PaymentDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar(max)" />
+          <Property Name="LastName" Type="nvarchar(max)" />
+          <Property Name="EmailAddress" Type="nvarchar(max)" />
+          <Property Name="UserName" Type="nvarchar(max)" />
+          <Property Name="Password" Type="nvarchar(max)" />
+          <Property Name="LastLogin" Type="datetime" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="ActivationDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="UserInfo">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="UserIDRequestedBy" Type="int" />
+          <Property Name="UserType" Type="int" Nullable="false" />
+          <Property Name="AssignedRole" Type="int" />
+          <Property Name="TerritoryID" Type="varchar" MaxLength="250" />
+          <Property Name="RepID" Type="varchar" MaxLength="250" />
+          <Property Name="FirstName" Type="varchar" MaxLength="250" />
+          <Property Name="LastName" Type="varchar" MaxLength="250" />
+          <Property Name="EmailAddress" Type="varchar" MaxLength="250" />
+          <Property Name="ClinicName" Type="varchar" MaxLength="250" />
+          <Property Name="Address" Type="varchar" MaxLength="250" />
+          <Property Name="Address2" Type="varchar" MaxLength="250" />
+          <Property Name="City" Type="varchar" MaxLength="250" />
+          <Property Name="RegionID" Type="int" />
+          <Property Name="Province" Type="varchar" MaxLength="3" />
+          <Property Name="PostalCode" Type="varchar" MaxLength="250" />
+          <Property Name="Phone" Type="varchar" MaxLength="250" />
+          <Property Name="AdditionalPhone" Type="varchar" MaxLength="250" />
+          <Property Name="Fax" Type="varchar" MaxLength="250" />
+          <Property Name="Specialty" Type="varchar" MaxLength="250" />
+          <Property Name="SpeakerHonariumRange" Type="varchar" MaxLength="250" />
+          <Property Name="Speaker2HonariumRange" Type="varchar" MaxLength="250" />
+          <Property Name="ModeratorHonariumRange" Type="varchar" MaxLength="250" />
+          <Property Name="TherapeuticID" Type="int" />
+          <Property Name="PrivilegeID" Type="int" />
+          <Property Name="SponsorID" Type="int" />
+          <Property Name="BoneWBSCode" Type="varchar" MaxLength="250" />
+          <Property Name="CVWBSCode" Type="varchar" MaxLength="250" />
+          <Property Name="SubmittedDate" Type="datetime" />
+          <Property Name="Status" Type="int" />
+          <Property Name="Comment" Type="varchar" MaxLength="250" />
+          <Property Name="LastUpdated" Type="datetime" />
+        </EntityType>
+        <EntityType Name="UserRegistration">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="COIForm" Type="bit" />
+          <Property Name="COIFormExt" Type="varchar" MaxLength="8" />
+          <Property Name="PayeeForm" Type="bit" />
+          <Property Name="PayeeFormDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="UserRole">
+          <Key>
+            <PropertyRef Name="UserID" />
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="RoleID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserStatus">
+          <Key>
+            <PropertyRef Name="UserStatusID" />
+          </Key>
+          <Property Name="UserStatusID" Type="int" Nullable="false" />
+          <Property Name="UserStatusDescription" Type="varchar" MaxLength="50" />
+          <Property Name="Comment" Type="varchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="UserTypeLookUp">
+          <Key>
+            <PropertyRef Name="UserTypeID" />
+          </Key>
+          <Property Name="UserTypeID" Type="int" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="50" />
+          <Property Name="Comments" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_HandoutRequest_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="HandoutRequest" Type="Self.HandoutRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="HandoutRequest">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProgramRequest_Program">
+          <End Role="Program" Type="Self.Program" Multiplicity="0..1" />
+          <End Role="ProgramRequest" Type="Self.ProgramRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Program">
+              <PropertyRef Name="ProgramID" />
+            </Principal>
+            <Dependent Role="ProgramRequest">
+              <PropertyRef Name="ProgramID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProgramRequest_RequestStatusLookup">
+          <End Role="RequestStatusLookup" Type="Self.RequestStatusLookup" Multiplicity="0..1" />
+          <End Role="ProgramRequest" Type="Self.ProgramRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RequestStatusLookup">
+              <PropertyRef Name="RequestStatusID" />
+            </Principal>
+            <Dependent Role="ProgramRequest">
+              <PropertyRef Name="RequestStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProgramRequest_UserInfo">
+          <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="0..1" />
+          <End Role="ProgramRequest" Type="Self.ProgramRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfo">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ProgramRequest">
+              <PropertyRef Name="ProgramSpeakerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProgramRequest_UserInfo1">
+          <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="0..1" />
+          <End Role="ProgramRequest" Type="Self.ProgramRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfo">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ProgramRequest">
+              <PropertyRef Name="ProgramSpeaker2ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProgramRequest_UserInfo2">
+          <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="0..1" />
+          <End Role="ProgramRequest" Type="Self.ProgramRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfo">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ProgramRequest">
+              <PropertyRef Name="ProgramModeratorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProgramRequestSessionCredits_SessionCreditLookUp">
+          <End Role="SessionCreditLookUp" Type="Self.SessionCreditLookUp" Multiplicity="1" />
+          <End Role="ProgramRequestSessionCredits" Type="Self.ProgramRequestSessionCredits" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SessionCreditLookUp">
+              <PropertyRef Name="SessionCreditID" />
+            </Principal>
+            <Dependent Role="ProgramRequestSessionCredits">
+              <PropertyRef Name="SessionCreditID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserInfo_User">
+          <End Role="User" Type="Self.User" Multiplicity="0..1" />
+          <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="UserInfo">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserInfo_UserStatus">
+          <End Role="UserStatus" Type="Self.UserStatus" Multiplicity="0..1" />
+          <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserStatus">
+              <PropertyRef Name="UserStatusID" />
+            </Principal>
+            <Dependent Role="UserInfo">
+              <PropertyRef Name="Status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserInfo_UserTypeLookUp">
+          <End Role="UserTypeLookUp" Type="Self.UserTypeLookUp" Multiplicity="1" />
+          <End Role="UserInfo" Type="Self.UserInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserTypeLookUp">
+              <PropertyRef Name="UserTypeID" />
+            </Principal>
+            <Dependent Role="UserInfo">
+              <PropertyRef Name="UserType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserRole_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="UserRole" Type="Self.UserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="UserRole">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserRole_UserRole">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="UserRole" Type="Self.UserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="UserRole">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ClinicalConundrums2019ModelStoreContainer">
+          <EntitySet Name="COISlidesUpload" EntityType="Self.COISlidesUpload" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HandoutRequest" EntityType="Self.HandoutRequest" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PayeeInfo" EntityType="Self.PayeeInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Program" EntityType="Self.Program" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProgramRequest" EntityType="Self.ProgramRequest" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProgramRequestFileUpload" EntityType="Self.ProgramRequestFileUpload" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProgramRequestSessionCredits" EntityType="Self.ProgramRequestSessionCredits" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Region" EntityType="Self.Region" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RequestStatusLookup" EntityType="Self.RequestStatusLookup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SessionCreditLookUp" EntityType="Self.SessionCreditLookUp" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SpeakerPayment" EntityType="Self.SpeakerPayment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserInfo" EntityType="Self.UserInfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserRegistration" EntityType="Self.UserRegistration" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserRole" EntityType="Self.UserRole" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserStatus" EntityType="Self.UserStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserTypeLookUp" EntityType="Self.UserTypeLookUp" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AssignedRole" EntityType="Self.AssignedRole" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [AssignedRole].[id] AS [id], 
+    [AssignedRole].[RoleDescription] AS [RoleDescription]
+    FROM [dbo].[AssignedRole] AS [AssignedRole]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="ProgramRequestFileUploadOther" EntityType="Self.ProgramRequestFileUploadOther" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ProgramRequestFileUploadOther].[ProgramRequestID] AS [ProgramRequestID], 
+    [ProgramRequestFileUploadOther].[FileType] AS [FileType], 
+    [ProgramRequestFileUploadOther].[FileName] AS [FileName], 
+    [ProgramRequestFileUploadOther].[FileExt] AS [FileExt]
+    FROM [dbo].[ProgramRequestFileUploadOther] AS [ProgramRequestFileUploadOther]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_HandoutRequest_User" Association="Self.FK_HandoutRequest_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="HandoutRequest" EntitySet="HandoutRequest" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProgramRequest_Program" Association="Self.FK_ProgramRequest_Program">
+            <End Role="Program" EntitySet="Program" />
+            <End Role="ProgramRequest" EntitySet="ProgramRequest" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProgramRequest_RequestStatusLookup" Association="Self.FK_ProgramRequest_RequestStatusLookup">
+            <End Role="RequestStatusLookup" EntitySet="RequestStatusLookup" />
+            <End Role="ProgramRequest" EntitySet="ProgramRequest" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProgramRequest_UserInfo" Association="Self.FK_ProgramRequest_UserInfo">
+            <End Role="UserInfo" EntitySet="UserInfo" />
+            <End Role="ProgramRequest" EntitySet="ProgramRequest" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProgramRequest_UserInfo1" Association="Self.FK_ProgramRequest_UserInfo1">
+            <End Role="UserInfo" EntitySet="UserInfo" />
+            <End Role="ProgramRequest" EntitySet="ProgramRequest" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProgramRequest_UserInfo2" Association="Self.FK_ProgramRequest_UserInfo2">
+            <End Role="UserInfo" EntitySet="UserInfo" />
+            <End Role="ProgramRequest" EntitySet="ProgramRequest" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProgramRequestSessionCredits_SessionCreditLookUp" Association="Self.FK_ProgramRequestSessionCredits_SessionCreditLookUp">
+            <End Role="SessionCreditLookUp" EntitySet="SessionCreditLookUp" />
+            <End Role="ProgramRequestSessionCredits" EntitySet="ProgramRequestSessionCredits" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserInfo_User" Association="Self.FK_UserInfo_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserInfo" EntitySet="UserInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserInfo_UserStatus" Association="Self.FK_UserInfo_UserStatus">
+            <End Role="UserStatus" EntitySet="UserStatus" />
+            <End Role="UserInfo" EntitySet="UserInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserInfo_UserTypeLookUp" Association="Self.FK_UserInfo_UserTypeLookUp">
+            <End Role="UserTypeLookUp" EntitySet="UserTypeLookUp" />
+            <End Role="UserInfo" EntitySet="UserInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserRole_Role" Association="Self.FK_UserRole_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="UserRole" EntitySet="UserRole" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserRole_UserRole" Association="Self.FK_UserRole_UserRole">
+            <End Role="User" EntitySet="User" />
+            <End Role="UserRole" EntitySet="UserRole" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ClinicalConundrums2019Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="ClinicalConundrums2019Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="PayeeInfoes" EntityType="ClinicalConundrums2019Model.PayeeInfo" />
+          <EntitySet Name="Programs" EntityType="ClinicalConundrums2019Model.Program" />
+          <EntitySet Name="Regions" EntityType="ClinicalConundrums2019Model.Region" />
+          <EntitySet Name="RequestStatusLookups" EntityType="ClinicalConundrums2019Model.RequestStatusLookup" />
+          <EntitySet Name="Roles" EntityType="ClinicalConundrums2019Model.Role" />
+          <EntitySet Name="SpeakerPayments" EntityType="ClinicalConundrums2019Model.SpeakerPayment" />
+          <EntitySet Name="Users" EntityType="ClinicalConundrums2019Model.User" />
+          <EntitySet Name="UserStatus" EntityType="ClinicalConundrums2019Model.UserStatu" />
+          <EntitySet Name="SessionCreditLookUps" EntityType="ClinicalConundrums2019Model.SessionCreditLookUp" />
+          <AssociationSet Name="UserRole" Association="ClinicalConundrums2019Model.UserRole">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <EntitySet Name="UserTypeLookUps" EntityType="ClinicalConundrums2019Model.UserTypeLookUp" />
+          <EntitySet Name="UserRegistrations" EntityType="ClinicalConundrums2019Model.UserRegistration" />
+          <EntitySet Name="ProgramRequestFileUploads" EntityType="ClinicalConundrums2019Model.ProgramRequestFileUpload" />
+          <EntitySet Name="ProgramRequestFileUploadOthers" EntityType="ClinicalConundrums2019Model.ProgramRequestFileUploadOther" />
+          <EntitySet Name="UserInfoes" EntityType="ClinicalConundrums2019Model.UserInfo" />
+          <AssociationSet Name="FK_UserInfo_User" Association="ClinicalConundrums2019Model.FK_UserInfo_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="UserInfo" EntitySet="UserInfoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserInfo_UserStatus" Association="ClinicalConundrums2019Model.FK_UserInfo_UserStatus">
+            <End Role="UserStatu" EntitySet="UserStatus" />
+            <End Role="UserInfo" EntitySet="UserInfoes" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserInfo_UserTypeLookUp" Association="ClinicalConundrums2019Model.FK_UserInfo_UserTypeLookUp">
+            <End Role="UserTypeLookUp" EntitySet="UserTypeLookUps" />
+            <End Role="UserInfo" EntitySet="UserInfoes" />
+          </AssociationSet>
+          <EntitySet Name="AssignedRoles" EntityType="ClinicalConundrums2019Model.AssignedRole" />
+          <EntitySet Name="ProgramRequests" EntityType="ClinicalConundrums2019Model.ProgramRequest" />
+          <AssociationSet Name="FK_ProgramRequest_Program" Association="ClinicalConundrums2019Model.FK_ProgramRequest_Program">
+            <End Role="Program" EntitySet="Programs" />
+            <End Role="ProgramRequest" EntitySet="ProgramRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProgramRequest_RequestStatusLookup" Association="ClinicalConundrums2019Model.FK_ProgramRequest_RequestStatusLookup">
+            <End Role="RequestStatusLookup" EntitySet="RequestStatusLookups" />
+            <End Role="ProgramRequest" EntitySet="ProgramRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProgramRequest_UserInfo" Association="ClinicalConundrums2019Model.FK_ProgramRequest_UserInfo">
+            <End Role="UserInfo" EntitySet="UserInfoes" />
+            <End Role="ProgramRequest" EntitySet="ProgramRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProgramRequest_UserInfo1" Association="ClinicalConundrums2019Model.FK_ProgramRequest_UserInfo1">
+            <End Role="UserInfo" EntitySet="UserInfoes" />
+            <End Role="ProgramRequest" EntitySet="ProgramRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProgramRequest_UserInfo2" Association="ClinicalConundrums2019Model.FK_ProgramRequest_UserInfo2">
+            <End Role="UserInfo" EntitySet="UserInfoes" />
+            <End Role="ProgramRequest" EntitySet="ProgramRequests" />
+          </AssociationSet>
+          <EntitySet Name="HandoutRequests" EntityType="ClinicalConundrums2019Model.HandoutRequest" />
+          <EntitySet Name="ProgramRequestSessionCredits" EntityType="ClinicalConundrums2019Model.ProgramRequestSessionCredit" />
+          <AssociationSet Name="FK_HandoutRequest_User" Association="ClinicalConundrums2019Model.FK_HandoutRequest_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="HandoutRequest" EntitySet="HandoutRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProgramRequestSessionCredits_SessionCreditLookUp" Association="ClinicalConundrums2019Model.FK_ProgramRequestSessionCredits_SessionCreditLookUp">
+            <End Role="SessionCreditLookUp" EntitySet="SessionCreditLookUps" />
+            <End Role="ProgramRequestSessionCredit" EntitySet="ProgramRequestSessionCredits" />
+          </AssociationSet>
+          <EntitySet Name="COISlidesUploads" EntityType="ClinicalConundrums2019Model.COISlidesUpload" />
+          </EntityContainer>
+        <EntityType Name="PayeeInfo">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="PaymentMethod" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="ChequePayableTo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="InternalRefNum" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MailingAddr1" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="MailingAddr2" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="AttentionTo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+          <Property Name="ProvinceID" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="PostalCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="TaxNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AdditionalInstructions" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="LastUpdated" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Program">
+          <Key>
+            <PropertyRef Name="ProgramID" />
+          </Key>
+          <Property Name="ProgramID" Type="Int32" Nullable="false" />
+          <Property Name="TherapeuticID" Type="Int32" />
+          <Property Name="ProgramID_CHRC" Type="Int32" />
+          <Property Name="ProgramName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="DevelopedBy" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="CertifiedBy" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="ExpirationDate" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="TargetAudience" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="CreditHours" Type="Decimal" Precision="18" Scale="1" />
+          <Property Name="ProgramCompleted" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="ProgramRequests" Relationship="ClinicalConundrums2019Model.FK_ProgramRequest_Program" FromRole="Program" ToRole="ProgramRequest" />
+          <Property Name="CustomProgram" Type="Boolean" />
+          </EntityType>
+        <EntityType Name="Region">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RegionName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="RequestStatusLookup">
+          <Key>
+            <PropertyRef Name="RequestStatusID" />
+          </Key>
+          <Property Name="RequestStatusID" Type="Int32" Nullable="false" />
+          <Property Name="RequestStatusDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ActionItems" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ProgramRequests" Relationship="ClinicalConundrums2019Model.FK_ProgramRequest_RequestStatusLookup" FromRole="RequestStatusLookup" ToRole="ProgramRequest" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Users" Relationship="ClinicalConundrums2019Model.UserRole" FromRole="Role" ToRole="User" />
+        </EntityType>
+        <EntityType Name="SpeakerPayment">
+          <Key>
+            <PropertyRef Name="PaymentID" />
+          </Key>
+          <Property Name="PaymentID" Type="Int32" Nullable="false" />
+          <Property Name="ProgramRequestID" Type="Int32" />
+          <Property Name="Speakeruserid" Type="Int32" />
+          <Property Name="PaymentAmount" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="PaymentDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="EmailAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UserName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LastLogin" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Roles" Relationship="ClinicalConundrums2019Model.UserRole" FromRole="User" ToRole="Role" />
+          <Property Name="ActivationDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="UserInfoes" Relationship="ClinicalConundrums2019Model.FK_UserInfo_User" FromRole="User" ToRole="UserInfo" />
+          <NavigationProperty Name="HandoutRequests" Relationship="ClinicalConundrums2019Model.FK_HandoutRequest_User" FromRole="User" ToRole="HandoutRequest" />
+        </EntityType>
+        <EntityType Name="UserStatu">
+          <Key>
+            <PropertyRef Name="UserStatusID" />
+          </Key>
+          <Property Name="UserStatusID" Type="Int32" Nullable="false" />
+          <Property Name="UserStatusDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Comment" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="UserInfoes" Relationship="ClinicalConundrums2019Model.FK_UserInfo_UserStatus" FromRole="UserStatu" ToRole="UserInfo" />
+        </EntityType>
+        <EntityType Name="SessionCreditLookUp">
+          <Key>
+            <PropertyRef Name="SessionCreditID" />
+          </Key>
+          <Property Name="SessionCreditID" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Value" Type="Decimal" Precision="18" Scale="2" />
+          <NavigationProperty Name="ProgramRequestSessionCredits" Relationship="ClinicalConundrums2019Model.FK_ProgramRequestSessionCredits_SessionCreditLookUp" FromRole="SessionCreditLookUp" ToRole="ProgramRequestSessionCredit" />
+        </EntityType>
+        <Association Name="UserRole">
+          <End Type="ClinicalConundrums2019Model.Role" Role="Role" Multiplicity="*" />
+          <End Type="ClinicalConundrums2019Model.User" Role="User" Multiplicity="*" />
+        </Association>
+        <EntityType Name="UserTypeLookUp">
+          <Key>
+            <PropertyRef Name="UserTypeID" />
+          </Key>
+          <Property Name="UserTypeID" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Comments" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="UserInfoes" Relationship="ClinicalConundrums2019Model.FK_UserInfo_UserTypeLookUp" FromRole="UserTypeLookUp" ToRole="UserInfo" />
+        </EntityType>
+        <EntityType Name="UserRegistration">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="COIForm" Type="Boolean" />
+          <Property Name="COIFormExt" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="PayeeForm" Type="Boolean" />
+          <Property Name="PayeeFormDate" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="ProgramRequestFileUpload">
+          <Key>
+            <PropertyRef Name="ProgramRequestID" />
+          </Key>
+          <Property Name="ProgramRequestID" Type="Int32" Nullable="false" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="EvaluationFullPath" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="EvaluationUploaded" Type="Boolean" />
+          <Property Name="EvaluationFileName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="EvaluationFileExt" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="SignInFullPath" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="SignInUploaded" Type="Boolean" />
+          <Property Name="SignInFileName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="SignInFileExt" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="UserOtherFullPath" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="UserOtherUploaded" Type="Boolean" />
+          <Property Name="UserOtherFileName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="UserOtherFileExt" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="SpeakerAgreementFullPath" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="SpeakerAgreementUploaded" Type="Boolean" />
+          <Property Name="SpeakerAgreementFileName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="SpeakerAgreementFileExt" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="LastUpdated" Type="DateTime" Precision="3" />
+          <Property Name="FinalAttendanceListFullPath" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="FinalAttendanceListUploaded" Type="Boolean" />
+          <Property Name="FinalAttendanceListFileName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="FinalAttendanceListFileExt" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="ProgramRequestFileUploadOther">
+          <Key>
+            <PropertyRef Name="ProgramRequestID" />
+          </Key>
+          <Property Name="ProgramRequestID" Type="Int32" Nullable="false" />
+          <Property Name="FileType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="FileName" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="FileExt" Type="String" MaxLength="8" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="UserInfo">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="UserIDRequestedBy" Type="Int32" />
+          <Property Name="UserType" Type="Int32" Nullable="false" />
+          <Property Name="AssignedRole" Type="Int32" />
+          <Property Name="TerritoryID" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="RepID" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="FirstName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="EmailAddress" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="ClinicName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Address2" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="RegionID" Type="Int32" />
+          <Property Name="Province" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="PostalCode" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Phone" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="AdditionalPhone" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Fax" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Specialty" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="SpeakerHonariumRange" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="ModeratorHonariumRange" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="TherapeuticID" Type="Int32" />
+          <Property Name="PrivilegeID" Type="Int32" />
+          <Property Name="SponsorID" Type="Int32" />
+          <Property Name="BoneWBSCode" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="CVWBSCode" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="SubmittedDate" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="Comment" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="LastUpdated" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="User" Relationship="ClinicalConundrums2019Model.FK_UserInfo_User" FromRole="UserInfo" ToRole="User" />
+          <NavigationProperty Name="UserStatus" Relationship="ClinicalConundrums2019Model.FK_UserInfo_UserStatus" FromRole="UserInfo" ToRole="UserStatu" />
+          <NavigationProperty Name="UserTypeLookUp" Relationship="ClinicalConundrums2019Model.FK_UserInfo_UserTypeLookUp" FromRole="UserInfo" ToRole="UserTypeLookUp" />
+          <NavigationProperty Name="ProgramRequests" Relationship="ClinicalConundrums2019Model.FK_ProgramRequest_UserInfo" FromRole="UserInfo" ToRole="ProgramRequest" />
+          <NavigationProperty Name="ProgramRequests1" Relationship="ClinicalConundrums2019Model.FK_ProgramRequest_UserInfo1" FromRole="UserInfo" ToRole="ProgramRequest" />
+          <NavigationProperty Name="ProgramRequests2" Relationship="ClinicalConundrums2019Model.FK_ProgramRequest_UserInfo2" FromRole="UserInfo" ToRole="ProgramRequest" />
+          <Property Name="Speaker2HonariumRange" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK_UserInfo_User">
+          <End Type="ClinicalConundrums2019Model.User" Role="User" Multiplicity="0..1" />
+          <End Type="ClinicalConundrums2019Model.UserInfo" Role="UserInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="UserInfo">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserInfo_UserStatus">
+          <End Type="ClinicalConundrums2019Model.UserStatu" Role="UserStatu" Multiplicity="0..1" />
+          <End Type="ClinicalConundrums2019Model.UserInfo" Role="UserInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserStatu">
+              <PropertyRef Name="UserStatusID" />
+            </Principal>
+            <Dependent Role="UserInfo">
+              <PropertyRef Name="Status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserInfo_UserTypeLookUp">
+          <End Type="ClinicalConundrums2019Model.UserTypeLookUp" Role="UserTypeLookUp" Multiplicity="1" />
+          <End Type="ClinicalConundrums2019Model.UserInfo" Role="UserInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserTypeLookUp">
+              <PropertyRef Name="UserTypeID" />
+            </Principal>
+            <Dependent Role="UserInfo">
+              <PropertyRef Name="UserType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="AssignedRole">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="RoleDescription" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="ProgramRequest">
+          <Key>
+            <PropertyRef Name="ProgramRequestID" />
+          </Key>
+          <Property Name="ProgramRequestID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="ProgramID" Type="Int32" />
+          <Property Name="SponsorID" Type="Int32" />
+          <Property Name="ContactFirstName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="ContactLastName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="ContactPhone" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="ContactEmail" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="SessionAgendaFileName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="SessionAgendaUploaded" Type="Boolean" />
+          <Property Name="ProgramDate1" Type="DateTime" Precision="3" />
+          <Property Name="ProgramDate2" Type="DateTime" Precision="3" />
+          <Property Name="ProgramDate3" Type="DateTime" Precision="3" />
+          <Property Name="SpeakerStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SpeakerConfirmedProgramDate" Type="DateTime" Precision="3" />
+          <Property Name="SpeakerProgramDateNA" Type="Boolean" />
+          <Property Name="SpeakerConfirmationDate" Type="DateTime" Precision="3" />
+          <Property Name="SpeakerDeclined" Type="Boolean" />
+          <Property Name="SpeakerChosenProgramDate" Type="Boolean" />
+          <Property Name="Speaker2Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Speaker2ConfirmedProgramDate" Type="DateTime" Precision="3" />
+          <Property Name="Speaker2ProgramDateNA" Type="Boolean" />
+          <Property Name="Speaker2ConfirmationDate" Type="DateTime" Precision="3" />
+          <Property Name="Speaker2Declined" Type="Boolean" />
+          <Property Name="Speaker2ChosenProgramDate" Type="Boolean" />
+          <Property Name="ModeratorStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ModeratorConfirmedProgramDate" Type="DateTime" Precision="3" />
+          <Property Name="ModeratorProgramDateNA" Type="Boolean" />
+          <Property Name="ModeratorConfirmationDate" Type="DateTime" Precision="3" />
+          <Property Name="ModeratorDeclined" Type="Boolean" />
+          <Property Name="ModeratorChosenProgramDate" Type="Boolean" />
+          <Property Name="ConfirmedSessionDate" Type="DateTime" Precision="3" />
+          <Property Name="MealStartTime" Type="DateTime" Precision="3" />
+          <Property Name="ProgramStartTime" Type="DateTime" Precision="3" />
+          <Property Name="ProgramEndTime" Type="DateTime" Precision="3" />
+          <Property Name="ProgramCredits" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="MultiSession" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="RegistrationFees" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="ProgramSpeakerID" Type="Int32" />
+          <Property Name="ProgramSpeaker2ID" Type="Int32" />
+          <Property Name="ProgramModeratorID" Type="Int32" />
+          <Property Name="VenueContacted" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="LocationType" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="LocationName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="LocationAddress" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="LocationCity" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="LocationProvince" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="LocationPhoneNumber" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="LocationWebsite" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="CostPerPerson" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="CostByParticipant" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="MealType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Proximity" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AVEquipment" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Comments" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="CancellationReason" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="CancellationRequested" Type="Boolean" />
+          <Property Name="ModifyReason" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ModifyRequested" Type="Boolean" />
+          <Property Name="SubmittedDate" Type="DateTime" Precision="3" />
+          <Property Name="LastUpdatedDate" Type="DateTime" Precision="3" />
+          <Property Name="RequestStatus" Type="Int32" />
+          <Property Name="AdminVenueAvailable" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
+          <Property Name="AdminCCASent" Type="Boolean" />
+          <Property Name="AdminVenueReceipt" Type="Boolean" />
+          <Property Name="AdminVenueNotes" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="AdminCFPCDateSubmitted" Type="DateTime" Precision="3" />
+          <Property Name="AdminCFPCDateApproved" Type="DateTime" Precision="3" />
+          <Property Name="AdminCFPCFees" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="AdminCFPCImplementationFees" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="AdminCFPCImplementationFeesTaxes" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="AdminCFPCFeesTaxes" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="AdminSessionID" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="AdminSpeakerHonorium" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="AdminSpeakerHonoriumTaxes" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="AdminSpeakerExpense" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="AdminSpeakerExpenseTaxes" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="AdminSpeaker2Honorium" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="AdminSpeaker2HonoriumTaxes" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="AdminSpeaker2Expense" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="AdminSpeaker2ExpenseTaxes" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="AdminModeratorExpense" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="AdminModeratorExpenseTaxes" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="AdminSpeakerPaymentMethod" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AdminSpeakerPaymentSentDate" Type="DateTime" Precision="3" />
+          <Property Name="AdminSpeaker2PaymentMethod" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AdminSpeaker2PaymentSentDate" Type="DateTime" Precision="3" />
+          <Property Name="AdminModeratorHonorium" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="AdminModeratorHonoriumTaxes" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="AdminModeratorPaymentMethod" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="AdminModeratorPaymentSentDate" Type="DateTime" Precision="3" />
+          <Property Name="AdminVenueFees" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="AdminVenueFeesTaxes" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="AdminAVFees" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="AdminAVFeesTaxes" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="AdminOtherFees" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="AdminOtherFeesTaxes" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="AdminFinalAttendance" Type="Int32" />
+          <Property Name="AdminActionItems" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="AdminEdited" Type="Boolean" />
+          <Property Name="AdminUserID" Type="Int32" />
+          <Property Name="AdminEditDate" Type="DateTime" Precision="3" />
+          <Property Name="Approved" Type="Boolean" />
+          <Property Name="ApprovedDate" Type="DateTime" Precision="3" />
+          <Property Name="ReadOnly" Type="Boolean" />
+          <Property Name="AdditionalSessionContact" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="AdditionalContactName" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="AdditionalContactPhone" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="AdditionalContactEmail" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="EventType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EventTypeQuestion1" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="EventTypeQuestion2" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="EventTypeQuestion3" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="EventTypeQuestion4" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="EventTypeQuestion5" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="RegistrationArrivalTime" Type="DateTime" Precision="3" />
+          <Property Name="MealOption" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Program" Relationship="ClinicalConundrums2019Model.FK_ProgramRequest_Program" FromRole="ProgramRequest" ToRole="Program" />
+          <NavigationProperty Name="RequestStatusLookup" Relationship="ClinicalConundrums2019Model.FK_ProgramRequest_RequestStatusLookup" FromRole="ProgramRequest" ToRole="RequestStatusLookup" />
+          <NavigationProperty Name="SpeakerInfo" Relationship="ClinicalConundrums2019Model.FK_ProgramRequest_UserInfo" FromRole="ProgramRequest" ToRole="UserInfo" />
+          <NavigationProperty Name="Speaker2Info" Relationship="ClinicalConundrums2019Model.FK_ProgramRequest_UserInfo1" FromRole="ProgramRequest" ToRole="UserInfo" />
+          <NavigationProperty Name="ModeratorInfo" Relationship="ClinicalConundrums2019Model.FK_ProgramRequest_UserInfo2" FromRole="ProgramRequest" ToRole="UserInfo" />
+          <Property Name="LocationTypeOther" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="WebinarEventURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK_ProgramRequest_Program">
+          <End Type="ClinicalConundrums2019Model.Program" Role="Program" Multiplicity="0..1" />
+          <End Type="ClinicalConundrums2019Model.ProgramRequest" Role="ProgramRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Program">
+              <PropertyRef Name="ProgramID" />
+            </Principal>
+            <Dependent Role="ProgramRequest">
+              <PropertyRef Name="ProgramID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProgramRequest_RequestStatusLookup">
+          <End Type="ClinicalConundrums2019Model.RequestStatusLookup" Role="RequestStatusLookup" Multiplicity="0..1" />
+          <End Type="ClinicalConundrums2019Model.ProgramRequest" Role="ProgramRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RequestStatusLookup">
+              <PropertyRef Name="RequestStatusID" />
+            </Principal>
+            <Dependent Role="ProgramRequest">
+              <PropertyRef Name="RequestStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProgramRequest_UserInfo">
+          <End Type="ClinicalConundrums2019Model.UserInfo" Role="UserInfo" Multiplicity="0..1" />
+          <End Type="ClinicalConundrums2019Model.ProgramRequest" Role="ProgramRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfo">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ProgramRequest">
+              <PropertyRef Name="ProgramSpeakerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProgramRequest_UserInfo1">
+          <End Type="ClinicalConundrums2019Model.UserInfo" Role="UserInfo" Multiplicity="0..1" />
+          <End Type="ClinicalConundrums2019Model.ProgramRequest" Role="ProgramRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfo">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ProgramRequest">
+              <PropertyRef Name="ProgramSpeaker2ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProgramRequest_UserInfo2">
+          <End Type="ClinicalConundrums2019Model.UserInfo" Role="UserInfo" Multiplicity="0..1" />
+          <End Type="ClinicalConundrums2019Model.ProgramRequest" Role="ProgramRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserInfo">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="ProgramRequest">
+              <PropertyRef Name="ProgramModeratorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="HandoutRequest">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="Number" Type="Int32" />
+          <Property Name="Language" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="DateRequiredBy" Type="DateTime" Precision="3" />
+          <Property Name="ContactName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="EmailAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="MailingAddress" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Province" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PostalCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="MailToPresenter" Type="Boolean" />
+          <Property Name="PresenterName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="PresenterMailingAddress" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="PresenterCity" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PresenterProvince" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PresenterPostalCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="AdditionalInfo" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="User" Relationship="ClinicalConundrums2019Model.FK_HandoutRequest_User" FromRole="HandoutRequest" ToRole="User" />
+          <Property Name="SubmittedOn" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="ProgramRequestSessionCredit">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SessionCreditID" Type="Int32" Nullable="false" />
+          <Property Name="ProgramRequestID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="SessionCreditLookUp" Relationship="ClinicalConundrums2019Model.FK_ProgramRequestSessionCredits_SessionCreditLookUp" FromRole="ProgramRequestSessionCredit" ToRole="SessionCreditLookUp" />
+        </EntityType>
+        <Association Name="FK_HandoutRequest_User">
+          <End Type="ClinicalConundrums2019Model.User" Role="User" Multiplicity="0..1" />
+          <End Type="ClinicalConundrums2019Model.HandoutRequest" Role="HandoutRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="HandoutRequest">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProgramRequestSessionCredits_SessionCreditLookUp">
+          <End Type="ClinicalConundrums2019Model.SessionCreditLookUp" Role="SessionCreditLookUp" Multiplicity="1" />
+          <End Type="ClinicalConundrums2019Model.ProgramRequestSessionCredit" Role="ProgramRequestSessionCredit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SessionCreditLookUp">
+              <PropertyRef Name="SessionCreditID" />
+            </Principal>
+            <Dependent Role="ProgramRequestSessionCredit">
+              <PropertyRef Name="SessionCreditID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="COISlidesUpload">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="ProgramID" Type="Int32" Nullable="false" />
+          <Property Name="COISlides" Type="Boolean" />
+          <Property Name="COISlidesExt" Type="String" Nullable="false" MaxLength="8" FixedLength="false" Unicode="false" />
+          <Property Name="LastUpdated" Type="DateTime" Precision="3" />
+        </EntityType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ClinicalConundrums2019ModelStoreContainer" CdmEntityContainer="ClinicalConundrums2019Entities">
+          <EntitySetMapping Name="PayeeInfoes">
+            <EntityTypeMapping TypeName="ClinicalConundrums2019Model.PayeeInfo">
+              <MappingFragment StoreEntitySet="PayeeInfo">
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="AdditionalInstructions" ColumnName="AdditionalInstructions" />
+                <ScalarProperty Name="TaxNumber" ColumnName="TaxNumber" />
+                <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
+                <ScalarProperty Name="ProvinceID" ColumnName="ProvinceID" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="AttentionTo" ColumnName="AttentionTo" />
+                <ScalarProperty Name="MailingAddr2" ColumnName="MailingAddr2" />
+                <ScalarProperty Name="MailingAddr1" ColumnName="MailingAddr1" />
+                <ScalarProperty Name="InternalRefNum" ColumnName="InternalRefNum" />
+                <ScalarProperty Name="ChequePayableTo" ColumnName="ChequePayableTo" />
+                <ScalarProperty Name="PaymentMethod" ColumnName="PaymentMethod" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Programs">
+            <EntityTypeMapping TypeName="ClinicalConundrums2019Model.Program">
+              <MappingFragment StoreEntitySet="Program">
+                <ScalarProperty Name="CustomProgram" ColumnName="CustomProgram" />
+                <ScalarProperty Name="ProgramCompleted" ColumnName="ProgramCompleted" />
+                <ScalarProperty Name="CreditHours" ColumnName="CreditHours" />
+                <ScalarProperty Name="TargetAudience" ColumnName="TargetAudience" />
+                <ScalarProperty Name="ExpirationDate" ColumnName="ExpirationDate" />
+                <ScalarProperty Name="CertifiedBy" ColumnName="CertifiedBy" />
+                <ScalarProperty Name="DevelopedBy" ColumnName="DevelopedBy" />
+                <ScalarProperty Name="ProgramName" ColumnName="ProgramName" />
+                <ScalarProperty Name="ProgramID_CHRC" ColumnName="ProgramID_CHRC" />
+                <ScalarProperty Name="TherapeuticID" ColumnName="TherapeuticID" />
+                <ScalarProperty Name="ProgramID" ColumnName="ProgramID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Regions">
+            <EntityTypeMapping TypeName="ClinicalConundrums2019Model.Region">
+              <MappingFragment StoreEntitySet="Region">
+                <ScalarProperty Name="RegionName" ColumnName="RegionName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RequestStatusLookups">
+            <EntityTypeMapping TypeName="ClinicalConundrums2019Model.RequestStatusLookup">
+              <MappingFragment StoreEntitySet="RequestStatusLookup">
+                <ScalarProperty Name="ActionItems" ColumnName="ActionItems" />
+                <ScalarProperty Name="RequestStatusDescription" ColumnName="RequestStatusDescription" />
+                <ScalarProperty Name="RequestStatusID" ColumnName="RequestStatusID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="ClinicalConundrums2019Model.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SpeakerPayments">
+            <EntityTypeMapping TypeName="ClinicalConundrums2019Model.SpeakerPayment">
+              <MappingFragment StoreEntitySet="SpeakerPayment">
+                <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
+                <ScalarProperty Name="PaymentAmount" ColumnName="PaymentAmount" />
+                <ScalarProperty Name="Speakeruserid" ColumnName="Speakeruserid" />
+                <ScalarProperty Name="ProgramRequestID" ColumnName="ProgramRequestID" />
+                <ScalarProperty Name="PaymentID" ColumnName="PaymentID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="ClinicalConundrums2019Model.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="ActivationDate" ColumnName="ActivationDate" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="LastLogin" ColumnName="LastLogin" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserStatus">
+            <EntityTypeMapping TypeName="ClinicalConundrums2019Model.UserStatu">
+              <MappingFragment StoreEntitySet="UserStatus">
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="UserStatusDescription" ColumnName="UserStatusDescription" />
+                <ScalarProperty Name="UserStatusID" ColumnName="UserStatusID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SessionCreditLookUps">
+            <EntityTypeMapping TypeName="ClinicalConundrums2019Model.SessionCreditLookUp">
+              <MappingFragment StoreEntitySet="SessionCreditLookUp">
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="SessionCreditID" ColumnName="SessionCreditID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="UserRole" TypeName="ClinicalConundrums2019Model.UserRole" StoreEntitySet="UserRole">
+            <EndProperty Name="User">
+              <ScalarProperty Name="UserID" ColumnName="UserID" />
+            </EndProperty>
+            <EndProperty Name="Role">
+              <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="UserTypeLookUps">
+            <EntityTypeMapping TypeName="ClinicalConundrums2019Model.UserTypeLookUp">
+              <MappingFragment StoreEntitySet="UserTypeLookUp">
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="UserTypeID" ColumnName="UserTypeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserRegistrations">
+            <EntityTypeMapping TypeName="ClinicalConundrums2019Model.UserRegistration">
+              <MappingFragment StoreEntitySet="UserRegistration">
+                <ScalarProperty Name="PayeeFormDate" ColumnName="PayeeFormDate" />
+                <ScalarProperty Name="PayeeForm" ColumnName="PayeeForm" />
+                <ScalarProperty Name="COIFormExt" ColumnName="COIFormExt" />
+                <ScalarProperty Name="COIForm" ColumnName="COIForm" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProgramRequestFileUploads">
+            <EntityTypeMapping TypeName="ClinicalConundrums2019Model.ProgramRequestFileUpload">
+              <MappingFragment StoreEntitySet="ProgramRequestFileUpload">
+                <ScalarProperty Name="FinalAttendanceListFileExt" ColumnName="FinalAttendanceListFileExt" />
+                <ScalarProperty Name="FinalAttendanceListFileName" ColumnName="FinalAttendanceListFileName" />
+                <ScalarProperty Name="FinalAttendanceListUploaded" ColumnName="FinalAttendanceListUploaded" />
+                <ScalarProperty Name="FinalAttendanceListFullPath" ColumnName="FinalAttendanceListFullPath" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="SpeakerAgreementFileExt" ColumnName="SpeakerAgreementFileExt" />
+                <ScalarProperty Name="SpeakerAgreementFileName" ColumnName="SpeakerAgreementFileName" />
+                <ScalarProperty Name="SpeakerAgreementUploaded" ColumnName="SpeakerAgreementUploaded" />
+                <ScalarProperty Name="SpeakerAgreementFullPath" ColumnName="SpeakerAgreementFullPath" />
+                <ScalarProperty Name="UserOtherFileExt" ColumnName="UserOtherFileExt" />
+                <ScalarProperty Name="UserOtherFileName" ColumnName="UserOtherFileName" />
+                <ScalarProperty Name="UserOtherUploaded" ColumnName="UserOtherUploaded" />
+                <ScalarProperty Name="UserOtherFullPath" ColumnName="UserOtherFullPath" />
+                <ScalarProperty Name="SignInFileExt" ColumnName="SignInFileExt" />
+                <ScalarProperty Name="SignInFileName" ColumnName="SignInFileName" />
+                <ScalarProperty Name="SignInUploaded" ColumnName="SignInUploaded" />
+                <ScalarProperty Name="SignInFullPath" ColumnName="SignInFullPath" />
+                <ScalarProperty Name="EvaluationFileExt" ColumnName="EvaluationFileExt" />
+                <ScalarProperty Name="EvaluationFileName" ColumnName="EvaluationFileName" />
+                <ScalarProperty Name="EvaluationUploaded" ColumnName="EvaluationUploaded" />
+                <ScalarProperty Name="EvaluationFullPath" ColumnName="EvaluationFullPath" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ProgramRequestID" ColumnName="ProgramRequestID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProgramRequestFileUploadOthers">
+            <EntityTypeMapping TypeName="ClinicalConundrums2019Model.ProgramRequestFileUploadOther">
+              <MappingFragment StoreEntitySet="ProgramRequestFileUploadOther">
+                <ScalarProperty Name="FileExt" ColumnName="FileExt" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="FileType" ColumnName="FileType" />
+                <ScalarProperty Name="ProgramRequestID" ColumnName="ProgramRequestID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserInfoes">
+            <EntityTypeMapping TypeName="ClinicalConundrums2019Model.UserInfo">
+              <MappingFragment StoreEntitySet="UserInfo">
+                <ScalarProperty Name="Speaker2HonariumRange" ColumnName="Speaker2HonariumRange" />
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="SubmittedDate" ColumnName="SubmittedDate" />
+                <ScalarProperty Name="CVWBSCode" ColumnName="CVWBSCode" />
+                <ScalarProperty Name="BoneWBSCode" ColumnName="BoneWBSCode" />
+                <ScalarProperty Name="SponsorID" ColumnName="SponsorID" />
+                <ScalarProperty Name="PrivilegeID" ColumnName="PrivilegeID" />
+                <ScalarProperty Name="TherapeuticID" ColumnName="TherapeuticID" />
+                <ScalarProperty Name="ModeratorHonariumRange" ColumnName="ModeratorHonariumRange" />
+                <ScalarProperty Name="SpeakerHonariumRange" ColumnName="SpeakerHonariumRange" />
+                <ScalarProperty Name="Specialty" ColumnName="Specialty" />
+                <ScalarProperty Name="Fax" ColumnName="Fax" />
+                <ScalarProperty Name="AdditionalPhone" ColumnName="AdditionalPhone" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
+                <ScalarProperty Name="Province" ColumnName="Province" />
+                <ScalarProperty Name="RegionID" ColumnName="RegionID" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Address2" ColumnName="Address2" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="ClinicName" ColumnName="ClinicName" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="RepID" ColumnName="RepID" />
+                <ScalarProperty Name="TerritoryID" ColumnName="TerritoryID" />
+                <ScalarProperty Name="AssignedRole" ColumnName="AssignedRole" />
+                <ScalarProperty Name="UserType" ColumnName="UserType" />
+                <ScalarProperty Name="UserIDRequestedBy" ColumnName="UserIDRequestedBy" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AssignedRoles">
+            <EntityTypeMapping TypeName="ClinicalConundrums2019Model.AssignedRole">
+              <MappingFragment StoreEntitySet="AssignedRole">
+                <ScalarProperty Name="RoleDescription" ColumnName="RoleDescription" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProgramRequests">
+            <EntityTypeMapping TypeName="ClinicalConundrums2019Model.ProgramRequest">
+              <MappingFragment StoreEntitySet="ProgramRequest">
+                <ScalarProperty Name="WebinarEventURL" ColumnName="WebinarEventURL" />
+                <ScalarProperty Name="LocationTypeOther" ColumnName="LocationTypeOther" />
+                <ScalarProperty Name="MealOption" ColumnName="MealOption" />
+                <ScalarProperty Name="RegistrationArrivalTime" ColumnName="RegistrationArrivalTime" />
+                <ScalarProperty Name="EventTypeQuestion5" ColumnName="EventTypeQuestion5" />
+                <ScalarProperty Name="EventTypeQuestion4" ColumnName="EventTypeQuestion4" />
+                <ScalarProperty Name="EventTypeQuestion3" ColumnName="EventTypeQuestion3" />
+                <ScalarProperty Name="EventTypeQuestion2" ColumnName="EventTypeQuestion2" />
+                <ScalarProperty Name="EventTypeQuestion1" ColumnName="EventTypeQuestion1" />
+                <ScalarProperty Name="EventType" ColumnName="EventType" />
+                <ScalarProperty Name="AdditionalContactEmail" ColumnName="AdditionalContactEmail" />
+                <ScalarProperty Name="AdditionalContactPhone" ColumnName="AdditionalContactPhone" />
+                <ScalarProperty Name="AdditionalContactName" ColumnName="AdditionalContactName" />
+                <ScalarProperty Name="AdditionalSessionContact" ColumnName="AdditionalSessionContact" />
+                <ScalarProperty Name="ReadOnly" ColumnName="ReadOnly" />
+                <ScalarProperty Name="ApprovedDate" ColumnName="ApprovedDate" />
+                <ScalarProperty Name="Approved" ColumnName="Approved" />
+                <ScalarProperty Name="AdminEditDate" ColumnName="AdminEditDate" />
+                <ScalarProperty Name="AdminUserID" ColumnName="AdminUserID" />
+                <ScalarProperty Name="AdminEdited" ColumnName="AdminEdited" />
+                <ScalarProperty Name="AdminActionItems" ColumnName="AdminActionItems" />
+                <ScalarProperty Name="AdminFinalAttendance" ColumnName="AdminFinalAttendance" />
+                <ScalarProperty Name="AdminOtherFeesTaxes" ColumnName="AdminOtherFeesTaxes" />
+                <ScalarProperty Name="AdminOtherFees" ColumnName="AdminOtherFees" />
+                <ScalarProperty Name="AdminAVFeesTaxes" ColumnName="AdminAVFeesTaxes" />
+                <ScalarProperty Name="AdminAVFees" ColumnName="AdminAVFees" />
+                <ScalarProperty Name="AdminVenueFeesTaxes" ColumnName="AdminVenueFeesTaxes" />
+                <ScalarProperty Name="AdminVenueFees" ColumnName="AdminVenueFees" />
+                <ScalarProperty Name="AdminModeratorPaymentSentDate" ColumnName="AdminModeratorPaymentSentDate" />
+                <ScalarProperty Name="AdminModeratorPaymentMethod" ColumnName="AdminModeratorPaymentMethod" />
+                <ScalarProperty Name="AdminModeratorHonoriumTaxes" ColumnName="AdminModeratorHonoriumTaxes" />
+                <ScalarProperty Name="AdminModeratorHonorium" ColumnName="AdminModeratorHonorium" />
+                <ScalarProperty Name="AdminSpeaker2PaymentSentDate" ColumnName="AdminSpeaker2PaymentSentDate" />
+                <ScalarProperty Name="AdminSpeaker2PaymentMethod" ColumnName="AdminSpeaker2PaymentMethod" />
+                <ScalarProperty Name="AdminSpeakerPaymentSentDate" ColumnName="AdminSpeakerPaymentSentDate" />
+                <ScalarProperty Name="AdminSpeakerPaymentMethod" ColumnName="AdminSpeakerPaymentMethod" />
+                <ScalarProperty Name="AdminModeratorExpenseTaxes" ColumnName="AdminModeratorExpenseTaxes" />
+                <ScalarProperty Name="AdminModeratorExpense" ColumnName="AdminModeratorExpense" />
+                <ScalarProperty Name="AdminSpeaker2ExpenseTaxes" ColumnName="AdminSpeaker2ExpenseTaxes" />
+                <ScalarProperty Name="AdminSpeaker2Expense" ColumnName="AdminSpeaker2Expense" />
+                <ScalarProperty Name="AdminSpeaker2HonoriumTaxes" ColumnName="AdminSpeaker2HonoriumTaxes" />
+                <ScalarProperty Name="AdminSpeaker2Honorium" ColumnName="AdminSpeaker2Honorium" />
+                <ScalarProperty Name="AdminSpeakerExpenseTaxes" ColumnName="AdminSpeakerExpenseTaxes" />
+                <ScalarProperty Name="AdminSpeakerExpense" ColumnName="AdminSpeakerExpense" />
+                <ScalarProperty Name="AdminSpeakerHonoriumTaxes" ColumnName="AdminSpeakerHonoriumTaxes" />
+                <ScalarProperty Name="AdminSpeakerHonorium" ColumnName="AdminSpeakerHonorium" />
+                <ScalarProperty Name="AdminSessionID" ColumnName="AdminSessionID" />
+                <ScalarProperty Name="AdminCFPCFeesTaxes" ColumnName="AdminCFPCFeesTaxes" />
+                <ScalarProperty Name="AdminCFPCImplementationFeesTaxes" ColumnName="AdminCFPCImplementationFeesTaxes" />
+                <ScalarProperty Name="AdminCFPCImplementationFees" ColumnName="AdminCFPCImplementationFees" />
+                <ScalarProperty Name="AdminCFPCFees" ColumnName="AdminCFPCFees" />
+                <ScalarProperty Name="AdminCFPCDateApproved" ColumnName="AdminCFPCDateApproved" />
+                <ScalarProperty Name="AdminCFPCDateSubmitted" ColumnName="AdminCFPCDateSubmitted" />
+                <ScalarProperty Name="AdminVenueNotes" ColumnName="AdminVenueNotes" />
+                <ScalarProperty Name="AdminVenueReceipt" ColumnName="AdminVenueReceipt" />
+                <ScalarProperty Name="AdminCCASent" ColumnName="AdminCCASent" />
+                <ScalarProperty Name="AdminVenueAvailable" ColumnName="AdminVenueAvailable" />
+                <ScalarProperty Name="RequestStatus" ColumnName="RequestStatus" />
+                <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+                <ScalarProperty Name="SubmittedDate" ColumnName="SubmittedDate" />
+                <ScalarProperty Name="ModifyRequested" ColumnName="ModifyRequested" />
+                <ScalarProperty Name="ModifyReason" ColumnName="ModifyReason" />
+                <ScalarProperty Name="CancellationRequested" ColumnName="CancellationRequested" />
+                <ScalarProperty Name="CancellationReason" ColumnName="CancellationReason" />
+                <ScalarProperty Name="Comments" ColumnName="Comments" />
+                <ScalarProperty Name="AVEquipment" ColumnName="AVEquipment" />
+                <ScalarProperty Name="Proximity" ColumnName="Proximity" />
+                <ScalarProperty Name="MealType" ColumnName="MealType" />
+                <ScalarProperty Name="CostByParticipant" ColumnName="CostByParticipant" />
+                <ScalarProperty Name="CostPerPerson" ColumnName="CostPerPerson" />
+                <ScalarProperty Name="LocationWebsite" ColumnName="LocationWebsite" />
+                <ScalarProperty Name="LocationPhoneNumber" ColumnName="LocationPhoneNumber" />
+                <ScalarProperty Name="LocationProvince" ColumnName="LocationProvince" />
+                <ScalarProperty Name="LocationCity" ColumnName="LocationCity" />
+                <ScalarProperty Name="LocationAddress" ColumnName="LocationAddress" />
+                <ScalarProperty Name="LocationName" ColumnName="LocationName" />
+                <ScalarProperty Name="LocationType" ColumnName="LocationType" />
+                <ScalarProperty Name="VenueContacted" ColumnName="VenueContacted" />
+                <ScalarProperty Name="ProgramModeratorID" ColumnName="ProgramModeratorID" />
+                <ScalarProperty Name="ProgramSpeaker2ID" ColumnName="ProgramSpeaker2ID" />
+                <ScalarProperty Name="ProgramSpeakerID" ColumnName="ProgramSpeakerID" />
+                <ScalarProperty Name="RegistrationFees" ColumnName="RegistrationFees" />
+                <ScalarProperty Name="MultiSession" ColumnName="MultiSession" />
+                <ScalarProperty Name="ProgramCredits" ColumnName="ProgramCredits" />
+                <ScalarProperty Name="ProgramEndTime" ColumnName="ProgramEndTime" />
+                <ScalarProperty Name="ProgramStartTime" ColumnName="ProgramStartTime" />
+                <ScalarProperty Name="MealStartTime" ColumnName="MealStartTime" />
+                <ScalarProperty Name="ConfirmedSessionDate" ColumnName="ConfirmedSessionDate" />
+                <ScalarProperty Name="ModeratorChosenProgramDate" ColumnName="ModeratorChosenProgramDate" />
+                <ScalarProperty Name="ModeratorDeclined" ColumnName="ModeratorDeclined" />
+                <ScalarProperty Name="ModeratorConfirmationDate" ColumnName="ModeratorConfirmationDate" />
+                <ScalarProperty Name="ModeratorProgramDateNA" ColumnName="ModeratorProgramDateNA" />
+                <ScalarProperty Name="ModeratorConfirmedProgramDate" ColumnName="ModeratorConfirmedProgramDate" />
+                <ScalarProperty Name="ModeratorStatus" ColumnName="ModeratorStatus" />
+                <ScalarProperty Name="Speaker2ChosenProgramDate" ColumnName="Speaker2ChosenProgramDate" />
+                <ScalarProperty Name="Speaker2Declined" ColumnName="Speaker2Declined" />
+                <ScalarProperty Name="Speaker2ConfirmationDate" ColumnName="Speaker2ConfirmationDate" />
+                <ScalarProperty Name="Speaker2ProgramDateNA" ColumnName="Speaker2ProgramDateNA" />
+                <ScalarProperty Name="Speaker2ConfirmedProgramDate" ColumnName="Speaker2ConfirmedProgramDate" />
+                <ScalarProperty Name="Speaker2Status" ColumnName="Speaker2Status" />
+                <ScalarProperty Name="SpeakerChosenProgramDate" ColumnName="SpeakerChosenProgramDate" />
+                <ScalarProperty Name="SpeakerDeclined" ColumnName="SpeakerDeclined" />
+                <ScalarProperty Name="SpeakerConfirmationDate" ColumnName="SpeakerConfirmationDate" />
+                <ScalarProperty Name="SpeakerProgramDateNA" ColumnName="SpeakerProgramDateNA" />
+                <ScalarProperty Name="SpeakerConfirmedProgramDate" ColumnName="SpeakerConfirmedProgramDate" />
+                <ScalarProperty Name="SpeakerStatus" ColumnName="SpeakerStatus" />
+                <ScalarProperty Name="ProgramDate3" ColumnName="ProgramDate3" />
+                <ScalarProperty Name="ProgramDate2" ColumnName="ProgramDate2" />
+                <ScalarProperty Name="ProgramDate1" ColumnName="ProgramDate1" />
+                <ScalarProperty Name="SessionAgendaUploaded" ColumnName="SessionAgendaUploaded" />
+                <ScalarProperty Name="SessionAgendaFileName" ColumnName="SessionAgendaFileName" />
+                <ScalarProperty Name="ContactEmail" ColumnName="ContactEmail" />
+                <ScalarProperty Name="ContactPhone" ColumnName="ContactPhone" />
+                <ScalarProperty Name="ContactLastName" ColumnName="ContactLastName" />
+                <ScalarProperty Name="ContactFirstName" ColumnName="ContactFirstName" />
+                <ScalarProperty Name="SponsorID" ColumnName="SponsorID" />
+                <ScalarProperty Name="ProgramID" ColumnName="ProgramID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ProgramRequestID" ColumnName="ProgramRequestID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HandoutRequests">
+            <EntityTypeMapping TypeName="ClinicalConundrums2019Model.HandoutRequest">
+              <MappingFragment StoreEntitySet="HandoutRequest">
+                <ScalarProperty Name="SubmittedOn" ColumnName="SubmittedOn" />
+                <ScalarProperty Name="AdditionalInfo" ColumnName="AdditionalInfo" />
+                <ScalarProperty Name="PresenterPostalCode" ColumnName="PresenterPostalCode" />
+                <ScalarProperty Name="PresenterProvince" ColumnName="PresenterProvince" />
+                <ScalarProperty Name="PresenterCity" ColumnName="PresenterCity" />
+                <ScalarProperty Name="PresenterMailingAddress" ColumnName="PresenterMailingAddress" />
+                <ScalarProperty Name="PresenterName" ColumnName="PresenterName" />
+                <ScalarProperty Name="MailToPresenter" ColumnName="MailToPresenter" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
+                <ScalarProperty Name="Province" ColumnName="Province" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="MailingAddress" ColumnName="MailingAddress" />
+                <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+                <ScalarProperty Name="ContactName" ColumnName="ContactName" />
+                <ScalarProperty Name="DateRequiredBy" ColumnName="DateRequiredBy" />
+                <ScalarProperty Name="Language" ColumnName="Language" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProgramRequestSessionCredits">
+            <EntityTypeMapping TypeName="ClinicalConundrums2019Model.ProgramRequestSessionCredit">
+              <MappingFragment StoreEntitySet="ProgramRequestSessionCredits">
+                <ScalarProperty Name="ProgramRequestID" ColumnName="ProgramRequestID" />
+                <ScalarProperty Name="SessionCreditID" ColumnName="SessionCreditID" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="COISlidesUploads">
+            <EntityTypeMapping TypeName="ClinicalConundrums2019Model.COISlidesUpload">
+              <MappingFragment StoreEntitySet="COISlidesUpload">
+                <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="COISlidesExt" ColumnName="COISlidesExt" />
+                <ScalarProperty Name="COISlides" ColumnName="COISlides" />
+                <ScalarProperty Name="ProgramID" ColumnName="ProgramID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

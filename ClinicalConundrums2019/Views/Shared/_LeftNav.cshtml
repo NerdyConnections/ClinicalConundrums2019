@@ -1,0 +1,220 @@
+﻿@using ClinicalConundrums2019.Models;
+@model ProgramRequestStatusCount
+<div class="col-md-3 left-panel" style="margin-bottom: 2px; background-color: #e6e6e6">
+    <a href="/ProgramDetail?ProgramID=4" style="color: #333"><button type="button" class="form-control btn btn-sm" id="home" style="background:none; text-align:right; padding:0px"><span class="glyphicon glyphicon-home" style="font-size:16px"></span></button></a>
+
+    <div style="margin-top: 25px;">
+        ACTION ITEMS
+        <ul class="item">
+            <li id="NewProgramRequest" class="links"><span class="glyphicon  glyphicon glyphicon glyphicon-file" style="font-size: 13px"></span><a href="/Program/NewEventRequest" style="color: #333">New Event Request Form</a></li>
+            <!--li id="NewWebCastRequest" class="links"><span class="glyphicon  glyphicon glyphicon glyphicon-file" style="font-size: 13px"></span>New Web Cast Request Form</!--li-->
+            <li id="Dashboard" class="links"><span class="glyphicon  glyphicon glyphicon-dashboard " style="font-size: 13px"></span>My Dashboard</li>
+            <li id="Finance" class="links"><span class="glyphicon  glyphicon glyphicon glyphicon-usd" style="font-size: 13px"></span>Finance</li>
+
+        </ul>
+    </div>
+
+    <div style="margin-top: 30px">
+        PROGRAM MATERIALS &amp; RESOURCES
+        <ul class="item">
+            <li id="ProgramDescription" class="links"><span class="glyphicon glyphicon-info-sign " style="font-size: 13px"></span>Program Description</li>
+            <li id="ProcessDocument" class="links"><span class="glyphicon glyphicon-download-alt " style="font-size: 13px"></span>Process Document</li>
+            <li id="ImplementationGuide" class="links"><span class="glyphicon glyphicon-file " style="font-size: 13px"></span>Internal Implementation Documents</li>
+            <li id="ScientificPlanningCommittee" class="links"><span class="glyphicon glyphicon glyphicon-user" style="font-size: 13px"></span>Scientific Planning Committee</li>
+            <li id="ProgramMaterials" class="links"><span class="glyphicon glyphicon-folder-open" style="font-size: 13px"></span>Program Materials</li>
+            <!-- <li>Hard-copy Program Materials Request Form</li>-->
+            <li id="SpeakerManage" class="links"><span class="glyphicon glyphicon glyphicon-user" style="font-size: 13px"></span>Speaker &amp; Moderator Management</li>
+            <li id="AdminReport" class="links"><span class="glyphicon glyphicon glyphicon-open" style="font-size: 13px"></span>Admin Report</li>
+            <!-- <li>Reports</li>-->
+        </ul>
+    </div>
+    <div style="margin-top: 30px;margin-bottom:350px;">
+    
+        why am i not visible?
+    <!--chart here-->
+     
+        @{
+        Html.RenderPartial("_ProgramEventChart", (ProgramRequestStatusCount)@ViewBag.ProgramRequestStatusCounts);
+        }
+        </div>
+   
+
+        <!--div style="margin-top: 30px">
+            <div>
+
+                <div id="circle1" class="circleChart" data-value="" style="position: relative;"><canvas class="circleChart_canvas" width="120" height="120" style="margin-left: auto; margin-right: auto; display: block;"></canvas><p class="circleChart_text" style="position: absolute; line-height: 120px; top: 0px; width: 100%; margin: 0px; padding: 0px; text-align: center; font-size: 12px; font-weight: normal; font-family: BenchNine;">ACTIVE<br /></p></div>
+                <div id="circle2" class="circleChart" data-value="" style="position: relative;"><canvas class="circleChart_canvas" width="120" height="120" style="margin-left: auto; margin-right: auto; display: block;"></canvas><p class="circleChart_text" style="position: absolute; line-height: 120px; top: 0px; width: 100%; margin: 0px; padding: 0px; text-align: center; font-size: 12px; font-weight: normal; font-family: BenchNine;">ATTENTION<br /></p></div>
+                <div id="circle3" class="circleChart" data-value="" style="position: relative;"><canvas class="circleChart_canvas" width="120" height="120" style="margin-left: auto; margin-right: auto; display: block;"></canvas><p class="circleChart_text" style="position: absolute; line-height: 120px; top: 0px; width: 100%; margin: 0px; padding: 0px; text-align: center; font-size: 12px; font-weight: normal; font-family: BenchNine;">CANCELED<br /></p></div>
+                <div id="circle4" class="circleChart" data-value="" style="position: relative;"><canvas class="circleChart_canvas" width="120" height="120" style="margin-left: auto; margin-right: auto; display: block;"></canvas><p class="circleChart_text" style="position: absolute; line-height: 120px; top: 0px; width: 100%; margin: 0px; padding: 0px; text-align: center; font-size: 12px; font-weight: normal; font-family: BenchNine;">COMPLETED<br /></p></div>
+
+            </div>
+        </div-->
+
+    </div>
+
+
+
+<!--required script for circleCharts-->
+<script src="~/Scripts/jquery-3.1.0.min.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts/jquery.easing.min.js"></script>
+<script src="~/Scripts/circleCharts.js"></script>
+<!--end of circleCharts-->
+<script>
+
+
+    var renderChart = function () {
+        $('#circle1').circleChart({
+            size: 120,
+            cAngle: 0.2,
+            widthRatio: 0.15,
+            //don't have any background color backgroundColor: '#fee',
+            unit: 'percent',
+            tooltips:true,
+            animate: true,
+            backgroundFix: true,
+            lineCap: 'square',
+            animation: 'easeInOutCubic',
+            value: @Model.Percent_Active,
+            text: 'ACTIVE',
+            textSize: "12px",
+            textFamily: 'BenchNine',
+            autoCss: true,
+            counterclockwisie: false,
+            color: '#BADA55',
+            //color: '#FFF',
+            textCenter: true,
+            definition: [
+                    { label: 'Active', name: 'active', cls: 'active', value: 67 }
+
+            ]
+        });
+
+        $('#circle2').circleChart({
+            size: 120,
+            cAngle: 0.2,
+            widthRatio: 0.15,
+            // backgroundColor: '#fee',
+            unit: 'percent',
+            animate: true,
+            backgroundFix: true,
+            lineCap: 'square',
+            animation: 'easeInOutCubic',
+            value:@Model.Percent_Attention,
+            text: 'ATTENTION',
+            textSize: "12px",
+            textFamily: 'BenchNine',
+            autoCss: true,
+            counterclockwisie: false,
+            color: '#871216',
+            textCenter: true
+        });
+
+        $('#circle3').circleChart({
+            size: 120,
+            cAngle: 0.2,
+            widthRatio: 0.15,
+            // backgroundColor: '#fee',
+            unit: 'percent',
+            animate: true,
+            backgroundFix: true,
+            lineCap: 'square',
+            animation: 'easeInOutCubic',
+            value: @Model.Percent_Cancelled,
+            text: 'CANCELED',
+            textSize: "12px",
+            textFamily: 'BenchNine',
+            autoCss: true,
+            counterclockwisie: false,
+            color: '#E21C21',
+            textCenter: true
+        });
+
+        $('#circle4').circleChart({
+            size: 120,
+            cAngle: 0.2,
+            widthRatio: 0.15,
+            // backgroundColor: '#fee',
+            unit: 'percent',
+            animate: true,
+            backgroundFix: true,
+            lineCap: 'square',
+            animation: 'easeInOutCubic',
+            value: @Model.Percent_Completed,
+            text: 'COMPLETED',
+            textSize: "12px",
+            textFamily: 'BenchNine',
+            autoCss: true,
+            counterclockwisie: false,
+            color: '#0C4D9C',
+            textCenter: true
+        });
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   
+    $(document).ready(function () {
+       // renderChart();
+        $('.links').hover(function () {
+            $(this).css('cursor', 'pointer');
+        });
+    });
+    //parse the parameter
+    function getURLParameter(name) {
+        return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) || [null, ''])[1].replace(/\+/g, '%20')) || null;
+    }
+    $('#home').click(function () {
+        window.location = '/ProgramDetail?ProgramID=4';
+    });
+    $('#NewProgramRequest').click(function () {
+        window.location = '/Program/ProgramRequest';
+    });
+    $('#NewWebCastRequest').click(function () {
+        window.location = '/Program/WebCastRequest';
+    });
+    $('#SpeakerManage').click(function () {
+        window.location = '/Speaker/Index';
+    });
+    $('#Dashboard').click(function () {
+        window.location = '/Dashboard/Index';
+    });
+    
+    $('#AdminReport').click(function () {
+        window.location = '/Admin/ExportToExcel';
+    });
+
+    $('#ScientificPlanningCommittee').click(function () {
+        window.location = '/Program/Committee';
+    });
+    
+    $('#ProcessDocument').click(function () {
+        window.open("/PDF/ProcessDocument.pdf", "_blank");
+       
+    });
+    $('#ImplementationGuide').click(function () {
+        window.location = '/Home/ImplementationDocument';
+    });
+
+    $('#ProgramMaterials').click(function () {
+        window.location = '/Home/ProgramMaterials';
+    });
+    $('#Finance').click(function () {
+        window.location = '/Program/Finance';
+    });
+    $('#ProgramDescription').click(function () {
+        window.location = '/Program/Description';
+    });
+    
+</script>

@@ -1,0 +1,217 @@
+﻿@using ClinicalConundrums2019.Models;
+@using MoreLinq;
+@model List<Program>
+@{
+    ViewBag.Title = "Select Program Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!-- Trigger the modal with a button -->
+<button id="btn-modal" type="button" class="btn btn-info btn-lg hide" data-toggle="modal" data-target="#myModal">Open Modal</button>
+
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Request Submitted</h4>
+            </div>
+            <div class="modal-body">
+                <p>Thank You!</p>
+                <p>Your new session request has been successfully submitted and will be reviewed within 24-48 business hours.</p>
+                <p>You will be notified as following:</p>
+                <ul>
+                    <li>Session Request Approved: Once approved, you may proceed to inviting the session participants utilizing the “National” Invitation template located in the Program Materials section of the website.</li>
+                    <li>Changes Required: The applicable “Action Item” will be listed in your dashboard (e.g. Session Speaker not available on selected date</li>
+                </ul>
+
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<script>
+
+    var showpopup = @(ViewBag.ShowPopup?1:0);
+    if (showpopup)
+    {
+        $("#btn-modal").click();
+    }
+</script>
+
+
+<div class="pnl-portal">
+
+    @if (Model.Count > 0)
+    {
+        <div class="row">
+            <div class="col-md-12">
+                <div class="btn-back"><span class="glyphicon glyphicon-chevron-left"></span><span>@Html.ActionLink("Back", "Index", "Home", null, new { @class = "NoUnderlineLink" })</span></div>
+                <!--<div class="lead1">Please Select Your Program.</div>-->
+            </div>
+
+        </div>
+        foreach (var batch in @Model.Batch(2))
+        {
+
+
+            <div class="col-md-12" style="margin-bottom: 2px;padding-bottom:5px">
+
+                @foreach (var item in batch)
+                {
+                    if (item.CustomProgram)
+                    {
+                        <div class="col-md-6" style="margin-bottom: 2px;padding-bottom:5px">
+                            <div class="card" style="padding: 10px 20px;" title="Program Name" data-id="@item.ProgramID">
+                                <img src="/Images/cc-iv-FRlogo.png" alt="Card image cap" width="225" height="118" class="card-img-top" style=" margin:auto; display:block">
+                                <div style="margin-bottom: 12px; font-size: 22px; text-transform: uppercase; margin-top:10px" class="title-item">Enjeux Cliniques IV – 2019</div>
+                                <div>
+
+                                    <table style="font-size: 15px; width: 100%">
+                                        <tbody>
+                                            <tr>
+                                                <td style="width: 170px">Conçu par le CCRC</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="width: 170px">Reconnu par la FMOQ</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="width: 170px">Date d'expiration : août 2021 </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: right">
+                                                    <!--button onclick="window.location.href = 'http://www.chrc.net/cc/ccv/user/FRindex.html'" type="button" class="btn btn-default btn-sm program-detail" style="width: 102px; align-items: center; margin-top: 30px;">
+                                                        ENTRER
+                                                    </button-->
+                                                    <button  type="button" class="btn btn-default btn-sm program-detail" style="width: 102px; align-items: center; margin-top: 30px;">
+                                                           ENTRER
+                                                                        </button>
+
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+
+                                </div>
+
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="col-md-6" style="margin-bottom: 2px;padding-bottom:5px">
+                        <div class="card" style="padding: 10px 20px;" title="@item.ProgramName" data-id="@item.ProgramID">
+                            <img src="/Images/cc-logo.png" alt="Card image cap" class="card-img-top" style=" margin:auto; display:block" width="300" height="118">
+
+                            <div style="margin-bottom: 12px; font-size: 22px; text-transform: uppercase;" class="title-item">@Html.Raw(item.ProgramName)</div>
+                            <div>
+
+                                <table style="font-size: 15px; width: 100%">
+                                    <tbody>
+                                        <tr>
+                                            <td style="width: 170px">Developed by: @item.DevelopedBy</td>
+                                            <td>Target Audience: @item.TargetAudience</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 170px">Certified by: @item.CertifiedBy</td>
+                                            <td>Credit Hours: @item.CreditHours</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 170px">Program ID: @item.ProgramID_CHRC</td>
+                                            <td>Events Completed: @item.EventsCompleted</td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width: 170px">Expiration Date: @item.ExpirationDate</td>
+                                            <td>&nbsp;</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" style="text-align: right">
+                                                <button type="button" data-id="1" class="btn btn-default btn-sm program-detail" style="width: 102px; align-items: center; margin-top: 30px;">
+                                                    Enter
+                                                </button>
+                                            </td>
+                                        </tr>
+                                        <tr><td>&nbsp;</td></tr>
+                                    </tbody>
+                                </table>
+
+
+                            </div>
+
+                        </div>
+                    </div>
+                    }
+
+                }
+
+            </div>
+            <div class="row">
+                <div class="col-md-12">&nbsp;</div>
+            </div>
+        }
+    }
+    else
+    {
+        <div class="row">
+            <div class="col-md-12">
+                <div class="btn-back"><span class="glyphicon glyphicon-chevron-left"></span><span>@Html.ActionLink("Back", "Index", "Home", null, new { @class = "NoUnderlineLink" })</span></div>
+
+            </div>
+
+        </div>
+        <b style="color:#000000;font-size:larger">There is no program currently available</b><br /><br /><br /><br />
+    }
+
+
+    <div class="row">
+        <div class="col-md-12">&nbsp;</div>
+    </div>
+
+
+
+</div>
+
+<script type="text/javascript">
+
+
+
+    $(document).ready(function () {
+        document.title = 'Select Program';
+
+
+
+        $('a').each(function () {
+            $(this).attr('title', $(this).html());
+        });
+
+        $(document).on('click', '.card', function (e) {
+            debugger;
+            console.log('id:' + $(this).attr('data-id'));
+           // window.location.href = 'French/Index';
+            e.preventDefault();
+            if ($(this).attr('data-id')=="6")
+            {//cc2020 french
+               // debugger;
+                //console.log('id: ' + $(this).attr('data-id') )
+                window.location.href = '/French/Index';
+            }else
+            {
+
+              //  debugger;
+               // console.log('id: ' + $(this).attr('data-id') )
+                window.location.href = '/ProgramDetail?ProgramID=' + $(this).attr('data-id');
+
+            }
+        });
+     
+        
+    });
+</script>

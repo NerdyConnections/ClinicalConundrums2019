@@ -1,0 +1,245 @@
+﻿@using ClinicalConundrums2019.Models
+@using ClinicalConundrums2019.App_GlobalResources
+@model ActivationSubmitModel
+@{
+    ViewBag.Title = "Activation Submit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+@using (Html.BeginForm("ActivationSubmit", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { onsubmit = "return SubmitForm(this)" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model => model.Email);
+
+    <div class="pnl-portal frmProgramRequest">
+        <div class="row">
+            <div class="col-md-12">
+                <!-- <h1 id="lblTitle"></h1>-->
+                <h1>BMS / Pfizer Account Activation</h1>
+                <div class="lead1">Please complete and/or update any relevant fields below and create your permanent password.</div>
+                <div class="btn-back"><span class="glyphicon glyphicon-chevron-left"></span><a href="javascript:history.back()" style="text-decoration: none; color:#4a4848;">Back</a></div>
+                <!--<div class="lead1" style="color: #534d4d"></div>-->
+            </div>
+        </div>
+
+
+
+
+
+
+<!---
+
+        <div class="row" style="display:none">
+            <div class="form-group form-group-sm col-sm-2">
+                <label class="" title="Date Submitted">Date Submitted</label>
+                <div class="lbl">_lbl-01/01/2018</div>
+            </div>
+
+            <div class="form-group form-group-sm col-sm-2">
+                <label class="" title="Record ID">Record ID</label>
+                <div class="lbl">_lbl-0098234</div>
+            </div>
+
+        </div>
+        <div class="row"></div>-->
+
+        <div class="row">
+            <div class="form-group form-group-sm col-sm-2">
+                <strong>First Name:</strong>
+                @Html.TextBoxFor(model => model.FirstName, new { @class = "form-control", @placeholder = "" })
+                @Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "errorMssg" })
+            </div>
+
+            <div class="form-group form-group-sm col-sm-2">
+                <strong>Last Name:</strong>
+                @Html.TextBoxFor(model => model.LastName, new { @class = "form-control", @placeholder = "" })
+                @Html.ValidationMessageFor(m => m.LastName, "", new { @class = "errorMssg" })
+            </div>
+
+            <div class="form-group form-group-sm col-sm-2">
+                <strong>Phone Number: </strong>
+                @Html.TextBoxFor(model => model.PhoneNumber, new { @class = "form-control", @placeholder = "" })
+                @Html.ValidationMessageFor(m => m.PhoneNumber, "", new { @class = "errorMssg" })
+            </div>
+
+
+            <div class="form-group form-group-sm col-sm-4">
+                <strong>Additional Phone Number (optional): </strong>
+                @Html.TextBoxFor(model => model.AdditionalPhoneNumber, new { @class = "form-control", @placeholder = "" })
+                          
+            </div>
+        </div>
+
+
+
+
+        <div class="row">
+
+            <div class="form-group form-group-sm col-sm-2">
+                <strong>Company: please select one </strong>
+                <div>
+                    @Html.RadioButtonFor(model => model.ClinicName, "bms", new { @placeholder = "", @id = "bms" })
+                    <label class="form-check-label" for="bms" style="padding-right:10px; font-size:16px">BMS</label>
+
+                    @Html.RadioButtonFor(model => model.ClinicName, "pfizer", new { @placeholder = "", @id = "pfizer" })
+                    <label class="form-check-label" for="pfizer" style="padding-right:10px; font-size:16px">Pfizer</label>
+                </div>
+                <div>@Html.ValidationMessageFor(m => m.ClinicName, "", new { @class = "errorMssg" })</div>
+            </div>
+
+            <div class="form-group form-group-sm col-sm-10">
+                <strong>Region: Please select the region that you cover</strong>
+                <div>
+                    @Html.RadioButtonFor(model => model.RegionId, "1", new { @placeholder = "", @id = "region1" })
+                    <label class="form-check-label" for="region1" style="padding-right:10px; font-size:16px">AB &amp; MB</label>
+
+                    @Html.RadioButtonFor(model => model.RegionId, "2", new { @placeholder = "", @id = "region2" })
+                    <label class="form-check-label" for="region2" style="padding-right:10px; font-size:16px">ATL &amp; ON W</label>
+
+                    @Html.RadioButtonFor(model => model.RegionId, "3", new { @placeholder = "", @id = "region3" })
+                    <label class="form-check-label" for="region3" style="padding-right:10px; font-size:16px">BC &amp; SK</label>
+
+                    @Html.RadioButtonFor(model => model.RegionId, "4", new { @placeholder = "", @id = "region4" })
+                    <label class="form-check-label" for="region4" style="padding-right:10px; font-size:16px">ON Central</label>
+
+                    @Html.RadioButtonFor(model => model.RegionId, "5", new { @placeholder = "", @id = "region5" })
+                    <label class="form-check-label" for="region5" style="padding-right:10px; font-size:16px">ON East</label>
+
+                    @Html.RadioButtonFor(model => model.RegionId, "6", new { @placeholder = "", @id = "region6" })
+                    <label class="form-check-label" for="region6" style="padding-right:10px; font-size:16px">QC Central</label>
+
+                    @Html.RadioButtonFor(model => model.RegionId, "7", new { @placeholder = "", @id = "region7" })
+                    <label class="form-check-label" for="region7" style="padding-right:10px; font-size:16px">QC East</label>
+
+                    @Html.RadioButtonFor(model => model.RegionId, "8", new { @placeholder = "", @id = "region8" })
+                    <label class="form-check-label" for="region8" style="padding-right:10px; font-size:16px">Head Office / All Regions</label>
+                </div>
+                <div>@Html.ValidationMessageFor(m => m.RegionId, "", new { @class = "errorMssg" })</div>
+            </div>
+        </div>
+
+
+
+
+        <div class="row">
+
+
+        </div>
+
+
+        <div class="row">
+            <div class="form-group form-group-sm col-sm-2">
+                <strong>Username: </strong>
+                @Html.TextBoxFor(model => model.Username, new { @class = "form-control", @placeholder = "", @Value = Model.Email })
+                @Html.ValidationMessageFor(m => m.Username, "", new { @class = "errorMssg" })
+            </div>
+
+            <div class="form-group form-group-sm col-sm-2">
+                <strong>Password:</strong>
+                @Html.PasswordFor(model => model.Password, new { @class = "form-control", @placeholder = "" })
+                @Html.ValidationMessageFor(m => m.Password, "", new { @class = "errorMssg" })
+            </div>
+
+            <div class="form-group form-group-sm col-sm-2">
+                <strong>Re-enter Password:</strong>
+                @Html.PasswordFor(model => model.ConfirmedPassword, new { @class = "form-control", @placeholder = "" })
+                @Html.ValidationMessageFor(m => m.ConfirmedPassword, "", new { @class = "errorMssg" })
+            </div>
+
+        </div>
+
+
+
+
+
+
+
+        <div class="row">
+            <div class="form-group form-group-sm col-sm-2 pull-right">
+                <!-- Trigger the modal with a button -->
+                <!--<button type="button" class="form-control btn btn-default btn-sm" data-toggle="modal" data-target="#successModal">SUBMIT</button>-->
+                <input type="submit" class="form-control btn btn-default btn-sm" value="SUBMIT">
+               
+
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="successLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div id="successful_modal">
+                                    You have successfully activated your account.  An email confirmation has been sent with the log-in instructions.
+                                </div>
+                                <div id="failed_modal" style="color:red">
+                                    Activation failed.
+                                </div>
+                                
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    
+
+
+        <div class="row">
+            <div class="col-md-12">&nbsp;</div>
+        </div>
+    </div>
+
+}
+
+<script>
+    var addedSuccess = true;
+    function SubmitForm(form) {
+        $.validator.unobtrusive.parse(form);
+        
+        //event.preventDefault();  //prevent form become invalid
+        if ($(form).valid()) {
+            console.log("after");
+            $.ajax({
+                type: "POST",
+                url: form.action,
+                data: $(form).serialize(),
+                datatype: 'json',
+            }).done(function (data) {
+                if (data.success == "true") {
+                    $("#successful_modal").show();
+                    $("#failed_modal").hide();
+                    addedSuccess = true;
+                } else {
+                    $("#successful_modal").hide();
+                    $("#failed_modal").show();
+                    addedSuccess = false;
+                }
+
+                $("#myModal").modal('show');
+            });
+        }
+        return false;
+    }
+
+
+    $(document).ready(function () {
+        $('#myModal').on('hidden.bs.modal', function () {
+            if (addedSuccess) {
+                window.location = "/program/index";
+            }
+        })
+
+    });
+</script>
+
+

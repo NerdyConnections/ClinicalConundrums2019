@@ -1,0 +1,84 @@
+﻿@using ClinicalConundrumsSpeaker.Models;
+@model UserModel
+
+
+<div class="col-md-3 left-panel" style="margin-bottom: 2px; background-color: #e6e6e6">
+    <a href="/Home/Index" style="color: #333"><button type="button" class="form-control btn btn-sm" id="home" style="background:none; text-align:right; padding:0px"><span class="glyphicon glyphicon-home" style="font-size:16px"></span></button></a>
+    <div style="margin-top: 25px;">
+        ACTION ITEMS
+        <ul class="item">
+            @if (ViewBag.RegistrationStatus.COIForm??false)
+            {
+                <li id="COIForm" class="links"><span class="glyphicon glyphicon-ok" style="font-size: 13px"></span>COI Form</li>
+            }
+            else
+            {
+                <li id="COIForm" class="links"><span class="glyphicon glyphicon-remove" style="font-size: 13px"></span>COI Form</li>
+            }
+            @if (ViewBag.RegistrationStatus.PayeeForm??false)
+            {
+              <li id="PayeeForm" class="links"><span class="glyphicon glyphicon-ok" style="font-size: 13px"></span><a class="links" href="/Payee/Index" style="color: #333">Payee Form</a></li>
+            }
+            else
+            {
+                <li id="PayeeForm" class="links"><span class="glyphicon glyphicon-remove" style="font-size: 13px"></span><a class="links" href="/Payee/Index" style="color: #333">Payee Form</a></li>
+            }
+        </ul>
+    </div>
+@foreach (var spd in Model.SpeakerProgramDetails) { 
+    <div style="margin-top: 30px">
+        PROGRAM MATERIALS <!-- – @Html.Raw(spd.ProgramName) -->
+        <ul class="item">
+            <li><a class="links" href="/ProgramDescription?ProgramID=@spd.ProgramID" style="color: #333"><span class="glyphicon glyphicon-info-sign " style="font-size: 13px"></span>Program Description</a></li>
+            <li><a class="links" href="/SpeakerResp?ProgramID=@spd.ProgramID" style="color: #333"><span class="glyphicon glyphicon-info-sign " style="font-size: 13px"></span>Speaker Responsibilities</a></li>
+            @if (spd.COISlidesUploaded)
+            {
+                    <li id="COISlides_lnk" class="links"><a href="/COISlides/@Model.UserID/@spd.ProgramID/COISlides.@spd.COISlidesExt"><span class="glyphicon glyphicon-download-alt " style="font-size: 13px"></span>My COI Slides</a></li>
+            }
+            <li><a class="links" href="/Home/ScientificPlanningCommittee?ProgramID=@spd.ProgramID" style="color: #333"><span class="glyphicon glyphicon glyphicon-user" style="font-size: 13px"></span>Scientific Planning Committee</a></li>
+
+            
+            @if (spd.DisplayProgramMaterial)
+            {
+            <li><a class="links" href="/ProgramMaterials?ProgramID=@spd.ProgramID" style="color: #333"><span class="glyphicon glyphicon-download-alt " style="font-size: 13px"></span>Program Materials</a></li>
+            }
+
+            <!-- <li>Reports</li>-->
+        </ul>
+    </div>
+
+    <div style="margin-top: 30px">
+        MY SESSIONS:
+        <ul class="item">
+            
+            @foreach (var cs  in spd.MySession)
+            {
+            <li><span class="glyphicon glyphicon-info-sign " style="font-size: 13px"></span>@cs.ConfirmedDate – @cs.StartTime  – @cs.Location</li>
+            }
+            <!-- <li>Reports</li>-->
+        </ul>
+    </div>
+    }
+  
+</div>
+<script>
+  $(document).ready(function () {
+
+        $('.links').hover(function () {
+            $(this).css('cursor', 'pointer');
+                });
+            });
+    //parse the parameter
+    function getURLParameter(name) {
+                return decodeURIComponent((new RegExp('[?|&]' + name + '=' + '([^&;]+?)(&|#|;|$)').exec(location.search) || [null, ''])[1].replace(/\+/g, '%20')) || null;
+            }
+    @*$('#COISlides_lnk').click(function () {
+        window.location = '/COISlides/' + @ViewBag.UserID + "/COISlides." + "@ViewBag.RegistrationStatus.COISlidesExt";
+            });*@
+            //$('#SpeakerManage').click(function () {
+            //    window.location = '/Speaker/Index';
+            //});
+            //$('#Dashboard').click(function () {
+            //    window.location = '/Dashboard/Index';
+            //});
+    </script>

@@ -1,0 +1,749 @@
+﻿@using ClinicalConundrums2019.Models;
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<style type="text/css">
+    #DashboardTable_length { /*hiding the show 10 entries*/
+        visibility: hidden;
+    }
+
+    #DashboardTable_filter { /*hiding the search box*/
+        visibility: hidden;
+    }
+
+    #DashboardTable_wrapper .buttons { /*hide export buttons*/
+        visibility: hidden;
+    }
+
+
+    .cellStyle { /*set table td color*/
+        background-color: #fcfcfd;
+        text-align: center;
+        font-weight: bold;
+        color: black;
+        vertical-align: middle;
+    }
+
+    th {
+        background-color: #C6E6EA;
+        text-align: center;
+        font-weight: bold;
+        color: black;
+    }
+
+    .btnCancelSession {
+        vertical-align: middle;
+    }
+
+    ul {
+        list-style: decimal;
+        padding: 0;
+        margin: 0;
+    }
+
+    li {
+        padding-left: 5px;
+    }
+
+    .tooltip-inner {
+        max-width: 550px;
+        width: 550px;
+        text-align: left;
+        padding-left: 30px;
+    }
+
+        .tooltip-inner p {
+            text-align: left;
+        }
+
+            .tooltip-inner p.centerText {
+                text-align: center;
+            }
+</style>
+@ViewBag.Error **
+<div class="row">
+    <div class="col-md-12">
+        <h1 id="lblTitle"></h1>
+        <div onclick="window.history.back()" class="btn-back"><span class="glyphicon glyphicon-chevron-left"></span><span>Back</span></div>
+        <!-- <div class="lead1" style="color: #534d4d">CFPC &nbsp;&nbsp; FMOQ</div>-->
+    </div>
+</div>
+<div class="row">
+    @{
+        Html.RenderPartial("_LeftNav", (ProgramRequestStatusCount)@ViewBag.ProgramRequestStatusCounts);
+    }
+    <div class="col-md-9" style="margin-bottom: 2px; color: #2b2b2b">
+        <div class="1">
+            <h1>My Dashboard</h1>
+            <!-- <div class="link-blue"><a class="link-blue" href="javascript:void(0)">Download Process Document</a></div>-->
+
+
+            <div class="margin-top-4">
+
+                <table id="DashboardTable" class="table table-bordered table-sm" style="font-size:12px;    border: 1px solid #ddd;" align="center">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th colspan="6" bgcolor="#CCCCCC" class="h6" style="text-align: center; font-weight: bold;background-color:#CCCCCC" scope="col">&nbsp;</th>
+                            <th class="h6" style="text-align: center; font-weight: bold; color: #FFF;background-color:#003366" scope="col">Event Material</th>
+                            <th bgcolor="#CCCCCC" class="h6" style="text-align: center; font-weight: bold;background-color:#CCCCCC" scope="col">&nbsp;</th>
+                            <th class="h6" style="text-align: center; font-weight: bold; color: #FFF;background-color:#003366" scope="col">Required Documents</th>
+                            <th width="110" class="h6" style="text-align: center; font-weight: bold; color: #FFF;background-color:#339999" scope="col">Payment Status</th>
+                        </tr>
+                    </thead>
+                    <thead>
+
+                        <tr>
+                            <th>
+                                Cancel / Modify Event
+                                Info
+                                <button type="button" class="btn btn-xs" data-toggle="tooltip" data-placement="top" data-html="true" title="<p class='centerText'><strong>PLEASE NOTE: CANCELLATION REQUEST<strong>
+<p>Your cancellation request will be submitted for review to the provider administrator. You will be notified within 24 business hours of the next steps. <p>
+Once you receive the notification approving the cancellation request, it will be YOUR responsibility to notify the event participants.  The provider administrator will contact the speaker(s) and the venue.
+
+<p class='centerText'><strong>PLEASE NOTE: MODIFY EVENT REQUEST</strong>
+<p>Your event modification request will be submitted for review to the provider administrator.  You will be notified within 24 business hours of the next steps. <p>
+Approved changes will be reflected in your dashboard." id="btnInfo" style="background:none; padding:0px">
+    <span class="glyphicon glyphicon-info-sign" style="font-size: 11px"></span>
+</button>
+                            </th>
+                            <th>Request Date</th>
+                            <th>Full Event Details</th>
+                            <th style="background-color:#003366;color:#FFF">My Action Item(s)</th>
+                            <th>Event Status</th>
+                            <th>Event Info At-a-Glance</th>
+                            <th>Generate Materials&nbsp;
+                                <button type="button" class="btn btn-xs" data-toggle="tooltip" data-placement="left" data-html="true" title="" id="btnInfo" style="background:none; padding:0px" data-original-title="<p><strong>Event Materials<strong><p>
+      <ul>
+  <li>
+The Event Materials are specific to this session and will utilize the information from the submitted 'New Event Request Form'</li>
+<li>The event details, learning objectives for the corresponding module(s), speaker and/or moderator name(s) and designated Mainpro+ credit hours will be auto-generated </li>
+<li>The generic templates can be accessed in the 'Program Materials' section of your webtool </li>
+<li>You will be able to generate the event materials specific to this session once your program status changes to 'Active – Regional Ethics Review Pending'</li>
+<li>The 'REGIONAL Invitation Template' will become available once your program status changes to 'Active – Regional Ethics Approved'</li>
+<li>Please note that you cannot not make any changes to the approved program materials.  The program must be delivered exactly as approved by the CFPC.
+</li>
+</ul>
+
+
+
+"><span class="glyphicon glyphicon-info-sign" style="font-size: 11px"></span></button>
+                            </th>
+                            <th>Final Attendance</th> <!--Final Attendance column-->
+                            <th>
+                                Required Documents&nbsp;
+                                <button type="button" class="btn btn-xs" data-toggle="tooltip" data-placement="left" data-html="true" id="ReqDoc" title="<p><strong>Post Event Document Submission</strong>
+</p>
+                                <p>Please submit the completed evaluation forms, the sign-in sheet and any other pertinent documents related to this event within 5 business days of the event taking place. The honoraria payment will be issued to the speaker once the required documents (evaluation forms & sign-in sheet) are submitted.</p>
+<p><strong>Submission Options:</strong></p>
+                                    1. Upload the completed forms through your dashboard by clicking the upload icon<br />
+                                    2. Email the completed forms to info@clinicalconundrums.ca<br />
+                                    3. Fax the completed forms to 416-977-8020 or Toll-Free: 1-800-238-5335<br />
+                                    4. Mail the completed forms to: CHRC  200-259 Yorkland Rd, North York, ON, M2J 0B5
+
+        " id="btnInfo" style="background:none; padding:0px">
+        <span class="glyphicon glyphicon-info-sign" style="font-size: 11px"></span>
+</button>
+                            </th>
+                            <th>Payment Status</th>
+
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+
+
+
+
+
+
+                </table>
+                <!--end of dashboard grid-->
+                <!--ProgramSessionPayment-->
+                <div class="modal fade bootstrapmodal" id="ProgramSessionPaymentPopUp">
+
+
+                    <div class="modal-dialog modal-lg">
+
+                        <div class="modal-content">
+
+                            <div class="modal-header">
+
+
+                                <div class="modal-title">Payment Status</div>
+
+                            </div>
+
+                            <div id="ProgramSessionPaymentData" class="modal-body">
+
+                                @*@{Html.RenderPartial("Edit"); }*@
+
+                            </div>
+
+
+                            <div class="modal-footer">
+                                <button class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!--end ProgramSessionPayment-->
+                <!--cancel session modal-->
+                <div class="modal fade bootstrapmodal" id="CancelSessionPopUp">
+
+
+                    <div class="modal-dialog modal-lg">
+
+                        <div class="modal-content">
+
+                            <div class="modal-header">
+
+                                <button id="closeCancelModal" data-dismiss="modal" class="close"><span>&times; </span></button>
+                                <div class="modal-title">Session Cancellation Request</div>
+
+                            </div>
+
+                            <div id="CancelSessionData" class="modal-body">
+
+                                @*@{Html.RenderPartial("Edit"); }*@
+
+                            </div>
+
+
+                            <div class="modal-footer">
+                                
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+                </div>
+                <!--end of Cancel Session modal-->
+                <!--Modify session modal-->
+                <div class="modal fade bootstrapmodal" id="ModifySessionPopUp">
+
+
+                    <div class="modal-dialog modal-lg">
+
+                        <div class="modal-content">
+
+                            <div class="modal-header">
+
+                                <button id="closeModifyModal" data-dismiss="modal" class="close"><span>&times; </span></button>
+                                <div class="modal-title">Changes to Event Request</div>
+
+                            </div>
+
+                            <div id="ModifySessionData" class="modal-body">
+
+                                @*@{Html.RenderPartial("Edit"); }*@
+
+                            </div>
+
+
+                            <div class="modal-footer">
+                                
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+                </div>
+                <!--end of Cancel Session modal-->
+                <!--Required Document modal-->
+                <div class="modal fade bootstrapmodal" id="RequiredDocumentsPopUp">
+
+
+                    <div class="modal-dialog">
+
+                        <div class="modal-content">
+
+                            <div class="modal-header">
+
+
+                                <div class="modal-title">Upload Required Documents</div>
+
+                            </div>
+
+                            <div id="RequiredDocumentsData" class="modal-body">
+
+                                @*@{Html.RenderPartial("Edit"); }*@
+
+                            </div>
+                            <div class="modal-footer">
+
+                            </div>
+
+
+
+
+                        </div>
+
+                    </div>
+
+                </div>
+                <!--end of Required Document modal-->
+            </div>
+
+        </div>
+
+
+
+
+
+
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">&nbsp;</div>
+</div>
+
+
+
+@section scripts{
+    <link href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <script src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script>
+    <!--pdf/excell/copy buttons cdn scripts-->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.10.16/b-1.5.1/b-colvis-1.5.1/b-flash-1.5.1/b-html5-1.5.1/b-print-1.5.1/r-2.2.1/datatables.min.css" />
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/pdfmake.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.32/vfs_fonts.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.10.16/b-1.5.1/b-colvis-1.5.1/b-flash-1.5.1/b-html5-1.5.1/b-print-1.5.1/r-2.2.1/datatables.min.js"></script>
+    <!--end of buttons cdn scripts-->
+    <!--cnd for search-->
+   <!-- https://code.jquery.com/jquery-1.12.4.js-->
+   <!-- https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js-->
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.16/b-1.5.1/b-colvis-1.5.1/b-flash-1.5.1/b-html5-1.5.1/b-print-1.5.1/sl-1.2.5/datatables.min.css" />
+
+    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.16/b-1.5.1/b-colvis-1.5.1/b-flash-1.5.1/b-html5-1.5.1/b-print-1.5.1/sl-1.2.5/datatables.min.js"></script>
+
+
+    <!--end of search-->
+    <!--cdn for checkboxes-->
+    <link type="text/css" href="//gyrocode.github.io/jquery-datatables-checkboxes/1.2.9/css/dataTables.checkboxes.css" rel="stylesheet" />
+    <script type="text/javascript" src="//gyrocode.github.io/jquery-datatables-checkboxes/1.2.9/js/dataTables.checkboxes.min.js"></script>
+    <!--end of checkboxes-->
+    <script src="~/Scripts/jquery-ui-1.12.1.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script>
+        var Popup, dataTable;
+        $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip(); //activate the tooltip for cancellation
+          
+            //Required Documents Icon
+            var simple_checkbox = function (data, type, full, meta) {
+
+                var is_checked = data == true ? "checked" : "";
+                var id = full.user_id;
+                id = id.toString();
+
+                return '<input type="checkbox" onclick="ProcessCheckbox(this.parentElement)" class="checkbox1"  id= ' + id + " " +
+                    is_checked + ' />';
+            }
+            //checkbox display if the data is true or false
+            var simple_checkbox = function (data, type, full, meta) {
+
+                var is_checked = data == true ? "checked" : "";
+                var id = full.user_id;
+                id = id.toString();
+
+                return '<input type="checkbox" onclick="ProcessCheckbox(this.parentElement)" class="checkbox1"  id= ' + id + " " +
+                    is_checked + ' />';
+            }
+            //end of checkbox display
+            //If user can view full session details
+            var FullSessionDetails = function (data, type, full, meta) {
+
+                debugger;
+                var id = full.ProgramRequestID;
+                var ReadOnly = full.ReadOnly;
+                id = id.toString();
+                if (ReadOnly==true)
+                    return "<span class='glyphicon  glyphicon-eye-open' style='font-size: 13px;'  onclick=\"window.location='/Program/GetProgramRequest?ProgramRequestID=" + id + "'\"></span>"
+                else
+
+                    return "<span class='glyphicon  glyphicon-pencil' style='font-size: 13px;'  onclick=\"window.location='/Program/GetProgramRequest?ProgramRequestID=" + id + "'\"></span>"
+            }
+            //If user can view full session details
+            var GenerateMaterials = function (data, type, full, meta) {
+
+                debugger;
+                var id = full.ProgramRequestID;
+                var ReadOnly = full.ReadOnly;
+                id = id.toString().trim();
+                var programid=full.ProgramID;
+                var requeststatusid=full.SessionStatusID;
+                var eventtype=full.EventType;
+                var webinareventurl;
+                if (full.WebinarEventUrl==null)
+                    webinareventurl="";
+                else
+                 webinareventurl=full.WebinarEventUrl;
+                var finalattendancelistuploaded = full.FinalAttendanceListUploaded
+                var finalattendancelistfileext = full.FinalAttendanceListFileExt
+
+                var SignInuploaded = full.SignInUploaded
+                var SignInfileext = full.SignInFileExt
+
+                var Evaluationuploaded = full.EvaluationUploaded
+                var Evaluationfileext = full.EvaluationFileExt
+
+                console.log('EventType:' + eventtype)
+                console.log('WebinarEventUrl:' + webinareventurl)
+
+                var FinalString="";
+                if (finalattendancelistuploaded==true)
+                {
+                    FinalString=FinalString +"<div><a style='font-size: 14px;color:#555' target='_blank' href='/Admin/OpenFile?ProgramRequestID=" + id + "&FileType=FinalAttendanceList&FileExt=" + finalattendancelistfileext + "'><span class='glyphicon glyphicon-download' style='font-size: 14px;color:#555'></span> Full Attendance List</a></div>";
+                }
+                if (SignInuploaded==true)
+                {
+                    FinalString=FinalString + "<div><a style='font-size: 14px;color:#555' target='_blank' href='/Admin/OpenFile?ProgramRequestID=" + id + "&FileType=SignIn&FileExt=" + SignInfileext + "'><span class='glyphicon glyphicon-download' style='font-size: 14px;color:#555'></span> Sign In Sheet</a></div>" ;
+                }
+                if (Evaluationuploaded==true)
+                {
+                    FinalString=FinalString +   "<div><a style='font-size: 14px;color:#555' target='_blank' href='/Admin/OpenFile?ProgramRequestID=" + id + "&FileType=Evaluation&FileExt=" + Evaluationfileext + "'><span class='glyphicon glyphicon-download' style='font-size: 14px;color:#555'></span> Evaluation Form</a></div>";
+                }
+
+                if (programid==4)
+                {
+                    if (eventtype=='InPerson')
+                    {
+                        if (requeststatusid == 2 )
+                        {
+                            return "<span class='glyphicon  glyphicon-download' style='font-size: 13px;'  onclick=\"window.open('/DynamicPDF/NationalInvitation?ProgramRequestID=" + id + "','_blank')\"></span> NATIONAL Invitation Template<br/><br/>"
+
+                        }else if (requeststatusid == 3 || requeststatusid == 4 || requeststatusid == 5)
+                        {
+
+                            return "<span class='glyphicon  glyphicon-download' style='font-size: 13px;'  onclick=\"window.open('/DynamicPDF/NationalInvitation?ProgramRequestID=" + id + "','_blank')\"></span> NATIONAL Invitation Template<br/><br/>" + 
+                                 //Regional Template
+                            "<span class='glyphicon  glyphicon-download' style='font-size: 13px;'  onclick=\"window.open('/DynamicPDF/RegionalInvitation?ProgramRequestID=" + id + "','_blank')\"></span> Regional Invitation Template<br/><br/>" + 
+
+                            //EvalForm
+                            "<span class='glyphicon  glyphicon-download' style='font-size: 13px;'  onclick=\"window.open('/EvalForm/Index?ProgramRequestID=" + id + "','_blank')\"></span> Evaluation Form<br/><br/>" + 
+                            //Certificate of Attendance
+
+                                          "<span class='glyphicon  glyphicon-download' style='font-size: 13px;'  onclick=\"window.open('/DynamicPDF/COA?ProgramRequestID=" + id + "','_blank')\"></span> Certificate of Attendance<br/><br/>" + 
+                                //SignIn Sheet
+                                "<span class='glyphicon  glyphicon-download' style='font-size: 13px;'  onclick=\"window.open('/DynamicPDF/SignInSheet?ProgramRequestID=" + id + "','_blank')\"></span> Sign-In Sheet"
+                        }else
+                        {
+                            return "";
+                        }
+                    }else
+                    {
+                        //Webcast
+                       
+                           // return "<h3><u>Webinar Event:</u></h3><input class='form-control'  style='margin-bottom:4px;' id='" + id + "_WebinarURL" +  "' type='text' value='" + webinareventurl + "'><button type='button' onclick='copyToClipboard(document.getElementById(\"" + id.trim() + "_WebinarURL\"))" +  "' class='form-control btn btn-md' style='background:#CCC; width:50px; margin-bottom:3px;text-align:center'><strong>Copy</strong></button>" ;
+
+                        
+                            return "<h3><u>Webinar Event:</u></h3><input class='form-control' style='margin-bottom:4px;' id='" + id + "_WebinarURL" +  "' type='text' value='" + webinareventurl + "'><button type='button' onclick='copyToClipboard(document.getElementById(\"" + id.trim() + "_WebinarURL\"))" +  "' class='form-control btn btn-md' style='background:#CCC; width:50px;margin-bottom:3px; text-align:center'><strong>Copy</strong></button>" + FinalString;
+                             
+
+                      }
+                }else
+                {
+
+                    return "";
+                }
+            }
+            var SignInSheet = function (data, type, full, meta) {
+
+                debugger;
+                var id = full.ProgramRequestID;
+                var ReadOnly = full.ReadOnly;
+                id = id.toString();
+               
+
+                return "<span class='glyphicon  glyphicon-download' style='font-size: 13px;'  onclick=\"window.open('/DynamicPDF/SignInSheet?ProgramRequestID=" + id + "','_blank')\"></span>"
+            }
+            //admin program request dropdown
+
+            //checkbox display if the data is true or false
+            var ddlProgramRequestAdmin = function (data, type, full, meta) {
+
+                var is_checked = data == true ? "checked" : "";
+                var id = full.ProgramRequestID;
+                id = id.toString();
+
+                return "<select><option>Under Review</option><option>Active – Regional Ethics Review Pending</option><option>Active – Regional Ethics Approved</option><option>Completed – Items Pending</option><option>Completed – Session Closed </option>>option>Cancelled</option><option>Speaker Not Available</option><option>Speaker Declines</option><option></option></select> ";
+            }
+            //datatable definitions Begins Here
+            dataTable = $("#DashboardTable").DataTable({
+                dom: '<"buttons"B><"clear"><lf<t>ip>',//put a div tag with class=buttons around the buttons //put a div tag with class=clear immediately after the buttons
+                /*  buttons: [
+                     {
+                          extend: 'copy',
+                          text: 'Copy to clipboard'
+
+                      }, {
+                          extend: 'excel',
+                          text: 'Download to Excel'
+
+                      }, 'pdf'
+                  ],*/
+                bFilter: false,  //search box  for individual column search it must be true, otherwise does not work, you can hide search box using css and column search still works
+                bJQueryUI: true,
+                bInfo: true,  //showing 1 of x entries in x entries
+                sPaginationType: "full_numbers",//how pages button appears
+                bLengthChange: true,//show 10/20/30 entries dropdown
+                "bSort": true,//whether the columns are sortable or not
+                "bAutoWidth": false,
+                "asStripClasses": null,
+                "ajax": {
+                    "url": "/Dashboard/GetAllDashboardItems?UserID=" + @ViewBag.UserID + "&ProgramID=" + @ViewBag.ProgramID,
+                    "type": "GET",
+                    "datatype": "json"
+                },
+
+                "columns": [
+                    {
+
+                        "data": "ProgramRequestID", "render": function (data,type,row) {
+                            if (row.CanSessionBeCancelled==true)
+                            {
+
+                                return "<!--ProgramRequestID=" + + data + "-->" + "<button type=\"button\" data-toggle='modal' data-target='#CancelSessionPopUp' class=\"form-control btn btn-danger btn-sm\" id=\"CanSess\" onclick=javascript:PopupForm('@Url.Action("Cancel","Program")?ProgramRequestID=" + data + "','#CancelSessionData')>Cancel</button><br/><button style=\"margin-top:4px\" type=\"button\" data-toggle='modal' data-target='#ModifySessionPopUp' class=\"form-control btn btn-primary btn-sm\" id=\"ModifySess\" onclick=javascript:PopupForm('@Url.Action("Modify","Program")?ProgramRequestID=" + data + "','#ModifySessionData')>Modify</button>";
+                            }else{
+
+                                return "<!--ProgramRequestID=" + + data + "-->";
+                            }
+
+                           // return "<span class='glyphicon glyphicon-pencil btnCancelSession' style='font-size: 13px;'  data-toggle='modal' data-target='#CAncePopUp'  onclick=javascript:PopupForm('@Url.Action("Edit","Speaker")?user_id=" + data + "','#SpeakerData')></span>";
+                            //  return "<a class='btn btn-default' data-toggle='modal' data-target='.bootstrapmodal' onclick=PopupForm('@Url.Action("Edit","Admin")/" + data + "')><i class='fa fa-pencil'></i> </a>";
+
+                        },
+                        "orderable": false,
+                        "searchable": false,
+                        "width": "10px"
+                    },
+
+
+
+                    { "data": "RequestDate", "title": "Request Date" },
+                    {
+
+                        "data": "ProgramRequestID", "render": FullSessionDetails,
+
+
+                        "orderable": false,
+                        "searchable": false,
+                        "width": "10px",
+                        "title": "Full Session Details"
+                    },
+
+                    { "data": "MyActionItems", "title": "My Action Item(s}" },
+                    { "data": "SessionStatus", "title": "Session Status" },
+                    { "data": "SessionInfo", "title": "Date Session Speaker(s)/Moderator(s) Location" },
+                     {
+
+                        "data": "ProgramRequestID", "render": GenerateMaterials,
+
+
+                        "orderable": false,
+                        "searchable": false,
+                        "width": "20%",
+                        "title": "Generate Materials"
+                    },
+
+                    { "data": "FinalAttendance", "title": "" , 
+                    "orderable": false,//get rid of the funny sorting icon at the top of the table column    
+                    "width": "10px"},
+                     {//Required Documents
+
+                         "data": "ProgramRequestID", "render": function (data,type,row) {
+                             return "<span class='glyphicon glyphicon-upload btnRequiredDocuments' style='font-size: 13px;'  data-toggle='modal' data-target='#RequiredDocumentsPopUp'  onclick=javascript:PopupForm('@Url.Action("FileUpload","Dashboard")?ProgramRequestID=" + data + "&UserID=" + row.UserID + "','#RequiredDocumentsData')></span>";
+
+
+                         },
+                         "orderable": false,
+                         "searchable": false,
+                         "width": "10px",
+                         "title": "Required Documents"
+                     },
+                    {//PaymentStatus
+
+                        "data": "ProgramRequestID", "render": function (data) {
+                            return "<span class='glyphicon  glyphicon-eye-open' style='font-size: 13px;'  data-toggle='modal' data-target='#ProgramSessionPaymentPopUp'  onclick=javascript:PopupForm('@Url.Action("GetProgramSessionPayment", "Program")?ProgramRequestID=" + data + "','#ProgramSessionPaymentData')></span>";
+                            //  return "<a class='btn btn-default' data-toggle='modal' data-target='.bootstrapmodal' onclick=PopupForm('@Url.Action("Edit","Admin")/" + data + "')><i class='fa fa-pencil'></i> </a>";
+
+                        },
+                        "orderable": false,
+                        "searchable": false,
+                        "width": "10px",
+                        "title": "Payment Status"
+                    },
+
+
+                ],
+                "createdRow": function (row, data, index) {
+
+                    $('td', row).addClass('cellStyle');//add a class to each td so we can change background color
+
+                },
+
+                "language": {
+
+                    "UserTable": "No Session Requests are found for the selected Program"
+                }
+            });//end of datatable definitions
+
+            //move search input textboxes to the second thead, the first thead is a band column, the second is  column names, search textboxes should be placed below that
+          //  $('#DashboardTable tfoot tr').appendTo('#DashboardTable thead:eq(1)');
+            // $('tr', '.table').find('td').css('background', 'transparent')
+
+
+            var table = $('#DashboardTable').DataTable();
+            ////search code
+            //table.columns().every(function () {
+            //    var that = this;
+
+            //    $('input', this.footer()).on('keyup change', function () {
+            //        if (that.search() !== this.value) {
+            //            that
+            //                .search(this.value)
+            //                .draw();
+            //        }
+            //    });
+            //});
+            //end of search
+
+            //Covid 19, all event request are always webcast only, the invitation templates are not ready.
+          
+
+
+        });//end document.ready()
+
+        var Popup1;
+        //use for copy button besides webinar url
+        function copyToClipboard(elem) {
+            // create hidden text element, if it doesn't already exist
+            var targetId = "_hiddenCopyText_";
+            var isInput = elem.tagName === "INPUT" || elem.tagName === "TEXTAREA";
+            var origSelectionStart, origSelectionEnd;
+            if (isInput) {
+                // can just use the original source element for the selection and copy
+                target = elem;
+                origSelectionStart = elem.selectionStart;
+                origSelectionEnd = elem.selectionEnd;
+            } else {
+                // must use a temporary form element for the selection and copy
+                target = document.getElementById(targetId);
+                if (!target) {
+                    var target = document.createElement("textarea");
+                    target.style.position = "absolute";
+                    target.style.left = "-9999px";
+                    target.style.top = "0";
+                    target.id = targetId;
+                    document.body.appendChild(target);
+                }
+                target.textContent = elem.textContent;
+            }
+            // select the content
+            var currentFocus = document.activeElement;
+            target.focus();
+            target.setSelectionRange(0, target.value.length);
+    
+            // copy the selection
+            var succeed;
+            try {
+                succeed = document.execCommand("copy");
+            } catch(e) {
+                succeed = false;
+            }
+            // restore original focus
+            if (currentFocus && typeof currentFocus.focus === "function") {
+                currentFocus.focus();
+            }
+    
+            if (isInput) {
+                // restore prior selection
+                elem.setSelectionRange(origSelectionStart, origSelectionEnd);
+            } else {
+                // clear temporary content
+                target.textContent = "";
+            }
+            return succeed;
+        }
+        function PopupForm(url, div_id) {//get the contents of the modal box, the modal must reside in the same page as the calling function
+
+            var formDiv = $(div_id);
+            //  var formDiv = $('#editSpeaker');
+            $.get(url)
+            .done(function (response) {
+
+                formDiv.html(response);
+
+
+            });
+        }
+
+
+
+        function SubmitForm(form) {
+
+            $.validator.unobtrusive.parse(form);
+
+            if ($(form).valid()) {
+                $.ajax({
+                    type: "POST",
+                    url: form.action,
+                    data: $(form).serialize(),
+                    async: false,
+                    success: function (data) {
+
+                        if (data.result) {
+                            $("#closeCancelModal").click();
+                            dataTable.ajax.reload();
+
+                        }
+                        else {
+                            console.log("Error while process cancellation")
+                        }
+                    }
+                });
+            }
+            return false;
+        }
+
+        function SubmitModifyEventForm(form) {
+
+            $.validator.unobtrusive.parse(form);
+
+            if ($(form).valid()) {
+                $.ajax({
+                    type: "POST",
+                    url: form.action,
+                    data: $(form).serialize(),
+                    async: false,
+                    success: function (data) {
+
+                        if (data.result) {
+                            $("#closeModifyModal").click();
+                            dataTable.ajax.reload();
+                        }
+                        else {
+                            console.log("Error while process modify event form")
+                        }
+                    }
+                });
+            }
+            return false;
+        }
+
+    </script>
+}
+

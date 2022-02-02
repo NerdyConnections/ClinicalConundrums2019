@@ -1,0 +1,48 @@
+﻿@using ClinicalConundrums2019.Models
+@using ClinicalConundrums2019.App_GlobalResources
+@model ActivationModel
+@{
+    ViewBag.Title = "Activate";
+    Layout = "~/Views/Shared/_LoginMaster.cshtml";
+}
+
+
+
+
+@using (Html.BeginForm("Activate", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="pnl-login">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>BMS / Pfizer Account Activation</h1>
+                <div class="lead1">Please enter your username (your @@bms or @@pfizer email address) </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group form-group-sm float-left margin-right-4">
+                    <!--<label class="control-label">EMAIL </label>
+                    <input id="ctrlEmail" type="text" value="" class="form-control ctrl-login" placeholder="">-->
+                    @Resource.Email:
+                    @Html.TextBoxFor(model => model.Email, new { @class = "form-control ctrl-login", @id = "email", @placeholder = "" })
+                    
+                    <div style="color:red">@Html.Raw(HttpUtility.HtmlDecode(Html.ValidationMessageFor(m => m.Email).ToHtmlString()))</div>
+                </div>
+               
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <input type="submit" class="form-control" id="ctrlLogin" value="NEXT">
+            </div>
+
+            <div id="lblMessage" class="col-md-12" style="opacity: 1;">&nbsp;</div>
+        </div>
+
+    </div>
+
+}
+
+

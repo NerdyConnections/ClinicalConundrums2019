@@ -1,0 +1,121 @@
+﻿@using ClinicalConundrums2019.Util
+@model ClinicalConundrums2019.ViewModels.ProgramRequestCancellationVM
+@{
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Session Cancellation Request</title>
+</head>
+<body>
+
+    <!--don't these files, they are required at this location (not at head) for client side javascript to work-->
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+
+    <script src="~/Scripts/bootstrap.js"></script>
+
+
+    <script src="~/Scripts/jquery.validate.js"></script>
+
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+
+    <!--end of client side javascript-->
+
+    <div>
+        @using (Html.BeginForm("Cancel", "Program", FormMethod.Post, new { onsubmit = "return SubmitForm(this)" }))
+        {
+            @Html.HiddenFor(Model => Model.ProgramRequestID)
+            @Html.HiddenFor(Model => Model.ContactName)
+            @Html.HiddenFor(Model => Model.ConfirmedSessionDate)
+            @Html.HiddenFor(Model => Model.LocationName)
+            @Html.HiddenFor(Model => Model.SpeakerName)
+            @Html.HiddenFor(Model => Model.Speaker2Name)
+            @Html.HiddenFor(Model => Model.ModeratorName)
+            <table width="100%" border="0" align="right" cellpadding="10" cellspacing="0">
+                <tr>
+                    <td width="32%">Event ID:</td>
+                    <td width="68%">@Model.ProgramRequestID</td>
+                </tr>
+                <tr>
+                    <td>
+                        Event Contact:
+                    </td>
+                    <td>@Html.DisplayFor(model => model.ContactName)</td>
+                </tr>
+                <tr>
+                    <td>Event Date:</td>
+                    <td>@Html.DisplayFor(model => model.ConfirmedSessionDate)</td>
+                </tr>
+                <tr>
+                    <td>Event Location:</td>
+                    <td>@Html.DisplayFor(model => model.LocationName)</td>
+                </tr>
+                <tr>
+                    <td>Event Speaker:</td>
+                    <td>@Html.DisplayFor(model => model.SpeakerName)
+                    <td>
+                </tr>
+                <tr>
+                    <td>Event Speaker 2: (if applicable) </td>
+                    <td>@Html.DisplayFor(model => model.Speaker2Name)
+                    <td>
+                </tr>
+                <tr>
+                    <td>Event Moderator: (if applicable) </td>
+                    <td>@Html.DisplayFor(model => model.ModeratorName)</td>
+                </tr>
+                <tr>
+                    <td colspan="2">Please provide reason(s) for the cancellation request:</td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        @Html.TextAreaFor(m => m.CancellationReason, new { @class = "form-control" })
+                    </td>
+                </tr>
+                <tr><td colspan="2">@Html.ValidationMessageFor(m => m.CancellationReason, "", new { @class = "text-danger" })</td></tr>
+                <tr>
+                    <td colspan="2">
+
+                        &nbsp;
+                    </td>
+
+                </tr>
+
+                <tr>
+                    <td colspan="2">
+                        <div class="row">
+                            <div class="form-group form-group-sm col-sm-2 pull-right">
+                                <!-- Trigger the modal with a button -->
+                                <input type="submit" value="Submit" id="btnCancelSession" class="btn btn-default" />
+
+
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        }
+    </div>
+    <script>
+
+        $(document).ready(function(){
+
+            var readOnly = '@Model.CancellationRequested';
+            ///debugger;  works with developer tool f12 to stop the flow of the program and allow you to step through the code
+            if (readOnly === 'True') {
+
+                $('input[type=text], textarea').attr('readonly', true);
+
+                $(':input[type="submit"]').prop('disabled', true);
+
+
+            }
+        });
+    </script>
+</body>
+</html>

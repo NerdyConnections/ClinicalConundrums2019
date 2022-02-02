@@ -1,0 +1,86 @@
+﻿@using ClinicalConundrums2019.Models
+@model LoginModel
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_LoginMaster.cshtml";
+}
+
+
+
+
+
+<
+<style>
+    .errorMssg {
+        color: red;
+    }
+</style>
+
+
+
+@using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form" }))
+{
+
+    @Html.AntiForgeryToken()
+    <div class="pnl-login">
+
+
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Please log in</h1>
+                <div class="lead1">Please enter your username (email address) and password</div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group form-group-sm float-left margin-right-4">
+                    <label class="control-label">EMAIL </label>
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control ctrl-login", @id = "ctrlEmail", @placeholder = "" })
+                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "errorMssg" })
+                    <!--input id="ctrlEmail" type="text" value="" class="form-control ctrl-login" placeholder="" /-->
+                </div>
+                <div class="form-group form-group-sm float-left">
+                    <label class="control-label">PASSWORD </label>
+
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control ctrl-login", @id = "ctrlPassword", @placeholder = "" })
+                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "errorMssg" })
+                    <!--input id="ctrlPassword" type="password" value="" class="form-control ctrl-login" placeholder="" /-->
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <!--input type="button" class="form-control" id="ctrlLogin" value="LOGIN"-->
+                <input type="submit" class="form-control" id="ctrlLogin" src="/Images/button_login.png" value="LOGIN" />
+            </div>
+
+            <div id="lblMessage" class="col-md-12">
+                @Html.ValidationSummary(false,"", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                @Html.ActionLink("Forgot your password?", "ForgotPassword")
+            </div>
+        </div>
+        <div class="row margin-btm-80">
+            <div class="col-md-12">
+                <a title="Need Assistance?" id="ctrlNeedAssistance" href="mailto:info@clinicalconundrums.ca?subject=Assistance">Need Assistance?</a>
+
+                @*Html.ActionLink("First time user? REGISTER", "Register")*@
+            </div>
+        </div>
+
+    </div><!--end of pnl-login-->
+
+
+
+
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+}
+
+
+

@@ -1,0 +1,87 @@
+﻿
+
+
+@using ClinicalConundrumsFrenchSpeaker.Models
+@model LoginViewModel
+
+
+@{
+    ViewBag.Title = "Log in";
+    Layout = "~/Views/Shared/_LoginMaster.cshtml";
+}
+
+<
+<style>
+    .errorMssg {
+        color: red;
+    }
+</style>
+
+
+
+@using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { role = "form" }))
+{
+
+    @Html.AntiForgeryToken()
+    <div class="pnl-login">
+
+
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Veuillez vous connecter.</h1>
+                <div class="lead1">Veuillez saisir votre nom d'utilisateur.</div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group form-group-sm float-left margin-right-4">
+                    <label class="control-label">L'adresse courriel </label>
+                    @Html.TextBoxFor(m => m.Email, new { @class = "form-control ctrl-login", @id = "ctrlEmail", @placeholder = "" })
+                    @Html.ValidationMessageFor(m => m.Email, "", new { @class = "errorMssg" })
+                    <!--input id="ctrlEmail" type="text" value="" class="form-control ctrl-login" placeholder="" /-->
+                </div>
+                <div class="form-group form-group-sm float-left">
+                    <label class="control-label">mot de passe </label>
+
+                    @Html.PasswordFor(m => m.Password, new { @class = "form-control ctrl-login", @id = "ctrlPassword", @placeholder = "" })
+                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "errorMssg" })
+                    <!--input id="ctrlPassword" type="password" value="" class="form-control ctrl-login" placeholder="" /-->
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <!--input type="button" class="form-control" id="ctrlLogin" value="LOGIN"-->
+                <input type="submit" class="btn" id="ctrlLogin" value="CONNEXION" />
+            </div>
+
+            <div id="lblMessage" class="col-md-12">
+                &nbsp;
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                @*Html.ActionLink("Mot de passe oublié", "ForgotPassword")*@
+            </div>
+        </div>
+        <div class="row margin-btm-80">
+            <div class="col-md-12">
+                <a title="Besoin d'assistance?" id="ctrlNeedAssistance" href="mailto:info@clinicalconundrums.ca?subject=Assistance">Besoin d'assistance?</a>
+
+                @*Html.ActionLink("First time user? REGISTER", "Register")*@
+            </div>
+        </div>
+
+    </div><!--end of pnl-login-->
+
+
+
+
+}
+@section Scripts {
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+}
+
+
+

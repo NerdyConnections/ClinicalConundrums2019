@@ -1,0 +1,313 @@
+﻿@using ClinicalConundrums2019.Util;
+    
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link href="https://fonts.googleapis.com/css?family=BenchNine" rel="stylesheet">  
+    <!--<link href="/Content/bootstrap.min.css" rel="stylesheet" />-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <link href="/Content/Site.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+    <style type="text/css">
+        a:link {
+            text-decoration: none;
+        }
+
+        a:visited {
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: none;
+        }
+
+        a:active {
+            text-decoration: none;
+        }
+    </style>
+
+    <script src="~/Scripts/jquery-3.1.0.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    
+
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/helper.js"></script>
+    
+
+    @RenderSection("Scripts", required: false)
+</head>
+<body style="background-image: url('/Images/notebook1st.jpg');" cz-shortcut-listen="true">
+    <div class="overlay"></div>
+    <header>
+        <div class="navbar navbar-inverse overlay-z2" style="margin-bottom:0px">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <div id="logo">
+                                <object id="logo-svg" type="image/svg+xml" data="/Images/BMSPfizer.svg"></object>
+                                <div class="logo-txt-sub">CPD Portal</div>
+                            
+                                <div class="logo-txt-welcome">&nbsp;</div>
+                            </div>
+                        </div>
+                        <div class="navbar-collapse collapse">
+                            <ul class="nav navbar-nav float-right">
+                                <li><a href="#">Français FMOQ</a></li>
+                                <li><a href="#">Contact Us</a></li>
+                                <li><a href="/Account/LogOff">Log Out</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section>
+        <div role="main" class="container overlay-z2">
+            <div class="row">
+                <div class="col-md-12">
+
+                    <div><h1 style="padding:0px; margin:0px"><img src="/Images/cc2020logo.png" width="200" height="79" style="margin-right:15px">Clinical Conundrums 2020: Practical Strategies for Atrial Fibrillation Management in Real World Practice</h1></div>
+
+                    <div class="btn-back"><span class="glyphicon glyphicon-chevron-left"></span><span>Back</span></div>
+                    <!-- <div class="lead1" style="color: #534d4d">CFPC &nbsp;&nbsp; FMOQ</div>-->
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3 left-panel" style="margin-bottom: 2px; background-color: #e6e6e6">
+                    <div style="margin-top: 15px; text-align: right;">
+                    </div>
+                    <a href="/ProgramDetail?ProgramID=4" style="color: #333"><input type="button" class="form-control btn btn-sm" id="home" style="background:none; text-align:right; padding:0px"><span class="glyphicon glyphicon-home" style="font-size:16px"></span></input></a>
+                    <div>
+                        ACTION ITEMS
+                        <ul class="item">
+                            <li><span class="glyphicon  glyphicon glyphicon glyphicon-file" style="font-size: 13px"></span><a href="/Program/NewEventRequest" style="color: #333">New Event Request Form</a></li>
+                            <li><a href="/Program/HandoutRequest" style="color: #333"><i style="font-size:16px; margin-right:18px" class="fas"></i> 2020 Participant Handout Request</a></li>
+
+                            <li><span class="glyphicon  glyphicon glyphicon glyphicon-dashboard" style="font-size: 13px"></span><a href="/DashBoard/Index" style="color: #333">My Dashboard</a></li>
+                            <li><span class="glyphicon  glyphicon glyphicon glyphicon-usd" style="font-size: 13px"></span><a href="/Program/Finance" style="color: #333">Finance</a></li>
+                        </ul>
+                    </div>
+                    <div style="margin-top: 30px">
+                        PROGRAM MATERIALS &amp; RESOURCES
+                        <ul class="item">
+                            <li><span class="glyphicon glyphicon-info-sign " style="font-size: 13px"></span><a href="/Program/Description" style="color: #333">Program Description</a></li>
+                            <li><span class="glyphicon glyphicon-download-alt" style="font-size: 13px"></span>Process Document</li>
+                            <li><span class="glyphicon glyphicon-file" style="font-size: 13px"></span><a href="/Home/ImplementationDocument" style="color: #333">Internal Implementation Documents</a></li>
+                            <li><span class="glyphicon glyphicon glyphicon-user" style="font-size: 13px"></span><a href="/Program/Committee" style="color: #333">Scientific Planning Committee</a></li>
+                            <li><span class="glyphicon glyphicon-folder-open" style="font-size: 13px"></span><a href="/Home/ProgramMaterials" style="color: #333">Program Materials</a></li>
+                            <!-- <li>Hard-copy Program Materials Request Form</li>-->
+                            <li><span class="glyphicon glyphicon-briefcase" style="font-size: 13px"></span><a href="/Speaker/Index" style="color: #333">Speaker &amp; Moderator Management</a></li>
+                            @if (UserHelper.GetLoggedInUser().UserTypeID == 8 || UserHelper.GetLoggedInUser().UserTypeID == 9 || UserHelper.GetLoggedInUser().UserTypeID == 10 || UserHelper.GetLoggedInUser().UserTypeID == 11)
+                            {
+                             <li><span class="glyphicon glyphicon glyphicon-download-alt" style="font-size: 13px"></span><a href="/Admin/ExportToExcel" style="color: #333">Admin Report</a></li>
+                            }
+                            <!-- <li>Reports</li>-->
+                        </ul>
+                    </div>
+                    <div>
+                        <div id="circle1" class="circleChart" data-value=""></div>
+                        <div id="circle2" class="circleChart" data-value=""></div>
+                        <div id="circle3" class="circleChart" data-value=""></div>
+                        <div id="circle4" class="circleChart" data-value=""></div>
+                    </div>
+                </div>
+                <div class="col-md-9" style="margin-bottom: 2px; color: #2b2b2b">
+                    @RenderBody()
+                </div>
+
+
+
+
+
+
+
+            </div>
+
+            <div class="row">
+                <div class="col-md-12">&nbsp;</div>
+            </div>
+        </div>
+
+    </section>
+
+    <footer>
+        <div class="container overlay-z2 footer">
+            <div class="row">
+                <div class="col-sm-12 col-sm-12 col-md-6">
+                    <div class="logo-img-ftr">
+                        <object class="logo-img-ftr-svg" type="image/svg+xml" data="/Images/CHRClogos_mer.svg"></object>
+                    </div>
+                </div>
+
+                <div class="col-xs-12  col-sm-12 col-md-2">
+                    Dija Changkit<br>
+                    Project Leader<br>
+                    <a href="mailto:changkitdija@chrc.net">changkitdija@chrc.net</a><br>
+                    416-977-8010 ext. 296
+                </div>
+
+
+                <div class="col-xs-12  col-sm-12 col-md-2">
+                    Annie Pham <br>
+                    Administrative Assistant<br>
+                    <a href="mailto:phama@chrc.net">phama@chrc.net </a><br>
+                    416-977-8010 ext. 244
+                </div>
+
+
+                <div class="col-xs-12  col-sm-12 col-md-2">
+                    <span style="margin-right: 20px">http://clinicalconundrums.ca</span>
+                    <br class="r-break">
+                    <a href="mailto:info@clinicalconundrums.ca" title="info@ccpdhm.com" style="margin-right: 20px">info@clinicalconundrums.ca</a><br class="">
+                    259 Yorkland Road, Suite 200, <br class="r-break">
+                    North York, Ontario, <br class="r-break">
+                    Canada, M2J 0B5
+                    <br class="r-break">
+                    <br>
+                </div>
+            </div>
+        </div>
+    </footer>
+<!--
+    <script src="js/jquery-3.1.0.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.easing.min.js" defer=""></script>
+    <script src="js/helper.js"></script>
+    <script src="js/circleCharts.js"></script>-->
+    <script>
+        /*var renderChart = function () {
+            $('#circle1').circleChart({
+                size: 120,
+                cAngle: 0.2,
+                widthRatio: 0.15,
+                backgroundColoro: '#fee',
+                unit: 'percent',
+                animate: true,
+                backgroundFix: true,
+                lineCap: 'square',
+                animation: 'easeInOutCubic',
+                value: 67,
+                text: 'ACTIVE',
+                textSize: "12px",
+                textFamily: 'BenchNine',
+                autoCss: true,
+                counterclockwisie: false,
+                color: '#BADA55',
+                textCenter: true
+            });
+
+            $('#circle2').circleChart({
+                size: 120,
+                cAngle: 0.2,
+                widthRatio: 0.15,
+                backgroundColoro: '#fee',
+                unit: 'percent',
+                animate: true,
+                backgroundFix: true,
+                lineCap: 'square',
+                animation: 'easeInOutCubic',
+                value: 70,
+                text: 'ATTENTION',
+                textSize: "12px",
+                textFamily: 'BenchNine',
+                autoCss: true,
+                counterclockwisie: false,
+                color: '#871216',
+                textCenter: true
+            });
+
+            $('#circle3').circleChart({
+                size: 120,
+                cAngle: 0.2,
+                widthRatio: 0.15,
+                backgroundColoro: '#fee',
+                unit: 'percent',
+                animate: true,
+                backgroundFix: true,
+                lineCap: 'square',
+                animation: 'easeInOutCubic',
+                value: 10,
+                text: 'CANCELED',
+                textSize: "12px",
+                textFamily: 'BenchNine',
+                autoCss: true,
+                counterclockwisie: false,
+                color: '#E21C21',
+                textCenter: true
+            });
+
+            $('#circle4').circleChart({
+                size: 120,
+                cAngle: 0.2,
+                widthRatio: 0.15,
+                backgroundColoro: '#fee',
+                unit: 'percent',
+                animate: true,
+                backgroundFix: true,
+                lineCap: 'square',
+                animation: 'easeInOutCubic',
+                value: 90,
+                text: 'COMPLETED',
+                textSize: "12px",
+                textFamily: 'BenchNine',
+                autoCss: true,
+                counterclockwisie: false,
+                color: '#0C4D9C',
+                textCenter: true
+            });
+        }*/
+
+
+        $(document).ready(function () {
+
+
+
+			//$('body').css('background-image', 'url(img/notebook1st.jpg)');
+
+            //$('#btnAddSessionContact').on('click', function (e) {
+            //    loadModal('#abc', 'Add Session Contact', '> Modal Content', 'modal-lg');
+            //});
+            /*var obj = (findProgramByID(programs, getQuerystring('tID')));
+            document.title = 'Programs';
+            $('#lblTitle').html(obj[0].pName);
+            $('#lblTitle').css('color', obj[0].colorCode);
+
+            renderChart();
+
+            $('a').each(function () {
+                $(this).attr('title', $(this).html());
+            });
+
+
+            //events
+            $('#lnklLogOut').on('click', function (e) {
+                e.preventDefault();
+                logOut();
+            });*/
+
+            $('.program-detail').on('click', function (e) {
+                e.preventDefault();
+                window.location.href = 'programDetail.html?tID=' + getQuerystring('tID') + '&pID=' + $(this).closest('.card').attr('data-id');;
+            });
+
+
+            $('.btn-back').on('click', function (e) {
+                window.history.back();
+            });
+        });
+    </script>
+
+</body>
+</html>

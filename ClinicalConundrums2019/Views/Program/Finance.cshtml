@@ -1,0 +1,124 @@
+﻿@using ClinicalConundrums2019.Util
+@model ClinicalConundrums2019.Models.FinanceModel
+@{
+    ViewBag.Title = "Finance";
+    Layout = "~/Views/Shared/_ProgramDetails.cshtml";
+}
+   
+    <div class="col-md-9" style="margin-bottom: 2px; color: #2b2b2b">
+        <div class="1">
+            <h1>Finance</h1>
+            
+            <div class="margin-top-4">
+
+                <table id="FinanceTable" class="table table-bordered table-sm" style="font-size:12px;    border: 1px solid #ddd;" align="center">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th colspan="8" bgcolor="#CCCCCC" class="h6" style="text-align: center; font-weight: bold;background-color:#CCCCCC" scope="col">&nbsp;</th>
+                            <th id="col1" class="h6" style="text-align: center; font-weight: bold; color: black; background-color:#CCCCCC;">$</th>
+                            <th id="col2" class="h6" style="text-align: center; font-weight: bold; color: black; background-color:#CCCCCC;" scope="col">$</th>
+                            <th id="col3" width="110" class="h6" style="text-align: center; font-weight: bold; color: black; background-color:#CCCCCC; " scope="col">$</th>
+                        </tr>
+                    </thead>
+                    <thead>
+                        <tr>
+                        <tr style="background-color: rgb(198, 230, 234);">
+                            <th>
+                                Event Info At-a-Glance
+                            </th>
+                            <th>CFPC</th>
+                            <th>Venue Fees</th>
+                            <th>AV Fees</th>
+                            <th>Speaker Fees</th>
+                            <th>Speaker2 Fees</th>
+                            <th>Moderator Fees</th>
+                            <th>Other Fees</th>
+                            <th>Sub-Total</th>
+                            <th>Taxes (Combined)</th>
+                            <th>Event Total</th>
+
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+
+    @section scripts{
+    <link href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.10.16/b-1.5.1/b-colvis-1.5.1/b-flash-1.5.1/b-html5-1.5.1/b-print-1.5.1/r-2.2.1/datatables.min.css" />
+
+
+    <script src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/jszip-2.5.0/dt-1.10.16/b-1.5.1/b-colvis-1.5.1/b-flash-1.5.1/b-html5-1.5.1/b-print-1.5.1/r-2.2.1/datatables.min.js"></script>
+
+  
+    <script>
+        var Popup, dataTable;
+        $(document).ready(function () {
+            $('[data-toggle="tooltip"]').tooltip(); 
+
+            dataTable = $("#FinanceTable").DataTable({
+                bFilter: false, 
+                bJQueryUI: false,
+                bInfo: false,  
+                sPaginationType: "full_numbers",
+                bLengthChange: false,
+                "bSort": false,
+                "bAutoWidth": false,
+                "asStripClasses": null,
+                "ajax": {
+                    "url": "/Program/GetFinanceInfo?UserID=@ViewBag.UserID&ProgramID=@ViewBag.ProgramID",
+                    "type": "GET",
+                    "datatype": "json"
+                },
+
+                "columns": [
+
+
+                    { "data": "EventInfo", "title": "Event Name", "width": "15px" },
+                    { "data": "CFPC", "title": "CFPC" },
+                    { "data": "VenueFee", "title": "VenueFee" },
+                    { "data": "AVFees", "title": "AVFees" },
+                    { "data": "SpeakerFees", "title": "SpeakerFees" },
+                    { "data": "Speaker2Fees", "title": "Speaker2Fees" },
+                    { "data": "ModeratorFees", "title": "ModeratorFees" },
+                    { "data": "OtherFees", "title": "OtherFees" },
+                    { "data": "SubTotal", "title": "SubTotal" , "width": "50px"},
+                    { "data": "TaxesCombined", "title": "TaxesCombined" ,"width": "50px" },
+                    { "data": "EventTotal", "title": "EventTotal" ,"width": "50px" }
+
+
+                ],
+
+                "createdRow": function (row, data, index) {
+
+                    $('td', row).addClass('cellStyle');
+
+                },
+
+                "language": {
+
+                    "UserTable": "No Session Requests are found for the selected Program"
+                }
+            });
+
+
+            var table = $('#FinanceTable').DataTable();
+            
+            $('#col1').html("$ " + '@ViewBag.SumSubtotal' );
+            $('#col2').html("$ " + '@ViewBag.SumTaxes');
+            $('#col3').html("$ " + '@ViewBag.SumEventTotal');
+
+
+
+        });
+
+    </script>
+
+}

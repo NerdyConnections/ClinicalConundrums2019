@@ -1,0 +1,387 @@
+﻿@using ClinicalConundrums2019.Util
+@model ClinicalConundrums2019.Models.UserRegistration
+
+@{
+    Layout = null;
+}
+
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Upload Required Documents</title>
+    <style>
+        .DownloadLink, a:hover, a:visited, a:active {
+            font-size: 20px;
+            text-decoration: none;
+            cursor: pointer;
+            font-family: 'BenchNine','oswald','Fjalla One','Open Sans Condensed', 'Oswald',sans-serif !important;
+            color: #4a4848 !important;
+        }
+
+        .half {
+            width: 48%;
+        }
+
+        .rightandtop {
+            margin-left: 52%;
+            margin-top: -57px;
+        }
+
+        #ddcoislides {
+            width: 360px;
+            font-size: 10px;
+            height: 34px;
+            overflow: hidden;
+            white-space: pre;
+            text-overflow: ellipsis;
+            -webkit-appearance: none;
+            margin-bottom: 20px;
+        }
+
+        option {
+            border: solid 1px #DDDDDD;
+        }
+    </style>
+</head>
+<body style="border:none">
+
+
+    <!--don't these files, they are required at this location (not at head) for client side javascript to work-->
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
+
+    <script src="~/Scripts/bootstrap.js"></script>
+
+
+    <script src="~/Scripts/jquery.validate.js"></script>
+
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+
+    <!--end of client side javascript-->
+    <!--using (Html.BeginForm("FileUpload", "DashBoard", FormMethod.Post, new { id = "frmFileUpload", enctype = "multipart/form-data"}))-->
+    <h1> COI Form</h1>
+
+    <div id="DivCOIFormfileupload" class="form-group">
+        <label width="50%" title="Upload">
+            @if (Model != null && Model.COIForm)
+            {
+                <a style="color:#C6E6EA" class="DownloadLink" href="@ViewBag.SpeakerCOIURL/OpenFile?UserID=@Model.UserID&FileType=COIForm&FileExt=@Model.COIFormExt"><span class="glyphicon glyphicon-download-alt " style="font-size: 13px"></span> &nbsp;COI Form</a>
+            }
+
+
+        </label>
+        <br />
+
+        <div style="position:relative;">
+            <button class=" form-control" style="width:360px; cursor: pointer; display: inline-block">
+                Choose File
+                <input id="COIForm_Uploader" data-val="" type="file"
+                       style="cursor: pointer; position:absolute;z-index:2;top:0;left:0;filter: alpha(opacity=0);-ms-filter:&quot;progid:DXImageTransform.Microsoft.Alpha(Opacity=0)&quot;;opacity:0;background-color:transparent;color:transparent;" name="COIForm_Uploader"
+                       accept=".pdf,.doc,.docx" size="40" class="form-group-sm form-control">
+            </button> <br /><span class="small-text" id="uploadcoiform-file-info"></span>
+
+            <input id="uploadcoiformSucceess" value="" type="hidden" />
+        </div>
+
+    </div>
+
+
+    <h1> COI Slides</h1>
+
+    <select id="ddcoislides" class="form-group">
+        <option value=""> Please Select Program</option>
+        @foreach (var item in @ViewBag.ProgramList)
+        {
+            <option value=@item.Id> @item.Name </option>
+
+        }
+
+
+    </select>
+    <div id="slidesError"></div>
+
+    <br />
+
+
+    <div id="DivCOISlidesfileupload" class="form-group">
+
+
+        <div style="position:relative;">
+            <button id="btn-coislides" class="form-control" style="width:360px; cursor: pointer;">
+                Choose File
+                <input id="COISlides_Uploader" data-val="" type="file"
+                       style="cursor: pointer; position:absolute;z-index:2;top:0;left:0;filter: alpha(opacity=0);-ms-filter:&quot;progid:DXImageTransform.Microsoft.Alpha(Opacity=0)&quot;;opacity:0;background-color:transparent;color:transparent;" name="COISlides_Uploader"
+                       accept=".ppt,.pptx" size="40">
+            </button>
+
+
+
+            <br /><span class="small-text" id="uploadcoislides-file-info"></span>
+
+            <input id="uploadcoislidesSucceess" value="" type="hidden" />
+        </div>
+
+    </div>
+
+    <div>
+
+        @*<label width="50%" title="Upload">
+               @if (Model != null && Model.COIForm)
+                {
+                    <a style="color:#C6E6EA" class="DownloadLink" href="@ViewBag.SpeakerCOIURL/OpenFile?UserID=@Model.UserID&FileType=COISlides&FileExt=@Model.COISlidesExt"><span class="glyphicon glyphicon-download-alt " style="font-size: 13px"></span> &nbsp;COI Slides</a>
+                }
+
+
+            </label>*@
+        <br />
+    </div>
+
+
+    <div id="Coilinks">
+    </div>
+
+    <div class="form-group">
+
+
+        <button style="margin-right:10px" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+    </div>
+
+
+    <script>
+
+    @*<h1> COI Slides</h1>
+    <div id="DivCOISlidesfileupload" class="form-group">
+        <label width="50%" title="Upload">
+            @if (Model != null && Model.COIForm)
+            {
+                <a style="color:#C6E6EA" class="DownloadLink" href="@ViewBag.SpeakerCOIURL/OpenFile?UserID=@Model.UserID&FileType=COISlides&FileExt=@Model.COISlidesExt"><span class="glyphicon glyphicon-download-alt " style="font-size: 13px"></span> &nbsp;COI Slides</a>
+            }
+
+
+        </label>
+        <br />
+
+        <div style="position:relative;">
+            <button class=" form-control" style="width:360px; cursor: pointer; display: inline-block">
+                Choose File
+                <input id="COISlides_Uploader" data-val="" type="file"
+                       style="cursor: pointer; position:absolute;z-index:2;top:0;left:0;filter: alpha(opacity=0);-ms-filter:&quot;progid:DXImageTransform.Microsoft.Alpha(Opacity=0)&quot;;opacity:0;background-color:transparent;color:transparent;" name="COISlides_Uploader"
+                       accept=".ppt,.pptx" size="40" class="form-group-sm form-control">
+            </button> <br /><span class="small-text" id="uploadcoislides-file-info"></span>
+
+            <input id="uploadcoislidesSucceess" value="" type="hidden" />
+        </div>
+
+    </div>
+
+    <div class="form-group">
+
+
+        <button style="margin-right:10px" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+    </div>
+
+
+    <script>*@
+
+
+
+
+
+     $(document).ready(function (e) {
+
+	   // call the list of program names
+
+	    var UserID = '@ViewBag.UserID';
+		 
+         $.getJSON('@ViewBag.SpeakerCOIURL' + 'GetCOIFileNames?UserID=' + UserID)
+              .done(function (response) {
+
+                  if (response == "undefined") {
+
+
+                  }
+                  else
+                  {
+                      var ProgramList = '<ul class="programlinks">';
+
+                      $.each(response.list, function (index, program) {
+
+                          ProgramList += '<li>';
+
+                          debugger;
+                          ProgramList += '<a href=' + '@ViewBag.SpeakerCOIURL' + 'OpenCOIFile?UserID=' + UserID + '&ProgramID=' + program.Item1 + '&FileType=COISlides&FileExt=pptx>' + program.Item2 + "<span class=glyphicon glyphicon-download-alt style='font-size': 13px></span>" +'</a>';
+
+
+                          ProgramList += '</li>';
+
+                      });
+
+                      ProgramList += "</ul>";
+
+                      $('#Coilinks').html(ProgramList);
+
+                  }
+
+              });
+
+	     });//end of document.ready
+
+
+        $('#COIForm_Uploader').on('change', function (e) {
+            alert("hello COI");
+            debugger;
+            var files = e.target.files;
+
+            var UserID = '@ViewBag.UserID';
+
+            if (files.length > 0) {
+                if (window.FormData !== undefined) {//making sure it support html 5 control
+                    var fileSize = files[0].size / 1024 / 1024;
+                    var filename = files[0].name;
+                    var extension = filename.substr((filename.lastIndexOf('.') + 1));
+                    if (fileSize < 20.00) {
+                        $('#uploadcoiform-file-info').html(filename);
+                        $("#COIForm_Uploader").attr("data-val", "true");
+
+                        //upload file to Speaker Site
+                        var data = new FormData();
+                        data.append(files[0].name, files[0])
+                        $.ajax({
+                            type: "POST",
+                            url: "@ViewBag.SpeakerCOIURL" + "COIForm?UserID=" + UserID,
+                            contentType: false,
+                            processData: false,
+                            data: data,
+                            success: function (result) {
+                                if (result.success) {
+                                    debugger;
+                                    console.log(result.success.msg);
+                                    $('#uploadcoiform-file-info').html(result.success.uploadedFilename + " Uploaded");
+                                    $('#uploadcoiform-file-info').removeClass("text-danger");
+                                    $('#uploadcoiform-file-info').addClass("text-sucess");
+                                    $('#SessionFileName').val(result.success.returnFileName);
+                                    $('#IsFileUploaded').val(true);
+                                    console.log($('#SessionFileName').val());
+                                    $("#COIForm_Uploader").attr("data-val", true);
+
+                                } else {
+                                    console.log(result.error);
+                                    debugger;
+                                    $('#uploadcoiform-file-info').html(result.error);
+                                    $('#uploadcoiform-file-info').addClass("text-danger");
+                                }
+                            }
+                        });
+
+                    }
+                    else {
+                        $('#uploadcoiform-file-info').html("File Size is too big. Please upload another file");
+                        $("#COIForm_Uploader").attr("data-val", "false");
+
+                    }
+
+                }
+            }
+
+
+        });
+
+
+        $('#COISlides_Uploader').on('change', function (e) {
+
+
+
+            var ProgramID = $("#ddcoislides option:selected").val();
+
+
+            var files = e.target.files;
+
+            var UserID = '@ViewBag.UserID';
+            debugger;
+
+            if (files.length > 0) {
+                if (window.FormData !== undefined) {//making sure it support html 5 control
+                    var fileSize = files[0].size / 1024 / 1024;
+                    var filename = files[0].name;
+                    var extension = filename.substr((filename.lastIndexOf('.') + 1));
+                    if (fileSize < 20.00) {
+                        $('#uploadcoislides-file-info').html(filename);
+                        $("#COISlides_Uploader").attr("data-val", "true");
+                        //alert('@ViewBag.SpeakerCOIURL');
+                        //upload file to server
+                        var data = new FormData();
+                        data.append(files[0].name, files[0])
+                        $.ajax({
+
+                            type: "POST",
+                            url: "@ViewBag.SpeakerCOIURL" + "COISlides2?UserID=" + UserID + "&ProgramID=" + ProgramID,
+
+                            contentType: false,
+                            processData: false,
+                            data: data,
+                            success: function (result) {
+
+
+                                if (result.success) {
+                                    debugger;
+                                    console.log(result.success.msg);
+                                    $('#uploadcoislides-file-info').html(result.success.uploadedFilename + " Uploaded");
+                                    $('#uploadcoislides-file-info').removeClass("text-danger");
+                                    $('#uploadcoislides-file-info').addClass("text-sucess");
+                                    $('#SessionFileName').val(result.success.returnFileName);
+                                    $('#IsFileUploaded').val(true);
+                                    console.log($('#SessionFileName').val());
+                                    $("#COISlides_Uploader").attr("data-val", true);
+
+                                } else {
+                                    console.log(result.error);
+                                    debugger;
+                                    $('#uploadcoislides-file-info').html(result.error);
+                                    $('#uploadcoislides-file-info').addClass("text-danger");
+                                }
+                            }
+
+                        });
+
+                    }
+                    else {
+                        $('#uploadcoislides-file-info').html("File Size is too big. Please upload another file");
+                        $("#COISlides_Uploader").attr("data-val", "false");
+
+                    }
+
+                }
+            }
+
+
+        });
+
+        $('#btn-coislides').click(function (e) {
+
+            var selectedvalue = $("#ddcoislides option:selected").val();
+            if (selectedvalue === "") {
+
+                $('#slidesError').html("Please Select Program")
+                e.preventDefault();
+                return;
+            }
+
+            else {
+
+                $('#slidesError').html("")
+
+            }
+
+
+
+        });
+
+
+
+
+    </script>
+</body>
+</html>

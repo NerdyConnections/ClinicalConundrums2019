@@ -1,0 +1,52 @@
+﻿@model ClinicalConundrumsSpeaker.Models.SpeakerActivationEmailModel
+
+@{
+    Layout = "~/Views/Shared/_LoginMaster.cshtml";
+}
+
+
+@using (@Html.BeginForm("Index", "Activation", FormMethod.Post))
+{
+<div class="pnl-login">
+    <div class="row">
+        <div class="col-md-12">
+            <h1>SPEAKER RESOURCE PORTAL ACCOUNT ACTIVATION</h1>
+            <div class="lead1">Please enter your username (your  email address) </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="form-group form-group-sm float-left margin-right-4">
+                <label class="control-label">EMAIL </label>
+                @Html.TextBoxFor(model => model.EmailAddress, new { @class = "form-control ctrl-login" })
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-2">
+            <input type="submit" class="form-control" value="NEXT" />
+        </div>
+        <br /><br />
+        <div id="lblEmail" class="col-md-12 text-danger">
+            @Html.ValidationMessageFor(m => m.EmailAddress, "", new { @class = "text-danger" })
+        </div>
+    </div>
+</div>
+}
+
+
+
+
+
+<script>
+    $(document).ready(function () {
+        var isHttpPost = "@ViewBag.IsHttpPost".toLowerCase();
+        var msg = "@ViewBag.Msg";
+        if (isHttpPost == "true") {
+            $('#lblEmail').html(msg);
+        }
+    });
+</script>

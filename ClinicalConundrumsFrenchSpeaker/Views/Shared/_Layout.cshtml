@@ -1,0 +1,169 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+
+    <link href="https://fonts.googleapis.com/css?family=BenchNine" rel="stylesheet">
+
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+    <link href="/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="/Content/cpd.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <script src="~/Scripts/jquery-3.1.0.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+
+
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/helper.js"></script>
+
+    <style type="text/css">
+        a:link {
+            text-decoration: none;
+        }
+
+        a:visited {
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: none;
+        }
+
+        a:active {
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body style="background-image: url(/Images/notebook1st.jpg);">
+    <div class="overlay"></div>
+
+    <!-- nav bar-->
+    <header>
+        <div class="navbar navbar-inverse overlay-z2" style="margin-bottom:0px">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                                <span class="icon-bar"></span>
+                            </button>
+                            <div id="logo">
+                                <div class="logo-img">
+                                    <object id="logo-svg" type="image/svg+xml" data="/images/BMSPfizer.svg"></object>
+                                </div>
+                                <div class="logo-txt-sub">Portail des conférenciers</div>
+                                <div class="logo-txt-welcome">&nbsp;</div>
+                            </div>
+                        </div>
+                        <div class="navbar-collapse collapse">
+                            <ul class="nav navbar-nav float-right">
+                                <li><a href="https://speaker.clinicalconundrums.ca">English</a></li>
+                                <li><a href="mailto:info@clinicalconundrums.ca">Nous joindre</a></li>
+                                <li><a href="/Account/LogOff" id="lnklLogOut">Fin de session</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!--end of nav bar-->
+
+    <section>
+
+        <div role="main" class="container overlay-z2">
+            <div class="row">
+                <div class="col-md-12">
+
+                    <div>
+                        <h1 style="padding:0px; margin:0px"><img src="/images/cc-iv-FRlogo.png" style="margin-right:15px" width="170" height="90">Enjeux cliniques IV – 2019</h1>
+                    </div>
+
+                    <div class="btn-back"><span class="glyphicon glyphicon-chevron-left"></span><span>Précédent</span></div>
+                    <!-- <div class="lead1" style="color: #534d4d">CFPC &nbsp;&nbsp; FMOQ</div>-->
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3 left-panel" style="margin-bottom: 2px; background-color: #e6e6e6">
+                    <div style="margin-top: 15px; text-align: right;">
+                    </div>
+                    <a href="FRprogramDetail.html" style="color: #333"><button type="button" class="form-control btn btn-sm" id="home" style="background:none; text-align:right; padding:0px"><span class="glyphicon glyphicon-home" style="font-size:16px"></span></button></a>
+
+                    <div>
+                        RESSOURCES
+                        <ul class="item">
+
+                            <li><span class="glyphicon glyphicon-folder-open" style="font-size: 13px"></span><a href="/Home/Documentation" style="color: #333">Documentation du programme</a></li>
+
+                            <li><span class="glyphicon glyphicon glyphicon-user" style="font-size: 13px"></span><a href="/Home/ScientificPlanningCommittee" style="color: #333">Comité directeur</a></li>
+
+                            <!-- <li>Hard-copy Program Materials Request Form</li>-->
+                            <!-- <li>Reports</li>-->
+                        </ul>
+                    </div>
+                    <div>
+                        <div id="circle1" class="circleChart" data-value=""></div>
+                        <div id="circle2" class="circleChart" data-value=""></div>
+                        <div id="circle3" class="circleChart" data-value=""></div>
+                        <div id="circle4" class="circleChart" data-value=""></div>
+                    </div>
+                </div>
+                <div class="col-md-9" style="margin-bottom: 2px; color: #2b2b2b">
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--footer-->
+    <footer>
+        <div class="container overlay-z2 footer">
+            <div class="row">
+                <div class="col-sm-12 col-sm-12 col-md-6">
+                    <div class="logo-img-ftr">
+                        <object class="logo-img-ftr-svg" type="image/svg+xml" data="/images/CHRClogos_merfr.svg"></object>
+                    </div>
+                </div>
+                <div class="col-xs-12  col-sm-12 col-md-2">
+                    Dija Changkit<br>
+                    Chef de projet<br>
+                    <a href="mailto:changkitdija@chrc.net">changkitdija@chrc.net</a><br>
+                    416-977-8010 poste 296
+                </div>
+
+                <div class="col-xs-12  col-sm-12 col-md-2">
+                    Annie Pham <br>
+                    Adjointe administrative<br>
+                    <a href="mailto:phama@chrc.net">phama@chrc.net </a><br>
+                    416-977-8010 poste 244
+                </div>
+
+                <div class="col-xs-12  col-sm-12 col-md-2">
+                    <span style="margin-right: 20px">http://clinicalconundrums.ca</span>
+                    <br class="r-break">
+                    <a href="mailto:info@clinicalconundrums.ca" title="info@ccpdhm.com" style="margin-right: 20px">info@clinicalconundrums.ca</a><br class="">
+                    110 Sheppard Avenue East, Suite 309, <br class="r-break">
+                    North York, Ontario, <br class="r-break">
+                    Canada, M2N 6Y8
+                    <br class="r-break">
+                    <br>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- end of footer-->
+    @RenderSection("Scripts", required: false)
+
+
+    <script>
+        $(document).ready(function () {
+            $('.btn-back').on('click', function (e) {
+                window.history.back();
+            });
+        });
+    </script>
+</body>
+</html>

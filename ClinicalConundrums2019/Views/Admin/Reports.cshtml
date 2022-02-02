@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewBag.Title = "Reports";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th>
+                        Program Request Report
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        @Html.ActionLink("Generate Program Requests Report", "ExportToExcel", "Admin", null, new { @class = "btn btn-primary btn-large" })
+                    </td>
+                    <td>
+                        @Html.ActionLink("Generate User Report", "ExportUsersToExcel", "Admin", null, new { @class = "btn btn-primary btn-large" })
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <br /><br /><br />
+    </div>
+
